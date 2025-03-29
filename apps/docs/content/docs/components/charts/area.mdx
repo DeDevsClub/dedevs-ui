@@ -1,0 +1,54 @@
+---
+title: Area Chart
+description: Area chart component
+icon: ChartArea
+---
+
+
+<Preview name="charts/area" code={`'use client';
+import * as React from 'react';
+import { AreaChartComponent, type AreaChartComponentProps } from '@/components/ui/dedevs-ui/charts/area';
+const chartData = [
+  { month: 'January', desktop: 186 },
+  { month: 'February', desktop: 305 },
+  { month: 'March', desktop: 237 },
+  { month: 'April', desktop: 73 },
+  { month: 'May', desktop: 209 },
+  { month: 'June', desktop: 214 },
+];
+
+const chartConfig = {
+  desktop: {
+    label: 'Desktop',
+    color: 'hsl(var(--chart-1))',
+  },
+};
+
+export default function Page() {
+  return <AreaChartComponent 
+  data={chartData}
+  config={chartConfig}
+  />;
+}
+`} />
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `Array<{ date: string; value: number }>` | `[]` | The data to display in the chart |
+
+<AutoTypeTable path="node_modules/@repo/charts/area.tsx" name="AreaChartComponentProps" />
+
+
+## Example
+
+<Preview name="charts/area" code={`'use client';
+
+import { AreaChartComponent } from '@/components/ui/dedevs-ui/charts/area';
+
+export default function Page() {
+  return <AreaChartComponent />;
+}
+`} />
+

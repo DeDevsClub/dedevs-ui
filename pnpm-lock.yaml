@@ -78,6 +78,9 @@ importers:
       '@repo/calendar':
         specifier: workspace:*
         version: link:../../packages/calendar
+      '@repo/charts':
+        specifier: workspace:*
+        version: link:../../packages/charts
       '@repo/code':
         specifier: workspace:*
         version: link:../../packages/code
@@ -476,6 +479,9 @@ importers:
 
   packages/charts:
     dependencies:
+      '@repo/cards':
+        specifier: workspace:*
+        version: link:../cards
       '@repo/shadcn-ui':
         specifier: workspace:*
         version: link:../shadcn-ui

@@ -45,3 +45,5 @@
       - dropdown
     - page
       - footer
+    - charts
+      - area

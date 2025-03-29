@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@repo/shadcn-ui": "workspace:*",
+    "@repo/cards": "workspace:*",
     "@tanstack/react-table": "^8.21.2",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
