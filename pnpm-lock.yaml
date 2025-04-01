@@ -17,7 +17,7 @@ importers:
     devDependencies:
       '@auto-it/first-time-contributor':
         specifier: ^11.3.0
-        version: 11.3.0(@types/node@22.13.5)(typescript@5.7.3)
+        version: 11.3.0(@types/node@22.13.17)(typescript@5.7.3)
       '@biomejs/biome':
         specifier: 1.9.4
         version: 1.9.4
@@ -26,7 +26,7 @@ importers:
         version: 0.5.10(next@15.1.7(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       '@types/node':
         specifier: ^22.13.5
-        version: 22.13.5
+        version: 22.13.17
       '@types/react':
         specifier: ^19.0.0
         version: 19.0.10
@@ -227,8 +227,8 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13
       '@types/node':
-        specifier: 22.13.5
-        version: 22.13.5
+        specifier: 22.13.17
+        version: 22.13.17
       '@types/react':
         specifier: ^19.0.10
         version: 19.0.10
@@ -3628,6 +3628,9 @@ packages:
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
+  '@types/estree@1.0.7':
+    resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
+
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
@@ -3667,8 +3670,8 @@ packages:
   '@types/mysql@2.15.26':
     resolution: {integrity: sha512-DSLCOXhkvfS5WNNPbfn2KdICAmk8lLc+/PNvnPnF7gOdMZCxopXduqv0OQ13y/yA/zXTSikZZqVgybUxOEg6YQ==}
 
-  '@types/node@22.13.5':
-    resolution: {integrity: sha512-+lTU0PxZXn0Dr1NBtC7Y8cR21AJr87dLLU953CWA6pMxxv/UDc7jYAY90upcrie1nRcD6XNG5HOYEDtgW5TxAg==}
+  '@types/node@22.13.17':
+    resolution: {integrity: sha512-nAJuQXoyPj04uLgu+obZcSmsfOenUg6DxPKogeUy6yNCFwWaj5sBF8/G/pNo8EtBJjAfSVgfIlugR/BCOleO+g==}
 
   '@types/parse-json@4.0.2':
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
@@ -6376,8 +6379,8 @@ packages:
     resolution: {integrity: sha512-un0FmiRUQNr5PJqy9kP7c40F5BOfpGlYTrxonDChEZB7pzZxRNp/bt+ymiy9/npwXya9KH99nJ/GXFIiUkYGFQ==}
     engines: {node: '>=8'}
 
-  terser-webpack-plugin@5.3.11:
-    resolution: {integrity: sha512-RVCsMfuD0+cTt3EwX8hSl2Ks56EbFHWmhluwcqoPKtBnfjiT6olaq7PRIRfhyU8nnC2MrnDrBLfrD/RGE+cVXQ==}
+  terser-webpack-plugin@5.3.14:
+    resolution: {integrity: sha512-vkZjpUjb6OMS7dhV+tILUW6BhpDR7P2L/aQSAv+Uwk+m8KATX9EccViHTJR2qDtACKPIYndLGCyl3FMo+r2LMw==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
       '@swc/core': '*'
@@ -6818,7 +6821,7 @@ snapshots:
 
   '@auto-it/bot-list@11.3.0': {}
 
-  '@auto-it/core@11.3.0(@types/node@22.13.5)(typescript@5.7.3)':
+  '@auto-it/core@11.3.0(@types/node@22.13.17)(typescript@5.7.3)':
     dependencies:
       '@auto-it/bot-list': 11.3.0
       '@endemolshinegroup/cosmiconfig-typescript-loader': 3.0.2(cosmiconfig@7.0.0)(typescript@5.7.3)
@@ -6855,24 +6858,24 @@ snapshots:
       tapable: 2.2.1
       terminal-link: 2.1.1
       tinycolor2: 1.6.0
-      ts-node: 10.9.2(@types/node@22.13.5)(typescript@5.7.3)
+      ts-node: 10.9.2(@types/node@22.13.17)(typescript@5.7.3)
       tslib: 2.1.0
       type-fest: 0.21.3
       typescript: 5.7.3
       typescript-memoize: 1.1.1
       url-join: 4.0.1
     optionalDependencies:
-      '@types/node': 22.13.5
+      '@types/node': 22.13.17
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
       - encoding
       - supports-color
 
-  '@auto-it/first-time-contributor@11.3.0(@types/node@22.13.5)(typescript@5.7.3)':
+  '@auto-it/first-time-contributor@11.3.0(@types/node@22.13.17)(typescript@5.7.3)':
     dependencies:
       '@auto-it/bot-list': 11.3.0
-      '@auto-it/core': 11.3.0(@types/node@22.13.5)(typescript@5.7.3)
+      '@auto-it/core': 11.3.0(@types/node@22.13.17)(typescript@5.7.3)
       array.prototype.flatmap: 1.3.3
       endent: 2.1.0
       tslib: 2.1.0
@@ -9367,7 +9370,7 @@ snapshots:
 
   '@types/connect@3.4.36':
     dependencies:
-      '@types/node': 22.13.5
+      '@types/node': 22.13.17
 
   '@types/d3-array@3.2.1': {}
 
@@ -9400,11 +9403,11 @@ snapshots:
   '@types/eslint-scope@3.7.7':
     dependencies:
       '@types/eslint': 9.6.1
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
 
   '@types/eslint@9.6.1':
     dependencies:
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
       '@types/json-schema': 7.0.15
 
   '@types/estree-jsx@1.0.5':
@@ -9412,6 +9415,8 @@ snapshots:
       '@types/estree': 1.0.6
 
   '@types/estree@1.0.6': {}
+
+  '@types/estree@1.0.7': {}
 
   '@types/hast@3.0.4':
     dependencies:
@@ -9452,9 +9457,9 @@ snapshots:
 
   '@types/mysql@2.15.26':
     dependencies:
-      '@types/node': 22.13.5
+      '@types/node': 22.13.17
 
-  '@types/node@22.13.5':
+  '@types/node@22.13.17':
     dependencies:
       undici-types: 6.20.0
 
@@ -9466,7 +9471,7 @@ snapshots:
 
   '@types/pg@8.6.1':
     dependencies:
-      '@types/node': 22.13.5
+      '@types/node': 22.13.17
       pg-protocol: 1.7.1
       pg-types: 2.2.0
 
@@ -9482,7 +9487,7 @@ snapshots:
 
   '@types/tedious@4.0.14':
     dependencies:
-      '@types/node': 22.13.5
+      '@types/node': 22.13.17
 
   '@types/unist@2.0.11': {}
 
@@ -10996,7 +11001,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.13.5
+      '@types/node': 22.13.17
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -12714,7 +12719,7 @@ snapshots:
       ansi-escapes: 4.3.2
       supports-hyperlinks: 2.3.0
 
-  terser-webpack-plugin@5.3.11(esbuild@0.24.2)(webpack@5.98.0(esbuild@0.24.2)):
+  terser-webpack-plugin@5.3.14(esbuild@0.24.2)(webpack@5.98.0(esbuild@0.24.2)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
@@ -12784,14 +12789,14 @@ snapshots:
       '@ts-morph/common': 0.26.1
       code-block-writer: 13.0.3
 
-  ts-node@10.9.2(@types/node@22.13.5)(typescript@5.7.3):
+  ts-node@10.9.2(@types/node@22.13.17)(typescript@5.7.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 22.13.5
+      '@types/node': 22.13.17
       acorn: 8.14.0
       acorn-walk: 8.3.4
       arg: 4.1.3
@@ -13092,7 +13097,7 @@ snapshots:
   webpack@5.98.0(esbuild@0.24.2):
     dependencies:
       '@types/eslint-scope': 3.7.7
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
       '@webassemblyjs/ast': 1.14.1
       '@webassemblyjs/wasm-edit': 1.14.1
       '@webassemblyjs/wasm-parser': 1.14.1
@@ -13111,7 +13116,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 4.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.11(esbuild@0.24.2)(webpack@5.98.0(esbuild@0.24.2))
+      terser-webpack-plugin: 5.3.14(esbuild@0.24.2)(webpack@5.98.0(esbuild@0.24.2))
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     transitivePeerDependencies:
