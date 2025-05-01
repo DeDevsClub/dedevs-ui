@@ -10,14 +10,14 @@ importers:
     dependencies:
       tsup:
         specifier: ^8.3.6
-        version: 8.3.6(jiti@2.4.2)(postcss@8.5.3)(typescript@5.7.3)(yaml@2.7.0)
+        version: 8.3.6(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.3)(yaml@2.7.0)
       zod:
         specifier: ^3.24.2
         version: 3.24.2
     devDependencies:
       '@auto-it/first-time-contributor':
         specifier: ^11.3.0
-        version: 11.3.0(@types/node@22.13.5)(typescript@5.7.3)
+        version: 11.3.0(@types/node@22.13.5)(typescript@5.8.3)
       '@biomejs/biome':
         specifier: 1.9.4
         version: 1.9.4
@@ -44,7 +44,7 @@ importers:
         version: 2.4.2
       typescript:
         specifier: ^5.7.3
-        version: 5.7.3
+        version: 5.8.3
       ultracite:
         specifier: ^4.1.20
         version: 4.1.20
@@ -125,10 +125,10 @@ importers:
         version: 9.1.0(@opentelemetry/context-async-hooks@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.57.2(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.0))(next@15.1.7(@babel/core@7.26.9)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(webpack@5.98.0(esbuild@0.24.2))
       '@t3-oss/env-core':
         specifier: ^0.12.0
-        version: 0.12.0(typescript@5.7.3)(zod@3.24.2)
+        version: 0.12.0(typescript@5.8.3)(zod@3.24.2)
       '@t3-oss/env-nextjs':
         specifier: ^0.12.0
-        version: 0.12.0(typescript@5.7.3)(zod@3.24.2)
+        version: 0.12.0(typescript@5.8.3)(zod@3.24.2)
       '@tailwindcss/postcss':
         specifier: ^4.0.8
         version: 4.0.8
@@ -155,7 +155,7 @@ importers:
         version: 11.5.6(acorn@8.14.0)(fumadocs-core@15.0.12(@types/react@19.0.10)(next@15.1.7(@babel/core@7.26.9)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(next@15.1.7(@babel/core@7.26.9)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       fumadocs-typescript:
         specifier: ^3.0.3
-        version: 3.0.3(typescript@5.7.3)
+        version: 3.0.3(typescript@5.8.3)
       fumadocs-ui:
         specifier: 15.0.12
         version: 15.0.12(@types/react-dom@19.0.4(@types/react@19.0.10))(@types/react@19.0.10)(fumadocs-core@15.0.12(@types/react@19.0.10)(next@15.1.7(@babel/core@7.26.9)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(next@15.1.7(@babel/core@7.26.9)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(tailwindcss@4.0.8)
@@ -194,7 +194,7 @@ importers:
         version: 7.5.2
       schema-dts:
         specifier: ^1.1.2
-        version: 1.1.2(typescript@5.7.3)
+        version: 1.1.2(typescript@5.8.3)
       shiki:
         specifier: 3.0.0
         version: 3.0.0
@@ -246,7 +246,7 @@ importers:
         version: 4.0.8
       typescript:
         specifier: ^5.7.3
-        version: 5.7.3
+        version: 5.8.3
 
   packages/ai:
     dependencies:
@@ -280,7 +280,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/announcement:
     dependencies:
@@ -308,7 +308,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/banner:
     dependencies:
@@ -339,7 +339,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/bento:
     dependencies:
@@ -367,7 +367,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/buttons:
     dependencies:
@@ -410,7 +410,7 @@ importers:
         version: 4.0.8
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/calendar:
     dependencies:
@@ -444,7 +444,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/cards:
     dependencies:
@@ -475,7 +475,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/charts:
     dependencies:
@@ -512,7 +512,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/code:
     dependencies:
@@ -618,7 +618,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/color-picker:
     dependencies:
@@ -655,7 +655,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/database:
     dependencies:
@@ -698,7 +698,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/dropzone:
     dependencies:
@@ -729,7 +729,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/events:
     dependencies:
@@ -763,7 +763,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/gantt:
     dependencies:
@@ -812,7 +812,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/hooks:
     dependencies:
@@ -834,7 +834,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/kanban:
     dependencies:
@@ -871,7 +871,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/list:
     dependencies:
@@ -905,7 +905,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/pages:
     dependencies:
@@ -936,7 +936,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/sandbox:
     dependencies:
@@ -967,7 +967,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/shadcn-ui:
     dependencies:
@@ -1149,7 +1149,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/tailwind-config:
     dependencies:
@@ -1199,7 +1199,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       typescript:
         specifier: ^5
-        version: 5.7.3
+        version: 5.8.3
 
   packages/typescript-config: {}
 
@@ -3628,6 +3628,9 @@ packages:
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
+  '@types/estree@1.0.7':
+    resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
+
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
@@ -4391,8 +4394,8 @@ packages:
     resolution: {integrity: sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==}
     engines: {node: '>= 0.4'}
 
-  es-module-lexer@1.6.0:
-    resolution: {integrity: sha512-qqnD1yMU6tk/jnaMosogGySTZP8YtUgAffA9nMN+E/rjxcfRQ6IEk7IiozUjgxKoFHBGjTLnrHB/YC45r/59EQ==}
+  es-module-lexer@1.7.0:
+    resolution: {integrity: sha512-jEQoCwk8hyb2AZziIOLhDqpm5+2ww5uIE6lkO/6jcOCusfk6LhMHpXXfBLXTZ7Ydyt0j4VoUQv6uGNYbdW+kBA==}
 
   es-object-atoms@1.1.1:
     resolution: {integrity: sha512-FGgH2h8zKNim9ljj7dankFPcICIK9Cp5bm+c2gQSYePhpaG5+esrLODihIorn+Pe6FGJzWhXQotPv73jTaldXA==}
@@ -6125,8 +6128,8 @@ packages:
     peerDependencies:
       typescript: '>=4.1.0'
 
-  schema-utils@4.3.0:
-    resolution: {integrity: sha512-Gf9qqc58SpCA/xdziiHz35F4GNIWYWZrEshUc/G/r5BnLph6xpKuLeoJoQuj5WfBIx/eQLf+hmVPYHaxJu7V2g==}
+  schema-utils@4.3.2:
+    resolution: {integrity: sha512-Gn/JaSk/Mt9gYubxTtSn/QCV4em9mpAPiR1rqy/Ocu19u/G9J5WWdNoUT4SiV6mFC3y6cxyFcFwdzPM3FgxGAQ==}
     engines: {node: '>= 10.13.0'}
 
   scroll-into-view-if-needed@3.1.0:
@@ -6376,8 +6379,8 @@ packages:
     resolution: {integrity: sha512-un0FmiRUQNr5PJqy9kP7c40F5BOfpGlYTrxonDChEZB7pzZxRNp/bt+ymiy9/npwXya9KH99nJ/GXFIiUkYGFQ==}
     engines: {node: '>=8'}
 
-  terser-webpack-plugin@5.3.11:
-    resolution: {integrity: sha512-RVCsMfuD0+cTt3EwX8hSl2Ks56EbFHWmhluwcqoPKtBnfjiT6olaq7PRIRfhyU8nnC2MrnDrBLfrD/RGE+cVXQ==}
+  terser-webpack-plugin@5.3.14:
+    resolution: {integrity: sha512-vkZjpUjb6OMS7dhV+tILUW6BhpDR7P2L/aQSAv+Uwk+m8KATX9EccViHTJR2qDtACKPIYndLGCyl3FMo+r2LMw==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
       '@swc/core': '*'
@@ -6569,8 +6572,8 @@ packages:
   typescript-memoize@1.1.1:
     resolution: {integrity: sha512-GQ90TcKpIH4XxYTI2F98yEQYZgjNMOGPpOgdjIBhaLaWji5HPWlRnZ4AeA1hfBxtY7bCGDJsqDDHk/KaHOl5bA==}
 
-  typescript@5.7.3:
-    resolution: {integrity: sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==}
+  typescript@5.8.3:
+    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -6818,10 +6821,10 @@ snapshots:
 
   '@auto-it/bot-list@11.3.0': {}
 
-  '@auto-it/core@11.3.0(@types/node@22.13.5)(typescript@5.7.3)':
+  '@auto-it/core@11.3.0(@types/node@22.13.5)(typescript@5.8.3)':
     dependencies:
       '@auto-it/bot-list': 11.3.0
-      '@endemolshinegroup/cosmiconfig-typescript-loader': 3.0.2(cosmiconfig@7.0.0)(typescript@5.7.3)
+      '@endemolshinegroup/cosmiconfig-typescript-loader': 3.0.2(cosmiconfig@7.0.0)(typescript@5.8.3)
       '@octokit/core': 3.6.0
       '@octokit/plugin-enterprise-compatibility': 1.3.0
       '@octokit/plugin-retry': 3.0.9
@@ -6855,10 +6858,10 @@ snapshots:
       tapable: 2.2.1
       terminal-link: 2.1.1
       tinycolor2: 1.6.0
-      ts-node: 10.9.2(@types/node@22.13.5)(typescript@5.7.3)
+      ts-node: 10.9.2(@types/node@22.13.5)(typescript@5.8.3)
       tslib: 2.1.0
       type-fest: 0.21.3
-      typescript: 5.7.3
+      typescript: 5.8.3
       typescript-memoize: 1.1.1
       url-join: 4.0.1
     optionalDependencies:
@@ -6869,10 +6872,10 @@ snapshots:
       - encoding
       - supports-color
 
-  '@auto-it/first-time-contributor@11.3.0(@types/node@22.13.5)(typescript@5.7.3)':
+  '@auto-it/first-time-contributor@11.3.0(@types/node@22.13.5)(typescript@5.8.3)':
     dependencies:
       '@auto-it/bot-list': 11.3.0
-      '@auto-it/core': 11.3.0(@types/node@22.13.5)(typescript@5.7.3)
+      '@auto-it/core': 11.3.0(@types/node@22.13.5)(typescript@5.8.3)
       array.prototype.flatmap: 1.3.3
       endent: 2.1.0
       tslib: 2.1.0
@@ -7175,12 +7178,12 @@ snapshots:
   '@emotion/memoize@0.7.4':
     optional: true
 
-  '@endemolshinegroup/cosmiconfig-typescript-loader@3.0.2(cosmiconfig@7.0.0)(typescript@5.7.3)':
+  '@endemolshinegroup/cosmiconfig-typescript-loader@3.0.2(cosmiconfig@7.0.0)(typescript@5.8.3)':
     dependencies:
       cosmiconfig: 7.0.0
       lodash.get: 4.4.2
       make-error: 1.3.6
-      ts-node: 9.1.1(typescript@5.7.3)
+      ts-node: 9.1.1(typescript@5.8.3)
       tslib: 2.1.0
     transitivePeerDependencies:
       - typescript
@@ -9028,16 +9031,16 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@t3-oss/env-core@0.12.0(typescript@5.7.3)(zod@3.24.2)':
+  '@t3-oss/env-core@0.12.0(typescript@5.8.3)(zod@3.24.2)':
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
       zod: 3.24.2
 
-  '@t3-oss/env-nextjs@0.12.0(typescript@5.7.3)(zod@3.24.2)':
+  '@t3-oss/env-nextjs@0.12.0(typescript@5.8.3)(zod@3.24.2)':
     dependencies:
-      '@t3-oss/env-core': 0.12.0(typescript@5.7.3)(zod@3.24.2)
+      '@t3-oss/env-core': 0.12.0(typescript@5.8.3)(zod@3.24.2)
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
       zod: 3.24.2
 
   '@tabler/icons-react@3.30.0(react@19.0.0)':
@@ -9400,11 +9403,11 @@ snapshots:
   '@types/eslint-scope@3.7.7':
     dependencies:
       '@types/eslint': 9.6.1
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
 
   '@types/eslint@9.6.1':
     dependencies:
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
       '@types/json-schema': 7.0.15
 
   '@types/estree-jsx@1.0.5':
@@ -9412,6 +9415,8 @@ snapshots:
       '@types/estree': 1.0.6
 
   '@types/estree@1.0.6': {}
+
+  '@types/estree@1.0.7': {}
 
   '@types/hast@3.0.4':
     dependencies:
@@ -10190,7 +10195,7 @@ snapshots:
 
   es-errors@1.3.0: {}
 
-  es-module-lexer@1.6.0: {}
+  es-module-lexer@1.7.0: {}
 
   es-object-atoms@1.1.1:
     dependencies:
@@ -10533,7 +10538,7 @@ snapshots:
       - acorn
       - supports-color
 
-  fumadocs-typescript@3.0.3(typescript@5.7.3):
+  fumadocs-typescript@3.0.3(typescript@5.8.3):
     dependencies:
       fast-glob: 3.3.3
       hast-util-to-jsx-runtime: 2.3.3
@@ -10542,7 +10547,7 @@ snapshots:
       mdast-util-to-hast: 13.2.0
       shiki: 2.3.2
       ts-morph: 25.0.1
-      typescript: 5.7.3
+      typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
 
@@ -12399,11 +12404,11 @@ snapshots:
 
   scheduler@0.25.0: {}
 
-  schema-dts@1.1.2(typescript@5.7.3):
+  schema-dts@1.1.2(typescript@5.8.3):
     dependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
 
-  schema-utils@4.3.0:
+  schema-utils@4.3.2:
     dependencies:
       '@types/json-schema': 7.0.15
       ajv: 8.17.1
@@ -12714,11 +12719,11 @@ snapshots:
       ansi-escapes: 4.3.2
       supports-hyperlinks: 2.3.0
 
-  terser-webpack-plugin@5.3.11(esbuild@0.24.2)(webpack@5.98.0(esbuild@0.24.2)):
+  terser-webpack-plugin@5.3.14(esbuild@0.24.2)(webpack@5.98.0(esbuild@0.24.2)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
-      schema-utils: 4.3.0
+      schema-utils: 4.3.2
       serialize-javascript: 6.0.2
       terser: 5.39.0
       webpack: 5.98.0(esbuild@0.24.2)
@@ -12784,7 +12789,7 @@ snapshots:
       '@ts-morph/common': 0.26.1
       code-block-writer: 13.0.3
 
-  ts-node@10.9.2(@types/node@22.13.5)(typescript@5.7.3):
+  ts-node@10.9.2(@types/node@22.13.5)(typescript@5.8.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -12798,18 +12803,18 @@ snapshots:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.7.3
+      typescript: 5.8.3
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
-  ts-node@9.1.1(typescript@5.7.3):
+  ts-node@9.1.1(typescript@5.8.3):
     dependencies:
       arg: 4.1.3
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
       source-map-support: 0.5.21
-      typescript: 5.7.3
+      typescript: 5.8.3
       yn: 3.1.1
 
   tslib@1.14.1: {}
@@ -12818,7 +12823,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@8.3.6(jiti@2.4.2)(postcss@8.5.3)(typescript@5.7.3)(yaml@2.7.0):
+  tsup@8.3.6(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.3)(yaml@2.7.0):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.24.2)
       cac: 6.7.14
@@ -12838,7 +12843,7 @@ snapshots:
       tree-kill: 1.2.2
     optionalDependencies:
       postcss: 8.5.3
-      typescript: 5.7.3
+      typescript: 5.8.3
     transitivePeerDependencies:
       - jiti
       - supports-color
@@ -12913,7 +12918,7 @@ snapshots:
 
   typescript-memoize@1.1.1: {}
 
-  typescript@5.7.3: {}
+  typescript@5.8.3: {}
 
   uc.micro@2.1.0: {}
 
@@ -13092,7 +13097,7 @@ snapshots:
   webpack@5.98.0(esbuild@0.24.2):
     dependencies:
       '@types/eslint-scope': 3.7.7
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
       '@webassemblyjs/ast': 1.14.1
       '@webassemblyjs/wasm-edit': 1.14.1
       '@webassemblyjs/wasm-parser': 1.14.1
@@ -13100,7 +13105,7 @@ snapshots:
       browserslist: 4.24.4
       chrome-trace-event: 1.0.4
       enhanced-resolve: 5.18.1
-      es-module-lexer: 1.6.0
+      es-module-lexer: 1.7.0
       eslint-scope: 5.1.1
       events: 3.3.0
       glob-to-regexp: 0.4.1
@@ -13109,9 +13114,9 @@ snapshots:
       loader-runner: 4.3.0
       mime-types: 2.1.35
       neo-async: 2.6.2
-      schema-utils: 4.3.0
+      schema-utils: 4.3.2
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.11(esbuild@0.24.2)(webpack@5.98.0(esbuild@0.24.2))
+      terser-webpack-plugin: 5.3.14(esbuild@0.24.2)(webpack@5.98.0(esbuild@0.24.2))
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     transitivePeerDependencies:
