@@ -1,42 +1,23 @@
 import { Metadata } from "next";
-// import { AIAnnouncement } from "./components/ai-announcement";
-// import { AIChatHero } from "./components/ai-chat-hero";
-import { v0 } from 'v0-sdk'
+import { AiChatInterface } from "./components/ai-chat-interface";
+import { Toaster } from "sonner";
 
-// No initialization needed - uses V0_API_KEY automatically
 export const metadata: Metadata = {
-  title: "Image to shadcn/ui theme. Generate with AI — DeDevs",
+  title: "AI Component Generator — DeDevs",
   description:
-    "Transform images into stunning shadcn/ui themes instantly with DeDevs' AI theme generator. Upload any image or describe your vision—our AI creates custom Tailwind CSS themes with real-time preview. Perfect for developers who want beautiful, production-ready themes in seconds.",
+    "Generate beautiful, functional UI components instantly with AI. Describe what you want and get production-ready React components with Tailwind CSS styling. Powered by v0.dev API.",
   keywords:
-    "ai theme generator, image to theme, shadcn/ui themes, tailwind css generator, ai design tool, theme from image, ui customization, tweakcn, visual theme creator, color palette generator, design system ai, frontend theming, web design automation",
+    "ai component generator, react components, tailwind css, ui generator, v0 api, component creation, ai design tool, shadcn/ui, frontend development, code generation",
   robots: "index, follow",
 };
 
-// Create a new chat
-const chat = await v0.chats.create({
-  message: 'Create a responsive navbar with Tailwind CSS'
-})
-
-export default async function AiPage() {
+export default function AiPage() {
   return (
-    <div className="relative isolate container mx-auto flex flex-1 flex-col gap-24 overflow-x-hidden overflow-y-auto px-4 md:px-6">
-      {/* AI Chat entry point section */}
-      {/* <section className="relative isolate flex flex-col gap-4 pt-28 lg:pt-44">
-        <AIAnnouncement />
-        <AIChatHero />
-      </section> */}
-
-      {/* Community themes section */}
-      <section className="relative isolate flex flex-col gap-4 pt-28 lg:pt-44">
-
-        {/* Use the Demo URL in an iframe */}
-        <iframe
-          src={chat.demo}
-          width="100%"
-          height="600">
-        </iframe>
-      </section>
-    </div>
+    <>
+      <div className="relative isolate container mx-auto flex flex-1 flex-col gap-8 overflow-x-hidden overflow-y-auto px-4 md:px-6 py-8">
+        <AiChatInterface />
+      </div>
+      <Toaster position="top-right" richColors />
+    </>
   );
 }
