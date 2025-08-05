@@ -30,8 +30,13 @@
     "build": "turbo build",
     "build:cli": "tsup",
     "build:registry": "npx shadcn@latest build && cp -r public/r apps/docs/public/ && cp registry.json apps/docs/public/",
-    "gen:registry": "ts-node scripts/generateRegistry.ts",
+    "build:registry:pro": "npx shadcn@latest build && cp -r public/r apps/docs/public/ && cp registry.json apps/docs/public/ && cp registry-pro.json apps/docs/public/",
+    "gen:registry": "tsx scripts/generateRegistry.ts",
+    "gen:registry:pro": "tsx scripts/generateProRegistry.ts",
+    "gen:registry:db": "tsx scripts/generateDatabaseRegistry.ts",
+    "gen:registry:upstash": "tsx scripts/generateUpstashRegistry.ts",
     "registry": "pnpm run gen:registry && pnpm run build:registry",
+    "registry:pro": "pnpm run gen:registry:pro && pnpm run build:registry:pro",
     "dev": "PORT=3422 turbo dev",
     "lint": "ultracite lint",
     "format": "ultracite format",
@@ -41,20 +46,34 @@
     "bump-ui": "npx shadcn@latest add --all --overwrite -c packages/shadcn-ui",
     "clean": "git clean -xdf node_modules",
     "prepublishOnly": "tsup",
-    "publish:cli": "npm run build:cli && npm publish",
-    "publish:patch": "npm version patch && npm run publish:cli",
-    "publish:minor": "npm version minor && npm run publish:cli",
-    "publish:major": "npm version major && npm run publish:cli",
-    "test:cli": "npm run build:cli && chmod +x dist/index.js && node dist/index.js --help"
+    "publish:cli": "pnpm run build:cli && pnpm publish",
+    "publish:patch": "pnpm version patch && pnpm run publish:cli",
+    "publish:minor": "pnpm version minor && pnpm run publish:cli",
+    "publish:major": "pnpm version major && pnpm run publish:cli",
+    "test:cli": "pnpm run build:cli && chmod +x dist/index.js && node dist/index.js --help",
+    "dev:api:upstash": "tsx examples/upstash-registry-api.ts",
+    "sync:registry": "pnpm run gen:registry:db",
+    "sync:registry:upstash": "pnpm run gen:registry:upstash",
+    "test:auth": "tsx scripts/auth.ts login test-key",
+    "test:auth:status": "tsx scripts/auth.ts status",
+    "health:registry": "tsx scripts/healthCheck.ts",
+    "health:api": "curl -f http://localhost:3000/health || exit 1",
+    "build:prod": "NODE_ENV=production pnpm run build",
+    "deploy:staging": "pnpm run build:prod && pnpm run sync:registry:upstash",
+    "validate:registry": "tsx scripts/validateRegistry.ts",
+    "validate:components": "tsx scripts/validateComponents.ts"
   },
   "devDependencies": {
     "@auto-it/first-time-contributor": "^11.3.0",
     "@biomejs/biome": "2.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
     "@types/node": "^24.0.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
     "turbo": "^2.5.4",
     "typescript": "^5.8.3",
-    "ultracite": "^5.0.3",
-    "ts-node": "^10.9.2"
+    "ultracite": "^5.0.3"
   },
   "engines": {
     "node": ">=18"
@@ -62,6 +81,10 @@
   "packageManager": "pnpm@10.12.1",
   "type": "module",
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.0.1",
+    "ioredis": "^5.7.0",
     "tsup": "^8.5.0",
     "zod": "^3.25.64"
   }

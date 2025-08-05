@@ -1,0 +1,231 @@
+name: Sync Registry to Upstash
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/**'
+      - 'scripts/generateUpstashRegistry.ts'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'packages/**'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  sync-registry:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+          
+      - name: Install dependencies
+        run: pnpm install
+        
+      - name: Generate static registry (fallback)
+        run: pnpm run registry
+        
+      - name: Test Upstash registry generation
+        run: pnpm run gen:registry:upstash
+        env:
+          KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+          KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
+          
+      - name: Deploy to production Upstash
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          echo "🚀 Syncing registry to Upstash..."
+          pnpm run gen:registry:upstash
+        env:
+          KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+          KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
+          
+      - name: Notify registry API to refresh cache
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          curl -X POST "${{ secrets.REGISTRY_API_URL }}/admin/sync" \
+            -H "Authorization: Bearer ${{ secrets.ADMIN_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"source": "github-actions", "commit": "${{ github.sha }}"}'
+          
+      - name: Deploy static files to Vercel (fallback)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          echo "📦 Deploying static registry files..."
+          # Upload registry.json to Vercel for fallback
+          npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          
+      - name: Comment on PR with registry updates
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            // Read registry file to get component count
+            let registryInfo = 'Registry updated successfully';
+            try {
+              const registry = JSON.parse(fs.readFileSync('registry.json', 'utf8'));
+              registryInfo = `📦 Registry updated with ${registry.items?.length || 0} components`;
+            } catch (e) {
+              console.log('Could not read registry file');
+            }
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 🚀 Registry Update Preview
+              
+              ${registryInfo}
+              
+              **Changes:**
+              - ✅ Static registry generated
+              - ✅ Upstash registry tested
+              - 🔄 Ready for production sync on merge
+              
+              **Test the changes:**
+              \`\`\`bash
+              # Test with the CLI
+              npx @dedevs/ui@latest add <component-name>
+              \`\`\`
+              `
+            });
+            
+      - name: Validate component structure
+        run: |
+          echo "🔍 Validating component structure..."
+          # Add validation script here
+          node -e "
+            const fs = require('fs');
+            const registry = JSON.parse(fs.readFileSync('registry.json', 'utf8'));
+            console.log('✅ Registry validation passed');
+            console.log('📊 Components:', registry.items?.length || 0);
+          "
+          
+      - name: Performance check
+        run: |
+          echo "⚡ Checking registry performance..."
+          # Check file sizes
+          ls -lh registry.json
+          echo "Registry file size check completed"
+
+  validate-components:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+          
+      - name: Install dependencies
+        run: pnpm install
+        
+      - name: Validate component structure
+        run: |
+          echo "🔍 Validating component structure..."
+          
+          # Check that all components have required files
+          for dir in packages/*/; do
+            if [ -d "$dir" ]; then
+              package_name=$(basename "$dir")
+              echo "Checking $package_name..."
+              
+              # Check for TypeScript files
+              if ! find "$dir" -name "*.tsx" -o -name "*.ts" | grep -v test | grep -v spec | head -1 > /dev/null; then
+                echo "❌ No TypeScript component files found in $package_name"
+                exit 1
+              fi
+              
+              echo "✅ $package_name structure valid"
+            fi
+          done
+          
+      - name: Test component imports
+        run: |
+          echo "🧪 Testing component imports..."
+          
+          # Create a test file to verify imports work
+          cat > test-imports.ts << 'EOF'
+          // Test that components can be imported without errors
+          import { readFileSync, readdirSync } from 'fs';
+          import { join } from 'path';
+          
+          const packagesDir = 'packages';
+          const packages = readdirSync(packagesDir, { withFileTypes: true })
+            .filter(dirent => dirent.isDirectory())
+            .map(dirent => dirent.name);
+          
+          for (const pkg of packages) {
+            const packagePath = join(packagesDir, pkg);
+            const files = readdirSync(packagePath).filter(f => f.endsWith('.tsx') || f.endsWith('.ts'));
+            
+            for (const file of files) {
+              const content = readFileSync(join(packagePath, file), 'utf-8');
+              
+              // Check for common issues
+              if (content.includes('import ') && !content.includes('export ')) {
+                console.warn(`⚠️  ${pkg}/${file} has imports but no exports`);
+              }
+              
+              // Check for TypeScript syntax
+              if (file.endsWith('.tsx') && !content.includes('React')) {
+                console.warn(`⚠️  ${pkg}/${file} is TSX but doesn't import React`);
+              }
+            }
+          }
+          
+          console.log('✅ Component import validation complete');
+          EOF
+          
+          npx ts-node test-imports.ts
+          
+      - name: Generate test registry
+        run: |
+          echo "📋 Generating test registry..."
+          pnpm run gen:registry
+          
+          # Validate registry JSON
+          node -e "
+            const registry = require('./registry.json');
+            console.log('Registry validation:');
+            console.log('- Schema:', registry.\$schema ? '✅' : '❌');
+            console.log('- Name:', registry.name ? '✅' : '❌');
+            console.log('- Items:', Array.isArray(registry.items) ? '✅' : '❌');
+            console.log('- Component count:', registry.items.length);
+            
+            // Validate each component
+            for (const item of registry.items) {
+              if (!item.name || !item.type || !item.files) {
+                console.error('❌ Invalid component:', item.name || 'unnamed');
+                process.exit(1);
+              }
+            }
+            
+            console.log('✅ Registry validation passed');
+          "

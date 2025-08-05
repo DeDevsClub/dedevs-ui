@@ -1,0 +1,62 @@
+{
+    "$schema": "./sources.schema.json",
+    "version": "1.0.0",
+    "sources": [
+        {
+            "name": "dedevs-ui-core",
+            "description": "Core open source components",
+            "url": "https://registry.ui.dedevs.com",
+            "requiresAuth": false,
+            "tier": "free",
+            "priority": 1,
+            "components": [
+                "snippet",
+                "code-block",
+                "editor",
+                "ai-simple",
+                "ai-input",
+                "ai-message",
+                "ai-response",
+                "ai-conversation",
+                "ai-branch"
+            ]
+        },
+        {
+            "name": "dedevs-ui-pro",
+            "description": "Premium components with advanced features",
+            "url": "https://registry.pro.dedevs.com",
+            "requiresAuth": true,
+            "tier": "pro",
+            "priority": 2,
+            "components": [
+                "ai-advanced-chat",
+                "ai-code-review",
+                "ai-data-visualization",
+                "ai-reasoning",
+                "ai-server",
+                "ai-source",
+                "ai-suggestion",
+                "ai-tool",
+                "premium-dashboard",
+                "advanced-analytics"
+            ]
+        },
+        {
+            "name": "community-registry",
+            "description": "Community contributed components",
+            "url": "https://registry.community.dedevs.com",
+            "requiresAuth": false,
+            "tier": "free",
+            "priority": 3,
+            "enabled": false,
+            "components": []
+        }
+    ],
+    "fallback": {
+        "enabled": true,
+        "sources": [
+            "https://registry.ui.dedevs.com",
+            "https://backup.ui.dedevs.com"
+        ]
+    }
+}

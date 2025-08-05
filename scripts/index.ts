@@ -4,6 +4,17 @@ import { execSync } from 'node:child_process';
 import { existsSync, readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
 import { get } from 'node:https';
 import { join, extname } from 'node:path';
+import { getAuthConfig, requireProAccess, loginCommand, logoutCommand, statusCommand } from './auth.js';
+
+// Pro components that require authentication
+const PRO_COMPONENTS = new Set([
+  'ai-advanced-chat',
+  'ai-code-review',
+  'ai-data-visualization',
+  'premium-dashboard',
+  'advanced-analytics',
+  // Add more pro components as needed
+]);
 
 async function main() {
   const args = process.argv.slice(2);
@@ -18,6 +29,29 @@ async function main() {
   if (args.includes('--version') || args.includes('-v')) {
     showVersion();
     process.exit(0);
+  }
+
+  // Handle authentication commands
+  if (command === 'auth') {
+    const subCommand = args[1];
+
+    if (subCommand === 'login') {
+      if (args.length < 3) {
+        console.log('Usage: npx dedevs-ui auth login <api-key>');
+        process.exit(1);
+      }
+      await loginCommand(args[2]);
+      process.exit(0);
+    } else if (subCommand === 'logout') {
+      logoutCommand();
+      process.exit(0);
+    } else if (subCommand === 'status') {
+      statusCommand();
+      process.exit(0);
+    } else {
+      console.log('Usage: npx dedevs-ui auth <login|logout|status>');
+      process.exit(1);
+    }
   }
 
   // Handle commands
@@ -37,6 +71,13 @@ async function main() {
         continue;
       }
 
+      // Check if component requires pro access
+      if (PRO_COMPONENTS.has(packageName)) {
+        if (!requireProAccess()) {
+          process.exit(1);
+        }
+      }
+
       console.log(`Adding ${packageName} component...`);
       await addComponentWithDependencies(packageName);
     }
@@ -46,6 +87,10 @@ async function main() {
     console.log('Commands:');
     console.log('  add [...packages]  Add components to your project');
     console.log('  list, ls           List all available components');
+    console.log('  auth <subcommand>  Manage authentication');
+    console.log('    login <api-key>  Login with pro API key');
+    console.log('    logout           Logout and switch to free tier');
+    console.log('    status           Show authentication status');
     console.log('');
     console.log('Options:');
     console.log('  --help, -h         Show help information');
@@ -56,13 +101,22 @@ async function main() {
 
 async function addComponentWithDependencies(packageName: string) {
   try {
-    // Fetch component JSON to analyze dependencies
-    const url = new URL(
-      `r/${packageName}.json`,
-      'https://ui.dedevs.com/'
-    );
+    const authConfig = getAuthConfig();
 
-    const componentData = await fetchJson(url.toString());
+    // Determine the registry URL based on tier
+    const baseUrl = authConfig.tier === 'pro'
+      ? 'https://pro.ui.dedevs.com/'
+      : 'https://ui.dedevs.com/';
+
+    const url = new URL(`r/${packageName}.json`, baseUrl);
+
+    // Add auth header for pro requests
+    const headers: Record<string, string> = {};
+    if (authConfig.tier === 'pro' && authConfig.apiKey) {
+      headers['Authorization'] = `Bearer ${authConfig.apiKey}`;
+    }
+
+    const componentData = await fetchJson(url.toString(), headers);
 
     // Extract dependencies from component files
     const dependencies = extractDependencies(componentData);
@@ -276,7 +330,7 @@ async function installMissingShadcnComponents(componentData: any) {
       const shadcnImportRegex = /@\/components\/ui\/([^'"\s;,}]+)/g;
       // Also look for @repo/shadcn-ui imports (before transformation)
       const repoShadcnImportRegex = /@repo\/shadcn-ui\/components\/ui\/([^'"\s;,}]+)/g;
-      
+
       let match;
 
       // Check for @/components/ui/ imports
@@ -284,7 +338,7 @@ async function installMissingShadcnComponents(componentData: any) {
         const componentName = match[1];
         requiredShadcnComponents.add(componentName);
       }
-      
+
       // Check for @repo/shadcn-ui imports
       while ((match = repoShadcnImportRegex.exec(file.content)) !== null) {
         const componentName = match[1];
@@ -350,6 +404,10 @@ function showHelp() {
   console.log('Commands:');
   console.log('  add [...packages]  Add components to your project');
   console.log('  list, ls           List all available components');
+  console.log('  auth <subcommand>  Manage authentication');
+  console.log('    login <api-key>  Login with pro API key');
+  console.log('    logout           Logout and switch to free tier');
+  console.log('    status           Show authentication status');
   console.log('');
   console.log('Options:');
   console.log('  --help, -h         Show help information');
@@ -447,9 +505,13 @@ async function listComponents() {
   }
 }
 
-function fetchJson(url: string): Promise<any> {
+function fetchJson(url: string, headers?: Record<string, string>): Promise<any> {
   return new Promise((resolve, reject) => {
-    get(url, (res) => {
+    const options = {
+      headers: headers || {}
+    };
+
+    get(url, options, (res) => {
       if (res.statusCode !== 200) {
         reject(new Error(`Failed to fetch registry: ${res.statusCode}`));
         return;
