@@ -6,46 +6,55 @@ export const env = createEnv({
   extends: [vercel()],
   server: {
     ANALYZE: z.string().optional(),
-    BETTERSTACK_API_KEY: z.string().min(1).optional(),
-    BETTERSTACK_URL: z.string().min(1).url().optional(),
+    BETTERSTACK_API_KEY: z.string().optional(),
+    BETTERSTACK_URL: z.string().optional().refine((val) => !val || z.string().url().safeParse(val).success, {
+      message: "Invalid URL"
+    }),
 
     // Database
-    DATABASE_URL: z.string().min(1),
+    DATABASE_URL: z.string().optional(),
 
     // Polar API for subscription management
-    POLAR_ACCESS_TOKEN: z.string().min(1),
+    POLAR_ACCESS_TOKEN: z.string().optional(),
 
     // GitHub API
-    GITHUB_TOKEN: z.string().min(1).optional(),
+    GITHUB_TOKEN: z.string().optional(),
 
     // Base URL for the application
-    BASE_URL: z.string().min(1).url(),
+    BASE_URL: z.string().optional().refine((val) => !val || z.string().url().safeParse(val).success, {
+      message: "Invalid URL"
+    }),
 
     // OAuth providers (currently commented out in auth config)
-    GOOGLE_CLIENT_ID: z.string().min(1).optional(),
-    GOOGLE_CLIENT_SECRET: z.string().min(1).optional(),
-    GITHUB_CLIENT_ID: z.string().min(1).optional(),
-    GITHUB_CLIENT_SECRET: z.string().min(1).optional(),
+    GOOGLE_CLIENT_ID: z.string().optional(),
+    GOOGLE_CLIENT_SECRET: z.string().optional(),
+    GITHUB_CLIENT_ID: z.string().optional(),
+    GITHUB_CLIENT_SECRET: z.string().optional(),
 
     // Added by Vercel
     NEXT_RUNTIME: z.enum(['nodejs', 'edge']).optional(),
 
     // Added by Sentry Integration, Vercel Marketplace
-    SENTRY_ORG: z.string().min(1).optional(),
-    SENTRY_PROJECT: z.string().min(1).optional(),
+    SENTRY_ORG: z.string().optional(),
+    SENTRY_PROJECT: z.string().optional(),
   },
   client: {
     NEXT_PUBLIC_GA_MEASUREMENT_ID: z
       .string()
-      .min(1)
-      .startsWith('G-')
-      .optional(),
-    NEXT_PUBLIC_LOGO_DEV_TOKEN: z.string().min(1).optional(),
-    NEXT_PUBLIC_PRO_PRODUCT_ID: z.string().min(1).optional(),
-    NEXT_PUBLIC_SOURCE_URL: z.string().min(1).url().optional(),
+      .optional()
+      .refine((val) => !val || val.startsWith('G-'), {
+        message: "Must start with 'G-'"
+      }),
+    NEXT_PUBLIC_LOGO_DEV_TOKEN: z.string().optional(),
+    NEXT_PUBLIC_PRO_PRODUCT_ID: z.string().optional(),
+    NEXT_PUBLIC_SOURCE_URL: z.string().optional().refine((val) => !val || z.string().url().safeParse(val).success, {
+      message: "Invalid URL"
+    }),
 
     // Added by Sentry Integration, Vercel Marketplace
-    NEXT_PUBLIC_SENTRY_DSN: z.string().min(1).url().optional(),
+    NEXT_PUBLIC_SENTRY_DSN: z.string().optional().refine((val) => !val || z.string().url().safeParse(val).success, {
+      message: "Invalid URL"
+    }),
   },
   runtimeEnv: {
     ANALYZE: process.env.ANALYZE,

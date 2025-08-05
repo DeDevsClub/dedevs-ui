@@ -192,6 +192,9 @@ importers:
       tw-animate-css:
         specifier: ^1.3.4
         version: 1.3.6
+      v0-sdk:
+        specifier: ^0.6.2
+        version: 0.6.2
       zod:
         specifier: ^3.25.64
         version: 3.25.76
@@ -7364,6 +7367,9 @@ packages:
   uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
     hasBin: true
+
+  v0-sdk@0.6.2:
+    resolution: {integrity: sha512-YB2yBfIyew9u6/4ep8OTe8XnSysUWgC+8ij7W2oZnVfYlKYZ8DHuUs++FyoTvqCq/FCpLO/1/ViutWuatJbObA==}
 
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
@@ -15220,6 +15226,8 @@ snapshots:
   util-deprecate@1.0.2: {}
 
   uuid@9.0.1: {}
+
+  v0-sdk@0.6.2: {}
 
   v8-compile-cache-lib@3.0.1: {}
 

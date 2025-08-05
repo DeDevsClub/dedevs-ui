@@ -10,7 +10,7 @@ import {
 } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
+import { cn } from '@repo/shadcn-ui/lib/utils';
 
 export type SnippetProps = ComponentProps<typeof Tabs>;
 

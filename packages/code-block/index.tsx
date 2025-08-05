@@ -106,7 +106,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { cn } from '@/lib/utils';
+import { cn } from '@repo/shadcn-ui/lib/utils';
 
 export type { BundledLanguage } from 'shiki';
 
