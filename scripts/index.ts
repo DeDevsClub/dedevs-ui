@@ -103,8 +103,8 @@ function extractDependencies(componentData: any): string[] {
       while ((match = importRegex.exec(file.content)) !== null) {
         const importPath = match[1];
 
-        // Skip relative imports and built-in modules
-        if (importPath.startsWith('.') || importPath.startsWith('node:')) {
+        // Skip relative imports, built-in modules, and local alias imports
+        if (importPath.startsWith('.') || importPath.startsWith('node:') || importPath.startsWith('@/')) {
           continue;
         }
 
@@ -272,8 +272,8 @@ async function installMissingShadcnComponents(componentData: any) {
   // Extract shadcn/ui component imports from the component files
   for (const file of componentData.files) {
     if (file.content) {
-      // Look for @repo/shadcn-ui imports that will be transformed to @/components/ui/
-      const shadcnImportRegex = /@repo\/shadcn-ui\/components\/ui\/([^'"]+)/g;
+      // Look for @/components/ui/ imports (the actual shadcn/ui import pattern)
+      const shadcnImportRegex = /@\/components\/ui\/([^'"\s;,}]+)/g;
       let match;
 
       while ((match = shadcnImportRegex.exec(file.content)) !== null) {

@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:list": "node ../../dist/index.js list",
+    "test:add": "node ../../dist/index.js add",
+    "test:help": "node ../../dist/index.js --help"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
