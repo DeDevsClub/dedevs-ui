@@ -12,7 +12,7 @@ import { track } from '@vercel/analytics/react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import dedevsui from '../public/logomark.svg';
+import dedevs from '../public/dedevs.svg';
 import shadcn from '../public/shadcn.svg';
 
 type InstallerProps = {
@@ -20,50 +20,50 @@ type InstallerProps = {
 };
 
 export const Installer = ({ packageName }: InstallerProps) => {
-  const [value, setValue] = useState('dedevs-ui');
+  const [value, setValue] = useState('dedevs');
 
   const commands = {
-    'dedevs-ui': {
-      image: dedevsui,
+    'dedevs': {
+      image: dedevs,
       code: `npx dedevs-ui@latest add ${packageName}`,
     },
     shadcn: {
       image: shadcn,
-      code: `npx shadcn@latest add https://ui.dedevs.club/registry/${packageName}.json`,
+      code: `npx shadcn@latest add https://ui.dedevs.com/registry/${packageName}.json`,
     },
   };
 
   return (
     <Snippet
-      value={value}
-      onValueChange={setValue}
       className="not-prose shiki shiki-themes github-light github-dark"
+      onValueChange={setValue}
+      value={value}
     >
       <SnippetHeader>
         <SnippetTabsList>
           {Object.entries(commands).map(([key, command]) => (
             <SnippetTabsTrigger key={key} value={key}>
               <Image
-                src={command.image}
                 alt=""
-                width={14}
-                height={14}
                 className="dark:invert"
+                height={14}
+                src={command.image}
+                width={14}
               />
               {key}
             </SnippetTabsTrigger>
           ))}
         </SnippetTabsList>
         <SnippetCopyButton
-          value={commands[value as keyof typeof commands].code}
           onCopy={() => {
             toast.success('Copied to clipboard');
-            track('copy_installer_code', {
+            track('Copy installer code', {
               cli: value,
               package: packageName,
             });
           }}
           onError={() => toast.error('Failed to copy to clipboard')}
+          value={commands[value as keyof typeof commands].code}
         />
       </SnippetHeader>
       {Object.entries(commands).map(([key, command]) => (

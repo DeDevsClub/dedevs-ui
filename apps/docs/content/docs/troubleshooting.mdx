@@ -1,0 +1,168 @@
+---
+title: Troubleshooting
+description: Solutions for common issues with the DeDevs UI Design Registry for AI chatbot interfaces.
+---
+
+## AI Conversation Component Issues
+
+### My chatbot messages aren't displaying properly
+
+Make sure your project is configured correctly for the Design Registry components:
+
+- Check that your `globals.css` file imports Tailwind and includes the shadcn/ui base styles
+- Verify you've installed the correct message handler components (`AIMessage`, `AIMessageContent`, etc.)
+- Ensure your conversation state is properly structured with message types (`user`, `assistant`, `system`)
+- Confirm that message formatting utilities are properly imported and configured
+
+### Message streaming animation doesn't work
+
+The AI response streaming animation requires:
+
+- Properly formatted stream data with partial content chunks
+- The `useAIStreamResponse` hook configured correctly with the proper streaming options
+- No conflicting CSS animations in your project that might override typing indicators
+- Correct implementation of the streaming protocol from your AI provider
+
+### AI response markdown rendering issues
+
+If your AI-generated markdown content doesn't render properly:
+
+- Make sure you've installed the markdown renderer component
+- Check that you're processing the markdown content with the right utilities
+- Verify custom element renderers are properly registered for specialized content types
+- Ensure you haven't disabled any required markdown extensions
+
+## Installation Issues
+
+### I ran npx dedevs-ui add but nothing was added to my project
+
+Double-check that:
+
+- Your current working directory is the root of your project (where package.json lives)
+- Your components.json file (if using shadcn-style config) is set up correctly
+- You're using the latest version of the DeDevs UI CLI:
+
+```bash
+npx dedevs-ui@latest
+```
+
+### AI component dependencies are missing
+
+Some AI components require additional dependencies:
+
+- For code highlighting: `shiki`, `rehype-pretty-code`, or similar
+- For markdown: `remark`, `rehype`, and related plugins
+- For visualizations: data visualization libraries
+
+Check the specific component documentation for required dependencies.
+
+## Theme & Styling Problems
+
+### Theme switching doesn't work — my AI chatbot stays in light mode
+
+Ensure your app is using the same data-theme system that shadcn/ui and the Design Registry expect. The default implementation toggles a `data-theme` attribute on the `<html>` element. Make sure your `tailwind.config.js` is using class or data- selectors accordingly.
+
+### Code blocks in AI responses look broken
+
+Make sure you have:
+
+- Installed the code syntax highlighting dependencies
+- Added the proper language detection utilities
+- Included the syntax highlighting CSS in your project
+- Configured the theme properly for both light and dark modes
+- Set up proper escaping for code content with special characters
+
+### AI reasoning visualization styling issues
+
+If your reasoning visualizations look incorrect:
+
+- Check for CSS conflicts with your application styles
+- Ensure the visualization container has sufficient width/height
+- Verify that your reasoning data structure follows the expected format
+- Check browser console for any styling errors
+
+## Import & Configuration Issues
+
+### The AI component imports fail with "module not found"
+
+Check the file exists. If it does, make sure your `tsconfig.json` has a proper paths alias for `@/` i.e.
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
+```
+
+### AI reasoning visualization doesn't render properly
+
+1. Ensure your reasoning data follows the correct schema format
+2. Check that all sub-components are properly imported
+3. Verify no CSS conflicts with other visualization libraries
+4. Make sure your reasoning steps are properly formatted with valid JSON structure
+5. Confirm that your visualization container has sufficient dimensions
+
+## AI Integration Problems
+
+### My AI model integration isn't working with the Design Registry
+
+1. Make sure you've implemented the correct message format adapters
+2. Check your API keys and endpoints are properly configured
+3. Verify the model output format matches what the components expect
+4. Use the browser console to check for API errors
+5. Ensure your rate limits haven't been exceeded with the AI provider
+6. Check that your AI service is properly handling streaming if you're using streaming components
+
+### The source attribution component doesn't display citations
+
+1. Check that your AI response includes the proper citation metadata format
+2. Verify you've installed the attribution component correctly
+3. Ensure the citation data structure matches the expected schema
+4. Confirm citation IDs are correctly referenced in the response text
+5. Check that citation URLs are properly formatted and accessible
+
+## MCP Integration Issues
+
+### The MCP integration commands fail
+
+1. Make sure Node.js and npm are installed
+2. Try running `npm install -g npm` to update npm
+3. Check your system's PATH includes npm binaries
+4. Verify your MCP configuration is correct
+5. Ensure your authentication with the MCP server is valid
+
+### Streaming AI responses through MCP are incomplete
+
+1. Check your streaming configuration in the MCP client
+2. Verify connection stability and timeout settings
+3. Ensure your client properly handles stream termination signals
+4. Check server logs for any errors in stream processing
+
+## Advanced Component Issues
+
+### Conversation history management problems
+
+1. Check that your conversation store is correctly implemented
+2. Verify message IDs are unique and consistent
+3. Ensure proper cleanup of temporary or draft messages
+4. Check for proper pagination if implementing virtual scrolling
+
+### AI feedback mechanisms not working
+
+1. Verify the feedback data structure matches component requirements
+2. Check that feedback submission endpoints are configured correctly
+3. Ensure user permissions allow feedback submission
+4. Check for proper error handling in feedback submission logic
+
+## Still stuck?
+
+If none of these answers help, open an [issue on GitHub](https://github.com/DeDevsClub/dedevs-ui/issues) and someone from the DeDevs team will be happy to assist. Please include:
+
+- Details of the specific AI component you're having trouble with
+- Any error messages from the console
+- Your environment details (Next.js version, React version, etc.)
+- A minimal code example demonstrating the issue

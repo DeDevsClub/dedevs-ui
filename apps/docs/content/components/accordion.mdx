@@ -1,0 +1,41 @@
+---
+title: Accordion
+description: A customizable accordion component.
+component: true
+---
+
+<ComponentPreview name="accordion" />
+
+## Installation
+
+```bash
+npx dedevs-ui add accordion
+```
+
+## Usage
+
+```tsx
+import { Accordion } from '@repo/shadcn-ui/components/accordion';
+
+export default function Example() {
+  return (
+    <Accordion>
+      Your content here
+    </Accordion>
+  );
+}
+```
+
+## API Reference
+
+### Accordion
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The content of the component |
+
+<PoweredBy packages={[
+  { name: "React", icon: "logos:react" },
+  { name: "Tailwind CSS", icon: "logos:tailwindcss-icon" }
+]} />

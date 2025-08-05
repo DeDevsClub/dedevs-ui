@@ -6,11 +6,8 @@ node_modules
 .pnp.js
 
 # Local env files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
 
 # Testing
 coverage
@@ -26,7 +23,6 @@ coverage
 out/
 build
 dist
-
 
 # Debug
 npm-debug.log*
@@ -46,11 +42,3 @@ yarn-error.log*
 # AI Rules
 .cursorrules
 .github/copilot-instructions.md
-
-# Build Cache
-cache
-docs@0.0.0
-next
-dedevs-ui@0.1.1
-turbo
-bun

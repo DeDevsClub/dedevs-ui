@@ -1,10 +1,11 @@
 'use client';
 
 import { Button } from '@repo/shadcn-ui/components/ui/button';
+import { cn } from '@repo/shadcn-ui/lib/utils';
 import { captureException } from '@sentry/nextjs';
 import type NextError from 'next/error';
 import { useEffect } from 'react';
-import { fonts } from './lib/fonts';
+import { mono, sans } from '../lib/fonts';
 
 type GlobalErrorProperties = {
   readonly error: NextError & { digest?: string };
@@ -17,9 +18,16 @@ const GlobalError = ({ error, reset }: GlobalErrorProperties) => {
   }, [error]);
 
   return (
-    <html lang="en" className={fonts}>
+    <html
+      className={cn(
+        'touch-manipulation font-sans antialiased',
+        sans.variable,
+        mono.variable
+      )}
+      lang="en"
+    >
       <body>
-        <h1>Oops, something went wrong</h1>
+        <h1>Whoopsies, something went wrong</h1>
         <Button onClick={() => reset()}>Try again</Button>
       </body>
     </html>

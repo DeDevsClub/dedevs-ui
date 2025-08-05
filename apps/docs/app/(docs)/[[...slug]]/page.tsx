@@ -1,4 +1,3 @@
-import { AutoTypeTable } from 'fumadocs-typescript/ui';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import {
   DocsBody,
@@ -8,11 +7,12 @@ import {
 } from 'fumadocs-ui/page';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { Header } from '../../../components/header';
+import { ComponentPreview } from '../../../components/component-preview';
 import { Installer } from '../../../components/installer';
 import { PoweredBy } from '../../../components/powered-by';
 import { Preview } from '../../../components/preview';
 import { source } from '../../../lib/source';
+import Home from './(home)';
 
 type PageProps = {
   params: Promise<{ slug?: string[] }>;
@@ -22,6 +22,10 @@ const Page = async (props: PageProps) => {
   const params = await props.params;
   const page = source.getPage(params.slug);
 
+  if (!params.slug) {
+    return <Home />;
+  }
+
   if (!page) {
     notFound();
   }
@@ -29,28 +33,25 @@ const Page = async (props: PageProps) => {
   const MDX = page.data.body;
 
   return (
-    <>
-      <Header />
-      <DocsPage
-        toc={page.data.toc}
-        full={page.data.full}
-        tableOfContent={{ style: 'clerk' }}
-      >
-        <DocsTitle>{page.data.title}</DocsTitle>
-        <DocsDescription>{page.data.description}</DocsDescription>
-        <DocsBody>
-          <MDX
-            components={{
-              ...defaultMdxComponents,
-              Installer,
-              Preview,
-              PoweredBy,
-              AutoTypeTable,
-            }}
-          />
-        </DocsBody>
-      </DocsPage>
-    </>
+    <DocsPage
+      full={page.data.full}
+      tableOfContent={{ style: 'clerk' }}
+      toc={page.data.toc}
+    >
+      <DocsTitle>{page.data.title}</DocsTitle>
+      <DocsDescription>{page.data.description}</DocsDescription>
+      <DocsBody>
+        <MDX
+          components={{
+            ...defaultMdxComponents,
+            ComponentPreview,
+            Installer,
+            Preview,
+            PoweredBy,
+          }}
+        />
+      </DocsBody>
+    </DocsPage>
   );
 };
 
@@ -61,6 +62,14 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const params = await props.params;
   const page = source.getPage(params.slug);
+
+  if (!params.slug) {
+    return {
+      title: 'DeDevs UI',
+      description:
+        'DeDevs UI is a custom registry of composable, accessible and open source components designed for use with shadcn/ui.',
+    };
+  }
 
   if (!page) {
     notFound();
@@ -75,7 +84,8 @@ export async function generateMetadata(props: {
       type: 'website',
       images: [
         {
-          url: `/og?slug=${params.slug?.join('/') ?? ''}`,
+          // url: `/og?slug=${params.slug?.join('/') ?? ''}`,
+          url: 'https://devcdn-ui.dedevs.com/opengraph-image.png',
           width: 1200,
           height: 630,
         },

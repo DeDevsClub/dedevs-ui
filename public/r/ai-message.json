@@ -1,0 +1,13 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ai-message",
+  "type": "registry:ui",
+  "description": "AI message display component",
+  "files": [
+    {
+      "path": "packages/ai/message.tsx",
+      "content": "import {\n  Avatar,\n  AvatarFallback,\n  AvatarImage,\n} from '@repo/shadcn-ui/components/ui/avatar';\nimport type { ComponentProps, HTMLAttributes } from 'react';\nimport { cn } from '@repo/shadcn-ui/lib/utils';\n\nexport type AIMessageProps = HTMLAttributes<HTMLDivElement> & {\n  from: 'user' | 'assistant';\n};\n\nexport const AIMessage = ({ className, from, ...props }: AIMessageProps) => (\n  <div\n    className={cn(\n      'group flex w-full items-end justify-end gap-2 py-4',\n      from === 'user' ? 'is-user' : 'is-assistant flex-row-reverse justify-end',\n      '[&>div]:max-w-[80%]',\n      className\n    )}\n    {...props}\n  />\n);\n\nexport type AIMessageContentProps = HTMLAttributes<HTMLDivElement>;\n\nexport const AIMessageContent = ({\n  children,\n  className,\n  ...props\n}: AIMessageContentProps) => (\n  <div\n    className={cn(\n      'flex flex-col gap-2 rounded-lg px-4 py-3 text-sm',\n      'bg-muted text-foreground',\n      'group-[.is-user]:bg-primary group-[.is-user]:text-primary-foreground',\n      className\n    )}\n    {...props}\n  >\n    <div className=\"is-user:dark\">{children}</div>\n  </div>\n);\n\nexport type AIMessageAvatarProps = ComponentProps<typeof Avatar> & {\n  src: string;\n  name?: string;\n};\n\nexport const AIMessageAvatar = ({\n  src,\n  name,\n  className,\n  ...props\n}: AIMessageAvatarProps) => (\n  <Avatar className={cn('size-8', className)} {...props}>\n    <AvatarImage alt=\"\" className=\"mt-0 mb-0\" src={src} />\n    <AvatarFallback>{name?.slice(0, 2) || 'ME'}</AvatarFallback>\n  </Avatar>\n);\n",
+      "type": "registry:component"
+    }
+  ]
+}

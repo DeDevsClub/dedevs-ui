@@ -1,18 +1,30 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
+  "globalDependencies": [
+    "**/.env.*local"
+  ],
   "ui": "tui",
   "envMode": "loose",
   "tasks": {
     "build": {
-      "dependsOn": ["^build", "test"],
-      "outputs": [".next/**", "!.next/cache/**", ".basehub/**"]
+      "dependsOn": [
+        "^build",
+        "test"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**"
+      ]
     },
     "test": {
-      "dependsOn": ["^test"]
+      "dependsOn": [
+        "^test"
+      ]
     },
     "analyze": {
-      "dependsOn": ["^analyze"]
+      "dependsOn": [
+        "^analyze"
+      ]
     },
     "dev": {
       "cache": false,

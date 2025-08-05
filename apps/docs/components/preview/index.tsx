@@ -1,293 +1,140 @@
+import { readFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import {
-  SandboxCodeEditor,
-  SandboxConsole,
-  SandboxFileExplorer,
-  SandboxLayout,
-  SandboxPreview,
-  SandboxTabs,
-  SandboxTabsContent,
-  SandboxTabsList,
-  SandboxTabsTrigger,
-} from '@repo/sandbox';
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from '@repo/shadcn-ui/components/ui/resizable';
-import { AppWindowIcon, CodeIcon, TerminalIcon } from 'lucide-react';
-import { content } from './content';
-import { PreviewProvider } from './provider';
-import { tsconfig } from './tsconfig';
-import { utils } from './utils';
-import { V0Button } from './v0-button';
-
-type ComponentModule = {
-  name: string;
-  dependencies?: Record<string, string>;
-  devDependencies?: Record<string, string>;
-  files?: { content: string }[];
-};
-
-type RegistryItem = {
-  dependencies?: Record<string, string>;
-  devDependencies?: Record<string, string>;
-  registryDependencies?: Record<string, string>;
-  files?: { path: string; content: string }[];
-};
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@repo/shadcn-ui/components/ui/tabs';
+import { cn } from '@repo/shadcn-ui/lib/utils';
+import { BoxIcon, CodeIcon, EyeIcon } from 'lucide-react';
+import { PreviewCode } from './code';
+import { PreviewContent } from './content';
+import { PreviewRender } from './render';
+import { PreviewSource } from './source';
 
 type PreviewProps = {
-  name: string;
-  code: string;
-  dependencies?: Record<string, string>;
-};
-
-// Caches to avoid repeated imports
-const componentModuleCache = new Map<string, ComponentModule>();
-const registryCache = new Map<string, RegistryItem>();
-
-// Regexes to parse dependencies, registry, and components
-const dependencyRegex = /^(.+?)(?:@(.+))?$/;
-const registryRegex = /@\/registry\/new-york\/ui\//g;
-const dedevsuiRegex = /@\/components\/ui\/(?!dedevs-ui\/)([^'"\s]+)/g;
-
-const parseDependencyVersion = (dependency: string) => {
-  const [name, version] =
-    (dependency as string).match(dependencyRegex)?.slice(1) ?? [];
-  return { name, version: version ?? 'latest' };
-};
-
-const parseContent = (content: string) =>
-  content.replace(registryRegex, '@/components/ui/');
-
-const processDependencies = (
-  deps: Record<string, string> | undefined,
-  target: Record<string, string>
-) => {
-  if (!deps) {
-    return;
-  }
-
-  for (const dep of Object.values(deps)) {
-    const { name, version } = parseDependencyVersion(dep);
-    target[name] = version;
-  }
-};
-
-const processComponentModule = async (
-  mod: ComponentModule,
-  files: Record<string, string>,
-  dependencies: Record<string, string>,
-  devDependencies: Record<string, string>
-) => {
-  const componentContent = mod.files?.[0]?.content ?? '';
-  files[`/components/ui/${mod.name}.tsx`] = parseContent(componentContent);
-
-  // Parse the component content to find additional dependencies
-  const nestedComponents = await parseShadcnComponents(componentContent);
-  Object.assign(files, nestedComponents.files);
-  Object.assign(dependencies, nestedComponents.dependencies);
-  Object.assign(devDependencies, nestedComponents.devDependencies);
-
-  processDependencies(mod.dependencies, dependencies);
-  processDependencies(mod.devDependencies, devDependencies);
-};
-
-const parseShadcnComponents = async (str: string) => {
-  const parsedString = parseContent(str);
-  const matches = parsedString.match(dedevsuiRegex);
-
-  const result = {
-    files: {} as Record<string, string>,
-    dependencies: {} as Record<string, string>,
-    devDependencies: {} as Record<string, string>,
-  };
-
-  if (!matches) {
-    return result;
-  }
-
-  const components = [
-    ...new Set(matches.map((m) => m.replace('@/components/ui/', ''))),
-  ];
-
-  await Promise.all(
-    components.map(async (component) => {
-      try {
-        // Check cache first
-        let mod = componentModuleCache.get(component);
-        if (!mod) {
-          mod = (await import(`./shadcn/${component}.json`)) as ComponentModule;
-          componentModuleCache.set(component, mod);
-        }
-
-        await processComponentModule(
-          mod,
-          result.files,
-          result.dependencies,
-          result.devDependencies
-        );
-      } catch (error) {
-        console.warn(
-          `Failed to load shadcn component: ${component} returned ${error}`
-        );
-      }
-    })
-  );
-
-  return result;
+  path: string;
+  className?: string;
+  type?: 'component' | 'block';
 };
 
 export const Preview = async ({
-  name,
-  code,
-  dependencies: demoDependencies,
+  path,
+  className,
+  type = 'component',
 }: PreviewProps) => {
-  const [packageName, componentName] = name.split('/');
+  const filePath = join(process.cwd(), 'examples', `${path}.tsx`);
 
-  let registry = registryCache.get(packageName);
-  if (!registry) {
-    registry = (await import(
-      `../../public/registry/${packageName}.json`
-    )) as RegistryItem;
-    registryCache.set(packageName, registry);
-  }
-
-  const [, initialParsedComponents] = await Promise.all([
-    Promise.resolve(registry),
-    parseShadcnComponents(code),
-  ]);
-
-  const { files, dependencies, devDependencies } = initialParsedComponents;
-
-  // Set up initial files
-  Object.assign(files, {
-    '/App.tsx': code,
-    '/tsconfig.json': tsconfig,
-    '/lib/utils.ts': utils,
-    '/lib/content.ts': content,
-  });
-
-  const selectedFile = registry.files?.find(
-    (file) => file.path === `${componentName ?? 'index'}.tsx`
-  );
-  const selectedComponentContent = parseContent(selectedFile?.content ?? '');
-
-  // Parse the selected component content
-  const selectedComponentDeps = await parseShadcnComponents(
-    selectedComponentContent
-  );
-  Object.assign(files, selectedComponentDeps.files);
-  Object.assign(dependencies, selectedComponentDeps.dependencies);
-  Object.assign(devDependencies, selectedComponentDeps.devDependencies);
-
-  // Process registry dependencies
-  if (registry.registryDependencies) {
-    await Promise.all(
-      Object.values(registry.registryDependencies).map(async (dependency) => {
-        let mod = componentModuleCache.get(dependency);
-        if (!mod) {
-          mod = (await import(
-            `./shadcn/${dependency}.json`
-          )) as ComponentModule;
-          componentModuleCache.set(dependency, mod);
-        }
-
-        await processComponentModule(mod, files, dependencies, devDependencies);
-      })
+  // Check if the example file exists
+  if (!existsSync(filePath)) {
+    return (
+      <div className="rounded-lg border border-dashed border-gray-300 p-8 text-center text-gray-500">
+        <p className="text-sm">Example for <code className="font-mono">{path}</code> is not yet available.</p>
+        <p className="text-xs mt-2">This component is being prepared and will be available soon.</p>
+      </div>
     );
   }
 
-  files[`/components/ui/dedevs-ui/${name}.tsx`] = parseContent(
-    selectedComponentContent
-  );
+  const code = await readFile(filePath, 'utf-8');
 
-  // Process all dependencies
-  for (const deps of [
-    registry.dependencies,
-    registry.devDependencies,
-    demoDependencies,
-  ]) {
-    processDependencies(deps, dependencies);
+  let Component;
+  try {
+    Component = await import(`../../examples/${path}.tsx`).then(
+      (module) => module.default
+    );
+  } catch (error) {
+    return (
+      <div className="rounded-lg border border-dashed border-red-300 p-8 text-center text-red-500">
+        <p className="text-sm">Failed to load example for <code className="font-mono">{path}</code>.</p>
+        <p className="text-xs mt-2">There may be an issue with the component implementation.</p>
+      </div>
+    );
+  }
+
+  const parsedCode = code
+    .replace(/@repo\/shadcn-ui\//g, '@/')
+    .replace(/@repo\//g, '@/components/ui/dedevs-ui/');
+
+  const sourceComponentNames =
+    parsedCode
+      .match(/@\/components\/ui\/dedevs-ui\/([^'"`]+)/g)
+      ?.map((match) => match.replace('@/components/ui/dedevs-ui/', '')) || [];
+
+  const sourceComponents: { name: string; source: string }[] = [];
+
+  for (const component of sourceComponentNames) {
+    const fileName = component.includes('/')
+      ? `${component}.tsx`
+      : `${component}/index.tsx`;
+
+    const source = await readFile(
+      join(process.cwd(), '..', '..', 'packages', fileName),
+      'utf-8'
+    );
+
+    if (sourceComponents.some((s) => s.name === component)) {
+      continue;
+    }
+
+    sourceComponents.push({ name: component, source });
   }
 
   return (
-    <PreviewProvider
-      template="react-ts"
-      options={{
-        externalResources: [
-          'https://cdn.tailwindcss.com',
-          'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
-        ],
-      }}
-      customSetup={{
-        dependencies: {
-          // shadcn/ui global dependencies
-          '@radix-ui/react-icons': 'latest',
-          clsx: 'latest',
-          'tailwind-merge': 'latest',
-          'class-variance-authority': 'latest',
-
-          // Tailwind dependencies
-          tailwindcss: 'latest',
-          'tailwindcss-animate': 'latest',
-          ...dependencies,
-
-          // Common utilities
-          'date-fns': 'latest',
-        },
-        devDependencies: {
-          autoprefixer: 'latest',
-          postcss: 'latest',
-          ...devDependencies,
-        },
-      }}
-      files={files}
-      className="not-prose h-[30rem]"
+    <div
+      className={cn(
+        'size-full overflow-hidden rounded-lg border bg-background',
+        type === 'block' && 'h-[48rem] prose-code:border-none prose-code:p-0',
+        type === 'component' && 'not-prose h-[32rem]',
+        className
+      )}
     >
-      <SandboxLayout>
-        <SandboxTabs defaultValue="preview">
-          <SandboxTabsList>
-            <SandboxTabsTrigger value="code">
-              <CodeIcon size={14} />
-              Code
-            </SandboxTabsTrigger>
-            <SandboxTabsTrigger value="preview">
-              <AppWindowIcon size={14} />
-              Preview
-            </SandboxTabsTrigger>
-            {/* <SandboxTabsTrigger value="console">
-              <TerminalIcon size={14} />
-              Console
-            </SandboxTabsTrigger> */}
-          </SandboxTabsList>
-          <V0Button name={name} />
-          <SandboxTabsContent value="code" className="overflow-hidden">
-            <ResizablePanelGroup
-              direction="horizontal"
-              className="overflow-hidden"
-            >
-              <ResizablePanel
-                className="!overflow-y-auto"
-                defaultSize={25}
-                minSize={20}
-                maxSize={40}
-              >
-                <SandboxFileExplorer />
-              </ResizablePanel>
-              <ResizableHandle withHandle />
-              <ResizablePanel className="!overflow-y-auto">
-                <SandboxCodeEditor />
-              </ResizablePanel>
-            </ResizablePanelGroup>
-          </SandboxTabsContent>
-          <SandboxTabsContent value="preview">
-            <SandboxPreview className="bg-primary dark:bg-secondary" />
-          </SandboxTabsContent>
-          {/* <SandboxTabsContent value="console"> */}
-          {/* <SandboxConsole /> */}
-          {/* </SandboxTabsContent> */}
-        </SandboxTabs>
-      </SandboxLayout>
-    </PreviewProvider>
+      <Tabs className="size-full gap-0" defaultValue="preview">
+        <TabsList className="w-full rounded-none border-b">
+          <TabsTrigger value="source">
+            <BoxIcon className="text-muted-foreground" size={16} />
+            Source
+          </TabsTrigger>
+          <TabsTrigger value="code">
+            <CodeIcon className="text-muted-foreground" size={16} />
+            Code
+          </TabsTrigger>
+          <TabsTrigger value="preview">
+            <EyeIcon className="text-muted-foreground" size={16} />
+            Preview
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent
+          className="not-prose size-full overflow-y-auto bg-background"
+          value="source"
+        >
+          <PreviewSource source={sourceComponents} />
+        </TabsContent>
+        <TabsContent
+          className="size-full overflow-y-auto bg-background"
+          value="code"
+        >
+          <PreviewCode code={parsedCode} filename="index.tsx" language="tsx" />
+        </TabsContent>
+        <TabsContent
+          className={cn(
+            'not-fumadocs-codeblock size-full',
+            type === 'component' ? 'overflow-hidden' : 'overflow-auto'
+          )}
+          value="preview"
+        >
+          <PreviewContent type={type}>
+            {type === 'block' ? (
+              <Component />
+            ) : (
+              <PreviewRender>
+                <Component />
+              </PreviewRender>
+            )}
+          </PreviewContent>
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 };

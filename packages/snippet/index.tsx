@@ -1,23 +1,23 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
 import { CheckIcon, CopyIcon } from 'lucide-react';
 import {
   type ComponentProps,
+  cloneElement,
   type HTMLAttributes,
   type ReactElement,
-  cloneElement,
   useState,
 } from 'react';
+import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 
 export type SnippetProps = ComponentProps<typeof Tabs>;
 
 export const Snippet = ({ className, ...props }: SnippetProps) => (
   <Tabs
     className={cn(
-      'group overflow-hidden rounded-md border shadow-sm',
+      'group w-full gap-0 overflow-hidden rounded-md border',
       className
     )}
     {...props}
@@ -82,10 +82,10 @@ export const SnippetCopyButton = ({
 
   return (
     <Button
-      variant="ghost"
-      size="icon"
-      onClick={copyToClipboard}
       className="opacity-0 transition-opacity group-hover:opacity-100"
+      onClick={copyToClipboard}
+      size="icon"
+      variant="ghost"
       {...props}
     >
       {children ?? icon}
@@ -118,6 +118,6 @@ export const SnippetTabsContent = ({
     className={cn('mt-0 bg-background p-4 text-sm', className)}
     {...props}
   >
-    <pre>{children}</pre>
+    <pre className="truncate">{children}</pre>
   </TabsContent>
 );

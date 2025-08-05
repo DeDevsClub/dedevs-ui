@@ -1,0 +1,56 @@
+---
+title: New Components
+description: Learn about adding new AI chatbot interface components to the DeDevs UI Design Registry.
+---
+
+One of the most exciting ways to contribute is by adding new components to the DeDevs UI Design Registry. Maybe you have an AI interface component that you built in your app that you think would be useful for others – for example, a specialized AI reasoning visualizer, an enhanced citation display, or a tailored prompt template editor. Here are some guidelines for contributing a new AI component:
+
+## Fit & Scope
+
+First, consider whether the component fits the specialized scope of the Design Registry. Our philosophy is to provide composable building blocks for sophisticated AI chatbot interfaces. If your component solves a common challenge in AI interfaces, it's likely a great fit. For example:
+
+- Components that help visualize AI reasoning or thought processes
+- Elements that enhance the presentation of AI-generated content
+- Tools for managing conversation context or history
+- UI patterns for source attribution and citation in AI responses
+- Components that handle streaming responses effectively
+
+Components that aren't specifically relevant to AI conversation interfaces might be better suited for the broader shadcn/ui ecosystem.
+
+## Design Consistency
+
+Ensure your AI component integrates with the existing design system. Use the same CSS variable themes from shadcn, and follow accessibility practices. For example, if you create a specialized `AICodeBlock` component, make sure it works in dark mode, handles syntax highlighting properly, and is keyboard accessible, similar to other components in the registry.
+
+Consider the unique aspects of AI interfaces when designing components, such as:
+- Handling streaming/progressive responses
+- Supporting rich content types (markdown, code, etc.)
+- Visualizing complex AI processes (reasoning, citations)
+- Providing appropriate feedback for loading/thinking states
+
+## Documentation
+
+When you add an AI component, prepare thorough documentation for it. This means a Markdown file in the docs site with:
+
+- An overview of the component and its AI-specific use cases
+- Installation instructions (`npx dedevs-ui add ...`)
+- A list of features and props
+- Example usage code showing common AI interface patterns
+- A props table with detailed explanations
+- Integration examples with popular AI models/providers if applicable
+
+Consider including interactive examples that demonstrate the component's behavior with realistic AI content. Good documentation ensures developers can effectively implement your component in their own AI applications.
+
+## Testing & Quality
+
+Testing AI interface components presents unique challenges. If possible, include tests for your component logic, especially around handling streaming responses, error states, and accessibility. At minimum, test it manually with realistic AI content scenarios within the docs.
+
+Consider testing:
+- How the component handles varying lengths of AI responses
+- Performance with large conversation histories
+- Edge cases like error handling or malformed responses
+- Accessibility with screen readers and keyboard navigation
+- Responsive behavior across device sizes
+
+We want to maintain a high quality bar so that any component in the Design Registry can be trusted in production AI applications.
+
+When your new component PR is opened, maintainers might review and give feedback. Be open to making changes – code review is a positive process to maintain quality and consistency. Once merged, you've officially added a valuable piece to the AI Design Registry ecosystem! 🎊

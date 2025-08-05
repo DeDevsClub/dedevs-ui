@@ -1,0 +1,76 @@
+---
+title: Usage
+description: Learn how to use DeDevs UI components in your application.
+---
+
+Once a DeDevs UI component is installed, you can import it and use it in your application like any other React component. The components are added as part of your codebase (not hidden in a library), so the usage feels very natural.
+
+## Example
+
+Let's say you want to create a chatbot interface using the DeDevs UI AI components. Here's how you might compose them together:
+
+```jsx
+// ChatInterface.tsx
+'use client';
+
+import {
+  AIConversation,
+  AIMessage,
+  AIMessageAvatar,
+  AIMessageContent,
+  AIResponse,
+  AIInput
+} from '@/packages/ai/ai';
+
+const ChatInterface = () => (
+  <div className="flex flex-col h-[600px]">
+    <AIConversation>
+      {/* User message */}
+      <AIMessage role="user">
+        <AIMessageContent>
+          How can I use DeDevs UI components?
+        </AIMessageContent>
+        <AIMessageAvatar fallback="U" />
+      </AIMessage>
+      
+      {/* AI response with markdown */}
+      <AIMessage role="assistant">
+        <AIMessageContent>
+          <AIResponse>
+            # DeDevs UI Components
+            
+            DeDevs UI provides specialized components for AI interfaces. Here's how to use them:
+            
+            1. Install the component you need
+            2. Import it into your React component
+            3. Use it in your JSX
+            
+            Example import:
+            import { AIResponse } from '@/packages/ai/ai';
+            
+            Components are available in your codebase for easy customization.
+          </AIResponse>
+        </AIMessageContent>
+        <AIMessageAvatar fallback="AI" />
+      </AIMessage>
+    </AIConversation>
+
+    {/* User input */}
+    <AIInput placeholder="Ask a question..." />
+  </div>
+);
+
+export default ChatInterface;
+```
+
+In the example above, we import various AI components from our DeDevs UI directory and compose them to create a complete chatbot interface. The `AIConversation` component acts as a container for the chat thread, `AIMessage` components represent individual messages with proper styling based on the sender role, and `AIResponse` renders markdown content from the AI assistant. The interface is completed with an `AIInput` component for user interaction.
+
+Feel free to add as many DeDevs UI components as you need. Because components are added on-demand, you're not including code for features you aren't using. This keeps your app lean. Each component is isolated, so adding one won't bloat another – yet they all share the same design tokens (colors, fonts, etc.) from shadcn's theme.
+
+## Extensibility
+
+All DeDevs UI components take as many primitive attributes as possible. For example, the `AIResponse` component extends `HTMLAttributes<HTMLDivElement>`, so you can pass any props that a `div` supports. This makes it easy to extend the component with your own styles or functionality.
+
+## Customization
+
+After installation, no additional setup is needed. The components come with their styles (Tailwind CSS classes) and functionality built-in. You can start using them in your app right away.

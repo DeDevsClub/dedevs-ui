@@ -1,0 +1,13 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ai-suggestion",
+  "type": "registry:ui",
+  "description": "AI suggestion component for prompts and recommendations",
+  "files": [
+    {
+      "path": "packages/ai/suggestion.tsx",
+      "content": "'use client';\n\nimport type { ComponentProps } from 'react';\nimport { Button } from '@repo/shadcn-ui/components/ui/button';\nimport { ScrollArea, ScrollBar } from '@repo/shadcn-ui/components/ui/scroll-area';\nimport { cn } from '@repo/shadcn-ui/lib/utils';\n\nexport type AISuggestionsProps = ComponentProps<typeof ScrollArea>;\n\nexport const AISuggestions = ({\n  className,\n  children,\n  ...props\n}: AISuggestionsProps) => (\n  <ScrollArea className=\"w-full overflow-x-auto whitespace-nowrap\" {...props}>\n    <div className={cn('flex w-max flex-nowrap items-center gap-2', className)}>\n      {children}\n    </div>\n    <ScrollBar className=\"hidden\" orientation=\"horizontal\" />\n  </ScrollArea>\n);\n\nexport type AISuggestionProps = Omit<\n  ComponentProps<typeof Button>,\n  'onClick'\n> & {\n  suggestion: string;\n  onClick?: (suggestion: string) => void;\n};\n\nexport const AISuggestion = ({\n  suggestion,\n  onClick,\n  className,\n  variant = 'outline',\n  size = 'sm',\n  children,\n  ...props\n}: AISuggestionProps) => {\n  const handleClick = () => {\n    onClick?.(suggestion);\n  };\n\n  return (\n    <Button\n      className={cn('cursor-pointer rounded-full px-4', className)}\n      onClick={handleClick}\n      size={size}\n      type=\"button\"\n      variant={variant}\n      {...props}\n    >\n      {children || suggestion}\n    </Button>\n  );\n};\n",
+      "type": "registry:component"
+    }
+  ]
+}

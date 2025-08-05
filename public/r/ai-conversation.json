@@ -1,0 +1,13 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ai-conversation",
+  "type": "registry:ui",
+  "description": "AI conversation container component",
+  "files": [
+    {
+      "path": "packages/ai/conversation.tsx",
+      "content": "'use client';\n\nimport { Button } from '@repo/shadcn-ui/components/ui/button';\nimport { ArrowDown } from 'lucide-react';\nimport type { ComponentProps } from 'react';\nimport { useCallback } from 'react';\nimport { StickToBottom, useStickToBottomContext } from 'use-stick-to-bottom';\nimport { cn } from '@repo/shadcn-ui/lib/utils';\n\nexport type AIConversationProps = ComponentProps<typeof StickToBottom>;\n\nexport const AIConversation = ({\n  className,\n  ...props\n}: AIConversationProps) => (\n  <StickToBottom\n    className={cn('relative flex-1 overflow-y-auto', className)}\n    initial=\"smooth\"\n    resize=\"smooth\"\n    role=\"log\"\n    {...props}\n  />\n);\n\nexport type AIConversationContentProps = ComponentProps<\n  typeof StickToBottom.Content\n>;\n\nexport const AIConversationContent = ({\n  className,\n  ...props\n}: AIConversationContentProps) => (\n  <StickToBottom.Content className={cn('p-4', className)} {...props} />\n);\n\nexport const AIConversationScrollButton = () => {\n  const { isAtBottom, scrollToBottom } = useStickToBottomContext();\n\n  const handleScrollToBottom = useCallback(() => {\n    scrollToBottom();\n  }, [scrollToBottom]);\n\n  return (\n    !isAtBottom && (\n      <Button\n        className=\"absolute bottom-4 left-[50%] translate-x-[-50%] rounded-full\"\n        onClick={handleScrollToBottom}\n        size=\"icon\"\n        type=\"button\"\n        variant=\"outline\"\n      >\n        <ArrowDown className=\"size-4\" />\n      </Button>\n    )\n  );\n};\n",
+      "type": "registry:component"
+    }
+  ]
+}

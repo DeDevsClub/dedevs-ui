@@ -1,7 +1,11 @@
 {
-  "plugins": ["npm", "first-time-contributor", "released"],
+  "plugins": [
+    "npm",
+    "first-time-contributor",
+    "released"
+  ],
   "owner": "DeDevsClub",
   "repo": "dedevs-ui",
-  "name": "DeDevsClub",
-  "email": "admin@dedevs.club"
+  "name": "V Alexander",
+  "email": "buns@dedevs.club"
 }

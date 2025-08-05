@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "title": "Components",
+  "pages": [
+    "---AI Chatbot---",
+    "ai-branch",
+    "ai-conversation",
+    "ai-input",
+    "ai-message",
+    "ai-reasoning",
+    "ai-response",
+    "ai-sources",
+    "ai-suggestion",
+    "ai-tool",
+    "---Code---",
+    "code-block",
+    "snippet"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "title": "Docs",
+  "description": "General",
+  "pages": [
+    "---Overview---",
+    "index",
+    "benefits",
+    "---Usage---",
+    "setup",
+    "usage",
+    "mcp",
+    "troubleshooting",
+    "---Contributing---",
+    "how-to-contribute",
+    "new-components",
+    "philosophy"
+  ]
+}

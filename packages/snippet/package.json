@@ -1,16 +1,17 @@
 {
   "name": "@repo/snippet",
+  "description": "Snippet is a component that allows you to display and copy code in a tabbed interface.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "lucide-react": "^0.475.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "lucide-react": "^0.536.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "typescript": "^5"
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
+    "typescript": "^5.9.2"
   }
 }

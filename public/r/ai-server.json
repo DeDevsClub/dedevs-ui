@@ -1,0 +1,13 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ai-server",
+  "type": "registry:ui",
+  "description": "AI server component utilities",
+  "files": [
+    {
+      "path": "packages/ai/server.tsx",
+      "content": "import type { AIResponseProps } from './response';\n\nexport function AIResponse({\n  className,\n  options,\n  children,\n  ...props\n}: AIResponseProps) {\n  return (\n    <div className={className} {...props}>\n      {children}\n    </div>\n  );\n}",
+      "type": "registry:component"
+    }
+  ]
+}

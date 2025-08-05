@@ -1,48 +1,68 @@
 {
   "name": "dedevs-ui",
-  "version": "0.1.2",
-  "description": "UI toolkit for developer documentation and productivity tooling.",
-  "main": "index.js",
-  "repository": "https://github.com/DeDevsClub/dedevs-ui.git",
-  "author": "DeDevsClub <admin@dedevs.club>",
+  "version": "0.2.0",
+  "description": "CLI tool for adding components from the DeDevs UI Design Registry",
+  "keywords": [
+    "ui",
+    "components",
+    "cli",
+    "design-system",
+    "shadcn",
+    "react"
+  ],
+  "author": "DeDevsClub",
   "license": "MIT",
+  "homepage": "https://ui.dedevs.com",
+  "bugs": {
+    "url": "https://github.com/DeDevsClub/dedevs-ui/issues"
+  },
   "bin": {
     "dedevs-ui": "dist/index.js"
   },
-  "files": ["dist/index.js"],
+  "files": [
+    "dist/index.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DeDevsClub/dedevs-ui.git"
+  },
   "scripts": {
-    "prebuild": "bun scripts/build-registry.ts",
     "build": "turbo build",
-    "predev": "pnpm run prebuild",
-    "dev": "turbo dev",
+    "build:cli": "tsup",
+    "build:registry": "npx shadcn@latest build && cp -r public/r apps/docs/public/ && cp registry.json apps/docs/public/",
+    "gen:registry": "ts-node scripts/generateRegistry.ts",
+    "registry": "pnpm run gen:registry && pnpm run build:registry",
+    "dev": "PORT=3422 turbo dev",
     "lint": "ultracite lint",
     "format": "ultracite format",
     "test": "turbo test",
     "analyze": "turbo analyze",
-    "bump-deps": "npx npm-check-updates --deep -u -x react-day-picker && pnpm install",
+    "bump-deps": "npx npm-check-updates --deep -u -x shiki,fumadocs-* && pnpm install",
     "bump-ui": "npx shadcn@latest add --all --overwrite -c packages/shadcn-ui",
-    "clean": "git clean -xdf node_modules"
+    "clean": "git clean -xdf node_modules",
+    "prepublishOnly": "tsup",
+    "publish:cli": "npm run build:cli && npm publish",
+    "publish:patch": "npm version patch && npm run publish:cli",
+    "publish:minor": "npm version minor && npm run publish:cli",
+    "publish:major": "npm version major && npm run publish:cli",
+    "test:cli": "npm run build:cli && chmod +x dist/index.js && node dist/index.js --help"
   },
   "devDependencies": {
     "@auto-it/first-time-contributor": "^11.3.0",
-    "@biomejs/biome": "1.9.4",
-    "@scalar/nextjs-api-reference": "^0.5.10",
-    "@types/node": "^22.13.5",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "turbo": "^2.4.2",
-    "typescript": "^5.7.3",
-    "ultracite": "^4.1.20"
+    "@biomejs/biome": "2.0.0",
+    "@types/node": "^24.0.1",
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3",
+    "ultracite": "^5.0.3",
+    "ts-node": "^10.9.2"
   },
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "pnpm@10.4.1",
+  "packageManager": "pnpm@10.12.1",
   "type": "module",
   "dependencies": {
-    "tsup": "^8.3.6",
-    "zod": "^3.24.2"
+    "tsup": "^8.5.0",
+    "zod": "^3.25.64"
   }
 }

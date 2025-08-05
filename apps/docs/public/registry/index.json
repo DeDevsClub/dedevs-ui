@@ -1,0 +1,642 @@
+{
+  "name": "dedevs-ui",
+  "description": "DeDevs UI Design Registry - Beautiful, accessible components built with React and Tailwind CSS",
+  "url": "https://ui.dedevs.com",
+  "components": [
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "description": "A customizable accordion component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-accordion",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/accordion.json"
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "description": "A customizable alert component.",
+      "dependencies": [
+        "react",
+        "class-variance-authority"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/alert.json"
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "description": "A customizable alert-dialog component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-alert-dialog"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/alert-dialog.json"
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "description": "A customizable aspect-ratio component.",
+      "dependencies": [
+        "@radix-ui/react-aspect-ratio"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/aspect-ratio.json"
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "description": "A customizable avatar component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-avatar"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/avatar.json"
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "description": "A customizable badge component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/badge.json"
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "description": "A customizable breadcrumb component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-slot",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/breadcrumb.json"
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "description": "A customizable button component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/button.json"
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "description": "A customizable calendar component.",
+      "dependencies": [
+        "react",
+        "react-day-picker"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/calendar.json"
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "description": "A customizable card component.",
+      "dependencies": [
+        "react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/card.json"
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "description": "A customizable carousel component.",
+      "dependencies": [
+        "react",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/carousel.json"
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "description": "A customizable chart component.",
+      "dependencies": [
+        "react",
+        "recharts"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/chart.json"
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "description": "A customizable checkbox component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-checkbox",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/checkbox.json"
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "description": "A customizable collapsible component.",
+      "dependencies": [
+        "@radix-ui/react-collapsible"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/collapsible.json"
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "description": "A customizable command component.",
+      "dependencies": [
+        "react",
+        "cmdk",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/command.json"
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "description": "A customizable context-menu component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-context-menu",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/context-menu.json"
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "description": "A customizable dialog component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-dialog",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/dialog.json"
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "description": "A customizable drawer component.",
+      "dependencies": [
+        "react",
+        "vaul"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/drawer.json"
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "description": "A customizable dropdown-menu component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-dropdown-menu",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/dropdown-menu.json"
+    },
+    {
+      "name": "form",
+      "type": "registry:ui",
+      "description": "A customizable form component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-label",
+        "@radix-ui/react-slot"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/form.json"
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "description": "A customizable hover-card component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-hover-card"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/hover-card.json"
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "description": "A customizable input component.",
+      "dependencies": [
+        "react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/input.json"
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "description": "A customizable input-otp component.",
+      "dependencies": [
+        "react",
+        "input-otp",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/input-otp.json"
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "description": "A customizable label component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-label"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/label.json"
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "description": "A customizable menubar component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-menubar",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/menubar.json"
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "description": "A customizable navigation-menu component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-navigation-menu",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/navigation-menu.json"
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "description": "A customizable pagination component.",
+      "dependencies": [
+        "react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/pagination.json"
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "description": "A customizable popover component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-popover"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/popover.json"
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "description": "A customizable progress component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-progress"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/progress.json"
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "description": "A customizable radio-group component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-radio-group",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/radio-group.json"
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "description": "A customizable resizable component.",
+      "dependencies": [
+        "react",
+        "lucide-react",
+        "react-resizable-panels"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/resizable.json"
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "description": "A customizable scroll-area component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-scroll-area"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/scroll-area.json"
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "description": "A customizable select component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-select",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/select.json"
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "description": "A customizable separator component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-separator"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/separator.json"
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "description": "A customizable sheet component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-dialog",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/sheet.json"
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "description": "A customizable sidebar component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/sidebar.json"
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "description": "A customizable skeleton component.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/skeleton.json"
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "description": "A customizable slider component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-slider"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/slider.json"
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "description": "A customizable sonner component.",
+      "dependencies": [
+        "next-themes",
+        "sonner"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/sonner.json"
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "description": "A customizable switch component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-switch"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/switch.json"
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "description": "A customizable table component.",
+      "dependencies": [
+        "react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/table.json"
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "description": "A customizable tabs component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-tabs"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/tabs.json"
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "description": "A customizable textarea component.",
+      "dependencies": [
+        "react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/textarea.json"
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "description": "A customizable toast component.",
+      "dependencies": [
+        "react",
+        "radix-ui",
+        "class-variance-authority",
+        "@radix-ui/react-icons"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/toast.json"
+    },
+    {
+      "name": "toaster",
+      "type": "registry:ui",
+      "description": "A customizable toaster component.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/toaster.json"
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "description": "A customizable toggle component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-toggle",
+        "class-variance-authority"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/toggle.json"
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "description": "A customizable toggle-group component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-toggle-group",
+        "class-variance-authority"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/toggle-group.json"
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "description": "A customizable tooltip component.",
+      "dependencies": [
+        "react",
+        "@radix-ui/react-tooltip"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": 1,
+      "path": "registry/tooltip.json"
+    }
+  ]
+}

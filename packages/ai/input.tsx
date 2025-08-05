@@ -1,21 +1,22 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Loader2Icon, Send, SquareIcon, X } from 'lucide-react';
+import type {
+  ComponentProps,
+  HTMLAttributes,
+  KeyboardEventHandler,
+} from 'react';
+import { Children, useCallback, useEffect, useRef } from 'react';
+import { Button } from '@repo/shadcn-ui/components/ui/button';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { cn } from '@/lib/utils';
-import { Children, useCallback, useEffect, useRef } from 'react';
-import type {
-  ComponentProps,
-  HTMLAttributes,
-  KeyboardEventHandler,
-} from 'react';
+} from '@repo/shadcn-ui/components/ui/select';
+import { Textarea } from '@repo/shadcn-ui/components/ui/textarea';
+import { cn } from '@repo/shadcn-ui/lib/utils';
 
 type UseAutoResizeTextareaProps = {
   minHeight: number;
@@ -114,18 +115,20 @@ export const AIInputTextarea = ({
 
   return (
     <Textarea
-      name="message"
-      placeholder={placeholder}
-      ref={textareaRef}
       className={cn(
         'w-full resize-none rounded-none border-none p-3 shadow-none outline-none ring-0',
+        'bg-transparent dark:bg-transparent',
+        'focus-visible:ring-0',
         className
       )}
+      name="message"
       onChange={(e) => {
         adjustHeight();
         onChange?.(e);
       }}
       onKeyDown={handleKeyDown}
+      placeholder={placeholder}
+      ref={textareaRef}
       {...props}
     />
   );
@@ -146,7 +149,14 @@ export const AIInputToolbar = ({
 export type AIInputToolsProps = HTMLAttributes<HTMLDivElement>;
 
 export const AIInputTools = ({ className, ...props }: AIInputToolsProps) => (
-  <div className={cn('flex items-center gap-1', className)} {...props} />
+  <div
+    className={cn(
+      'flex items-center gap-1',
+      '[&_button:first-child]:rounded-bl-xl',
+      className
+    )}
+    {...props}
+  />
 );
 
 export type AIInputButtonProps = ComponentProps<typeof Button>;
@@ -162,35 +172,54 @@ export const AIInputButton = ({
 
   return (
     <Button
-      type="button"
-      variant={variant}
-      size={newSize}
       className={cn(
-        'shrink-0 gap-1.5 text-muted-foreground',
+        'shrink-0 gap-1.5 rounded-lg',
+        variant === 'ghost' && 'text-muted-foreground',
         newSize === 'default' && 'px-3',
         className
       )}
+      size={newSize}
+      type="button"
+      variant={variant}
       {...props}
     />
   );
 };
 
-export type AIInputSubmitProps = ComponentProps<typeof Button>;
+export type AIInputSubmitProps = ComponentProps<typeof Button> & {
+  status?: 'submitted' | 'streaming' | 'ready' | 'error';
+};
 
 export const AIInputSubmit = ({
   className,
-  variant = 'ghost',
+  variant = 'default',
   size = 'icon',
+  status,
+  children,
   ...props
-}: AIInputSubmitProps) => (
-  <Button
-    type="submit"
-    variant={variant}
-    size={size}
-    className={cn('gap-1.5 text-muted-foreground', className)}
-    {...props}
-  />
-);
+}: AIInputSubmitProps) => {
+  let Icon = <Send />;
+
+  if (status === 'submitted') {
+    Icon = <Loader2Icon className="animate-spin" />;
+  } else if (status === 'streaming') {
+    Icon = <SquareIcon />;
+  } else if (status === 'error') {
+    Icon = <X />;
+  }
+
+  return (
+    <Button
+      className={cn('gap-1.5 rounded-lg rounded-br-xl', className)}
+      size={size}
+      type="submit"
+      variant={variant}
+      {...props}
+    >
+      {children ?? Icon}
+    </Button>
+  );
+};
 
 export type AIInputModelSelectProps = ComponentProps<typeof Select>;
 

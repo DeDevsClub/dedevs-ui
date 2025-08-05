@@ -1,0 +1,161 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "dedevs-ui",
+  "homepage": "https://ui.dedevs.com",
+  "items": [
+    {
+      "name": "ai-branch",
+      "type": "registry:ui",
+      "description": "AI conversation branch component for displaying branched conversations",
+      "files": [
+        {
+          "path": "packages/ai/branch.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ai-conversation",
+      "type": "registry:ui",
+      "description": "AI conversation container component",
+      "files": [
+        {
+          "path": "packages/ai/conversation.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ai-input",
+      "type": "registry:ui",
+      "description": "AI chat input component with advanced features",
+      "files": [
+        {
+          "path": "packages/ai/input.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ai-message",
+      "type": "registry:ui",
+      "description": "AI message display component",
+      "files": [
+        {
+          "path": "packages/ai/message.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ai-reasoning",
+      "type": "registry:ui",
+      "description": "AI reasoning visualization component",
+      "files": [
+        {
+          "path": "packages/ai/reasoning.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ai-response",
+      "type": "registry:ui",
+      "description": "AI response component with streaming support",
+      "files": [
+        {
+          "path": "packages/ai/response.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ai-server",
+      "type": "registry:ui",
+      "description": "AI server component utilities",
+      "files": [
+        {
+          "path": "packages/ai/server.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ai-simple",
+      "type": "registry:ui",
+      "description": "Simple AI component for basic interactions",
+      "files": [
+        {
+          "path": "packages/ai/simple.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ai-source",
+      "type": "registry:ui",
+      "description": "AI source attribution component",
+      "files": [
+        {
+          "path": "packages/ai/source.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ai-suggestion",
+      "type": "registry:ui",
+      "description": "AI suggestion component for prompts and recommendations",
+      "files": [
+        {
+          "path": "packages/ai/suggestion.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ai-tool",
+      "type": "registry:ui",
+      "description": "AI tool component for function calling interfaces",
+      "files": [
+        {
+          "path": "packages/ai/tool.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "code-block",
+      "type": "registry:ui",
+      "description": "Enhanced code block component with syntax highlighting",
+      "files": [
+        {
+          "path": "packages/code-block/index.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "editor",
+      "type": "registry:ui",
+      "description": "Code editor component",
+      "files": [
+        {
+          "path": "packages/editor/index.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "snippet",
+      "type": "registry:ui",
+      "description": "Code snippet component",
+      "files": [
+        {
+          "path": "packages/snippet/index.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}

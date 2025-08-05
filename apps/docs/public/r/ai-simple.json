@@ -1,0 +1,13 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ai-simple",
+  "type": "registry:ui",
+  "description": "Simple AI component for basic interactions",
+  "files": [
+    {
+      "path": "packages/ai/simple.tsx",
+      "content": "'use client';\n\nimport { Button } from '@repo/shadcn-ui/components/ui/button';\nimport { Card } from '@repo/shadcn-ui/components/ui/card';\n\nexport interface SimpleAIProps {\n  children?: React.ReactNode;\n}\n\nexport function SimpleAI({ children }: SimpleAIProps) {\n  return (\n    <Card className=\"p-4\">\n      <div className=\"space-y-4\">\n        <h3 className=\"text-lg font-semibold\">AI Component</h3>\n        <p className=\"text-sm text-muted-foreground\">\n          This is a simple AI component for demonstration.\n        </p>\n        {children}\n        <Button>AI Action</Button>\n      </div>\n    </Card>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

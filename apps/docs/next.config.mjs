@@ -49,139 +49,58 @@ const sentryConfig = {
 const config = {
   images: {
     formats: ['image/avif', 'image/webp'],
-    remotePatterns: [
-      {
-        hostname: 'img.logo.dev',
-        protocol: 'https',
-      },
-      {
-        hostname: 'pbs.twimg.com',
-        protocol: 'https',
-      },
-      {
-        hostname: 'x.com',
-        protocol: 'https',
-      },
-      {
-        hostname: '*.dedevs.club',
-        protocol: 'https',
-      },
-    ],
   },
-  staticPageGenerationTimeout: 180,
+
+  // biome-ignore lint/suspicious/useAwait: "headers is async"
+  async headers() {
+    return [
+      {
+        source: '/registry/(.*)',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET' },
+        ],
+      },
+    ];
+  },
+
   // biome-ignore lint/suspicious/useAwait: "redirects is async"
   async redirects() {
     return [
       {
-        source: '/',
-        destination: '/components/interface/announcement',
+        source: '/overview',
+        destination: '/docs',
+        permanent: true,
+      },
+      {
+        source: '/setup',
+        destination: '/docs/setup',
         permanent: true,
       },
       {
         source: '/components',
-        destination: '/components/interface/announcement',
-        permanent: true,
+        destination: '/components/ai-response',
+        permanent: false,
+      },
+      {
+        source: '/blocks',
+        destination: '/blocks/ai-chatbot',
+        permanent: false,
       },
       { source: '/ai', destination: '/components/ai', permanent: true },
       {
         source: '/ai/:slug*',
-        destination: '/components/ai/:slug*',
+        destination: '/components/ai-:slug*',
         permanent: true,
       },
       {
-        source: '/bento',
-        destination: '/components/productivity/bento',
+        source: '/code-block',
+        destination: '/components/code-block',
         permanent: true,
       },
       {
-        source: '/announcement',
-        destination: '/components/interface/announcement',
-        permanent: true,
-      },
-      {
-        source: '/banner',
-        destination: '/components/interface/banner',
-        permanent: true,
-      },
-      {
-        source: '/code/block',
-        destination: '/components/code/block',
-        permanent: true,
-      },
-      {
-        source: '/color-picker',
-        destination: '/components/interface/color-picker',
-        permanent: true,
-      },
-      {
-        source: '/database',
-        destination: '/components/database',
-        permanent: true,
-      },
-      {
-        source: '/database/:slug*',
-        destination: '/components/database/:slug*',
-        permanent: true,
-      },
-      {
-        source: '/dropzone',
-        destination: '/components/interface/dropzone',
-        permanent: true,
-      },
-      {
-        source: '/code/editor',
-        destination: '/components/code/editor',
-        permanent: true,
-      },
-      {
-        source: '/list',
-        destination: '/components/productivity/list',
-        permanent: true,
-      },
-      { source: '/pages', destination: '/components/pages', permanent: true },
-      {
-        source: '/pages/:slug*',
-        destination: '/components/pages/:slug*',
-        permanent: true,
-      },
-      {
-        source: '/sandbox',
-        destination: '/components/code/sandbox',
-        permanent: true,
-      },
-      {
-        source: '/select',
-        destination: '/components/select',
-        permanent: true,
-      },
-      {
-        source: '/select/:slug*',
-        destination: '/components/select/:slug*',
-        permanent: true,
-      },
-      {
-        source: '/snippet',
-        destination: '/components/code/snippet',
-        permanent: true,
-      },
-      {
-        source: '/tables',
-        destination: '/components/database/table',
-        permanent: true,
-      },
-      {
-        source: '/tables/:slug*',
-        destination: '/components/database/table/:slug*',
-        permanent: true,
-      },
-      {
-        source: '/transactions',
-        destination: '/components/database/transaction',
-        permanent: true,
-      },
-      {
-        source: '/transactions/:slug*',
-        destination: '/components/database/transaction/:slug*',
+        source: '/components/ai/:slug*',
+        destination: '/components/ai-:slug*',
         permanent: true,
       },
     ];
