@@ -81,6 +81,9 @@ async function addComponentWithDependencies(packageName: string) {
     // Check and install missing shadcn/ui components
     await installMissingShadcnComponents(componentData);
 
+    // Check and install missing component dependencies
+    await installMissingComponentDependencies(componentData);
+
   } catch (error) {
     console.error(`Failed to add ${packageName}:`, error instanceof Error ? error.message : String(error));
     process.exit(1);
@@ -96,34 +99,50 @@ function extractDependencies(componentData: any): string[] {
 
   for (const file of componentData.files) {
     if (file.content) {
-      // Extract import statements
-      const importRegex = /import\s+(?:{[^}]*}|[^\s,]+|\*\s+as\s+\w+)\s+from\s+['"]([^'"]+)['"]/g;
-      let match;
+      // Use multiple regex patterns to catch all import variations
+      const importPatterns = [
+        // Standard imports: import X from 'package'
+        /import\s+([\w$]+)\s+from\s+['"]([^'"]+)['"];?/g,
+        // Named imports: import { X, Y } from 'package'
+        /import\s+{[^}]*}\s+from\s+['"]([^'"]+)['"];?/g,
+        // Mixed imports: import X, { Y } from 'package'
+        /import\s+[\w$]+\s*,\s*{[^}]*}\s+from\s+['"]([^'"]+)['"];?/g,
+        // Namespace imports: import * as X from 'package'
+        /import\s+\*\s+as\s+\w+\s+from\s+['"]([^'"]+)['"];?/g,
+        // Type-only imports: import type { X } from 'package'
+        /import\s+type\s+{[^}]*}\s+from\s+['"]([^'"]+)['"];?/g,
+        // Side-effect imports: import 'package'
+        /import\s+['"]([^'"]+)['"];?/g
+      ];
 
-      while ((match = importRegex.exec(file.content)) !== null) {
-        const importPath = match[1];
+      for (const pattern of importPatterns) {
+        let match;
+        while ((match = pattern.exec(file.content)) !== null) {
+          // The package path is in the last capture group for all patterns
+          const importPath = match[match.length - 1];
 
-        // Skip relative imports, built-in modules, and local alias imports
-        if (importPath.startsWith('.') || importPath.startsWith('node:') || importPath.startsWith('@/')) {
-          continue;
-        }
+          // Skip relative imports, built-in modules, and local alias imports
+          if (importPath.startsWith('.') || importPath.startsWith('node:') || importPath.startsWith('@/')) {
+            continue;
+          }
 
-        // Handle scoped packages and regular packages
-        const packageName = importPath.startsWith('@')
-          ? importPath.split('/').slice(0, 2).join('/')
-          : importPath.split('/')[0];
+          // Handle scoped packages and regular packages
+          const packageName = importPath.startsWith('@')
+            ? importPath.split('/').slice(0, 2).join('/')
+            : importPath.split('/')[0];
 
-        // Skip React, Next.js, and workspace packages
-        if (['react', 'react-dom', 'next'].includes(packageName) || packageName.startsWith('@repo/')) {
-          continue;
-        }
+          // Skip React, Next.js, and workspace packages
+          if (['react', 'react-dom', 'next'].includes(packageName) || packageName.startsWith('@repo/')) {
+            continue;
+          }
 
-        // Map known workspace dependencies to their public equivalents
-        const mappedDependency = mapWorkspaceDependency(packageName, importPath);
-        if (mappedDependency) {
-          dependencies.add(mappedDependency);
-        } else {
-          dependencies.add(packageName);
+          // Map known workspace dependencies to their public equivalents
+          const mappedDependency = mapWorkspaceDependency(packageName, importPath);
+          if (mappedDependency) {
+            dependencies.add(mappedDependency);
+          } else {
+            dependencies.add(packageName);
+          }
         }
       }
     }
@@ -139,10 +158,15 @@ function mapWorkspaceDependency(packageName: string, importPath: string): string
     return null; // shadcn/ui components are installed via shadcn CLI, not npm
   }
 
-  // Handle @repo/code-block - map to its actual dependencies
+  // Handle @repo/code-block - this is a workspace package that doesn't need external deps
+  // The code-block component is part of the registry and gets installed as a component
   if (packageName === '@repo/code-block') {
-    // Return the actual dependencies that code-block needs
-    return 'shiki'; // or whatever the actual dependency is
+    return null; // This will be handled by the component installation process
+  }
+
+  // Handle other @repo/ packages
+  if (packageName.startsWith('@repo/')) {
+    return null; // All @repo/ packages are workspace packages, not external dependencies
   }
 
   // Add more mappings as needed
@@ -276,7 +300,7 @@ async function installMissingShadcnComponents(componentData: any) {
       const shadcnImportRegex = /@\/components\/ui\/([^'"\s;,}]+)/g;
       // Also look for @repo/shadcn-ui imports (before transformation)
       const repoShadcnImportRegex = /@repo\/shadcn-ui\/components\/ui\/([^'"\s;,}]+)/g;
-      
+
       let match;
 
       // Check for @/components/ui/ imports
@@ -284,7 +308,7 @@ async function installMissingShadcnComponents(componentData: any) {
         const componentName = match[1];
         requiredShadcnComponents.add(componentName);
       }
-      
+
       // Check for @repo/shadcn-ui imports
       while ((match = repoShadcnImportRegex.exec(file.content)) !== null) {
         const componentName = match[1];
@@ -472,4 +496,108 @@ function fetchJson(url: string): Promise<any> {
       reject(error);
     });
   });
+}
+
+function extractComponentDependencies(componentData: any): string[] {
+  const componentDependencies = new Set<string>();
+
+  if (!componentData.files || !Array.isArray(componentData.files)) {
+    return [];
+  }
+
+  for (const file of componentData.files) {
+    if (file.content) {
+      // Normalize content by removing line breaks within import statements
+      const normalizedContent = file.content.replace(/import\s*{[^}]*}\s*from\s*['"][^'"]+['"]/gs, (match: string) => {
+        return match.replace(/\s+/g, ' ');
+      });
+
+      // Look for imports from @/components/ui/ that are not shadcn/ui components
+      // Use a more comprehensive regex that handles multi-line imports
+      const componentImportRegex = /import\s+(?:{[^}]*}|[\w$]+(?:\s*,\s*{[^}]*})?|\*\s+as\s+\w+)\s+from\s+['"]@\/components\/ui\/([^'"]+)['"];?/g;
+
+      let match;
+      while ((match = componentImportRegex.exec(normalizedContent)) !== null) {
+        const componentPath = match[1];
+
+        // Skip known shadcn/ui components (these are handled by installMissingShadcnComponents)
+        const knownShadcnComponents = [
+          'button', 'input', 'label', 'textarea', 'select', 'dialog', 'card',
+          'tabs', 'accordion', 'alert', 'badge', 'checkbox', 'dropdown-menu',
+          'form', 'popover', 'radio-group', 'scroll-area', 'separator',
+          'sheet', 'skeleton', 'slider', 'switch', 'table', 'toast', 'toggle',
+          'tooltip', 'avatar', 'calendar', 'command', 'context-menu',
+          'hover-card', 'menubar', 'navigation-menu', 'progress', 'resizable',
+          'sonner', 'toggle-group'
+        ];
+
+        if (!knownShadcnComponents.includes(componentPath)) {
+          // This is likely a registry component dependency
+          componentDependencies.add(componentPath);
+          console.log(`🔍 Found component dependency: ${componentPath}`);
+        }
+      }
+    }
+  }
+
+  return Array.from(componentDependencies);
+}
+
+async function installMissingComponentDependencies(componentData: any) {
+  const requiredComponents = extractComponentDependencies(componentData);
+
+  if (requiredComponents.length === 0) {
+    return;
+  }
+
+  console.log(`🧩 Installing missing component dependencies: ${requiredComponents.join(', ')}`);
+
+  for (const componentName of requiredComponents) {
+    try {
+      // Check if component already exists
+      const componentPath = join(process.cwd(), 'components', 'ui', `${componentName}.tsx`);
+      const altComponentPath = join(process.cwd(), 'components', `${componentName}.tsx`);
+
+      if (existsSync(componentPath) || existsSync(altComponentPath)) {
+        console.log(`  ✅ ${componentName} already exists`);
+        continue;
+      }
+
+      console.log(`  Installing ${componentName}...`);
+
+      // Recursively install the component dependency
+      const url = new URL(
+        `r/${componentName}.json`,
+        'https://ui.dedevs.com/'
+      );
+
+      try {
+        const depComponentData = await fetchJson(url.toString());
+
+        // Install dependencies of the dependency first
+        const depDependencies = extractDependencies(depComponentData);
+        if (depDependencies.length > 0) {
+          await installMissingDependencies(depDependencies);
+        }
+
+        // Install shadcn/ui components needed by the dependency
+        await installMissingShadcnComponents(depComponentData);
+
+        // Install the component dependency itself
+        execSync(`npx shadcn@latest add ${url.toString()}`, { stdio: 'pipe' });
+
+        // Transform imports in the dependency
+        await transformComponentImports(componentName);
+
+        // Recursively install component dependencies of the dependency
+        await installMissingComponentDependencies(depComponentData);
+
+        console.log(`  ✅ ${componentName} installed`);
+      } catch (error) {
+        console.warn(`  ⚠️  Could not install component dependency ${componentName}:`, error instanceof Error ? error.message : String(error));
+      }
+    } catch (error) {
+      console.warn(`  ⚠️  Error checking component dependency ${componentName}:`, error instanceof Error ? error.message : String(error));
+    }
+  }
 }
