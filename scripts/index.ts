@@ -274,9 +274,19 @@ async function installMissingShadcnComponents(componentData: any) {
     if (file.content) {
       // Look for @/components/ui/ imports (the actual shadcn/ui import pattern)
       const shadcnImportRegex = /@\/components\/ui\/([^'"\s;,}]+)/g;
+      // Also look for @repo/shadcn-ui imports (before transformation)
+      const repoShadcnImportRegex = /@repo\/shadcn-ui\/components\/ui\/([^'"\s;,}]+)/g;
+      
       let match;
 
+      // Check for @/components/ui/ imports
       while ((match = shadcnImportRegex.exec(file.content)) !== null) {
+        const componentName = match[1];
+        requiredShadcnComponents.add(componentName);
+      }
+      
+      // Check for @repo/shadcn-ui imports
+      while ((match = repoShadcnImportRegex.exec(file.content)) !== null) {
         const componentName = match[1];
         requiredShadcnComponents.add(componentName);
       }
