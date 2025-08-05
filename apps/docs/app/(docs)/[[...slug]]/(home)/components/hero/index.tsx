@@ -64,18 +64,7 @@ export const Hero = () => (
     <div className="container relative z-10 grid gap-8 sm:gap-12 md:gap-16">
       <div className="mx-auto flex flex-col justify-center gap-6 text-balance">
         <h1 className="mb-0 text-balance text-center font-semibold text-4xl tracking-[-0.06em]! sm:text-5xl md:text-6xl xl:text-7xl">
-          High quality{' '}
-          <div className="ml-2 inline-flex items-center justify-center gap-2 align-bottom">
-            <Image
-              alt="shadcn/ui"
-              className="size-8 overflow-hidden rounded-full sm:size-10 md:size-12 lg:size-14"
-              height={56}
-              src={shadcn}
-              width={56}
-            />{' '}
-            <span>shadcn/ui</span>
-          </div>
-          components built with{' '}
+          Components built for Developers with{' '}
           <div className="-space-x-2 -translate-y-1.5 md:-translate-y-2.5 inline-flex items-center justify-center">
             {icons.map((icon, index) => (
               <Tooltip key={icon.name}>
