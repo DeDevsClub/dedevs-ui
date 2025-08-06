@@ -32,7 +32,7 @@
     "build:registry": "npx shadcn@latest build && cp -r public/r apps/docs/public/ && cp registry.json apps/docs/public/",
     "gen:registry": "ts-node scripts/generateRegistry.ts",
     "registry": "pnpm run gen:registry && pnpm run build:registry",
-    "dev": "PORT=3422 turbo dev",
+    "dev": "PORT=3421 turbo dev",
     "lint": "ultracite lint",
     "format": "ultracite format",
     "test": "turbo test",
