@@ -14,28 +14,143 @@ This guide provides comprehensive instructions for contributing to the DeDevs UI
 
 ### Overview
 
-Components in the DeDevs UI registry are organized in the `packages/` directory. Each package represents a category of components (e.g., `ai`, `code`).
+Components in the DeDevs UI registry are organized in the `packages/` directory using a **package-based architecture**. Each package represents a category of related components (e.g., `@repo/ai`, `@repo/code`).
+
+**IMPORTANT**: Components are **never created as standalone packages**. You must either:
+
+1. **Add to an existing package** (recommended for related functionality)
+2. **Create a new package** following the established patterns (only for new component categories)
+
+### Current Package Structure
+
+The registry follows these established package patterns:
+
+* **`@repo/ai`** - AI interface components (input, response, conversation, reasoning, etc.)
+* **`@repo/code`** - Code-related components (editor, snippet, block, etc.)
+* **`@repo/shadcn-ui`** - Base UI components (internal)
+* **`@repo/ticker`** - Financial/data ticker components
+
+### Decision Tree: Where to Add Your Component
+
+Before creating a component, determine the correct approach:
+
+#### Option 1: Add to Existing Package (Recommended)
+
+**Choose this if your component:**
+
+* Relates to AI interfaces → Add to `@repo/ai`
+* Relates to code display/editing → Add to `@repo/code`
+* Relates to financial/data tickers → Add to `@repo/ticker`
+* Fits within any existing package's scope
+
+#### Option 2: Create New Package
+
+**Only choose this if your component:**
+
+* Represents a completely new category (e.g., `@repo/blockchain`, `@repo/portfolio`)
+* Has no logical fit within existing packages
+* Will contain multiple related components (not just one)
 
 ### Step-by-Step Process
 
-#### 1. Create the Component Package Structure
+#### Option 1: Adding to Existing Package
+
+This is the **preferred approach** for most components.
+
+##### 1. Navigate to the Target Package
 
 ```bash
-# Navigate to the packages directory
-cd packages/
+# For AI-related components
+cd packages/ai/
 
-# Create a new package directory (if it doesn't exist)
-mkdir your-component-category
-cd your-component-category
+# For code-related components
+cd packages/code/
+
+# For other existing packages
+cd packages/your-target-package/
 ```
 
-#### 2. Set Up Package Configuration
+##### 2. Create Your Component File
 
-Create a `package.json` file for your component package:
+Create a new `.tsx` file with a descriptive name:
+
+```tsx
+// packages/ai/your-feature.tsx (for AI components)
+// packages/code/your-feature.tsx (for code components)
+
+import React from 'react';
+import { cn } from '@repo/shadcn-ui/lib/utils';
+
+interface YourFeatureProps {
+  className?: string;
+  // Add your component props here
+}
+
+export const YourFeature = React.forwardRef<
+  HTMLDivElement,
+  YourFeatureProps
+>(({ className, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn('your-feature-base-styles', className)}
+      {...props}
+    >
+      {/* Your component content */}
+    </div>
+  );
+});
+
+YourFeature.displayName = 'YourFeature';
+
+// Export any additional types
+export type { YourFeatureProps };
+```
+
+##### 3. Update Package Index (if needed)
+
+For packages with an `index.tsx` file (like `@repo/code`), add your export:
+
+```tsx
+// packages/code/index.tsx
+export * from './your-feature';
+```
+
+##### 4. Update Component Descriptions
+
+Edit `scripts/generateRegistry.ts` to add your component description:
+
+```typescript
+const COMPONENT_DESCRIPTIONS: Record<string, string> = {
+  // ... existing descriptions
+  'ai-your-feature': 'Description of your AI feature component', // for AI package
+  'code-your-feature': 'Description of your code feature component', // for code package
+  // Add more component descriptions as needed
+};
+```
+
+#### Option 2: Creating a New Package
+
+**Only use this approach for new component categories.**
+
+##### 1. Create Package Directory Structure
+
+```bash
+# Navigate to packages directory
+cd packages/
+
+# Create new package directory with descriptive name
+mkdir your-category  # e.g., blockchain, portfolio, analytics
+cd your-category
+```
+
+##### 2. Set Up Package Configuration
+
+Create `package.json` following the established pattern:
 
 ```json
 {
-  "name": "@repo/your-component-category",
+  "name": "@repo/your-category",
   "description": "Brief description of your component category",
   "version": "0.0.0",
   "private": true,
@@ -54,7 +169,7 @@ Create a `package.json` file for your component package:
 }
 ```
 
-Create a `tsconfig.json` file:
+Create `tsconfig.json`:
 
 ```json
 {
@@ -67,74 +182,75 @@ Create a `tsconfig.json` file:
 }
 ```
 
-#### 3. Create Your Component
+##### 3. Create Package Index
 
-Create your component file (e.g., `your-component.tsx` or `index.tsx`):
+Create `index.tsx` to export all components:
 
 ```tsx
-import React from 'react';
-import { cn } from '@repo/shadcn-ui/lib/utils';
-
-interface YourComponentProps {
-  className?: string;
-  // Add your component props here
-}
-
-export const YourComponent = React.forwardRef<
-  HTMLDivElement,
-  YourComponentProps
->(({ className, ...props }, ref) => {
-  return (
-    <div
-      ref={ref}
-      className={cn('your-component-base-styles', className)}
-      {...props}
-    >
-      {/* Your component content */}
-    </div>
-  );
-});
-
-YourComponent.displayName = 'YourComponent';
+// packages/your-category/index.tsx
+export * from './component-one';
+export * from './component-two';
+// Export all components in this package
 ```
 
-#### 4. Update Component Descriptions
+##### 4. Create Your Components
 
-Edit `scripts/generateRegistry.ts` to add your component description:
+Follow the same component creation pattern as Option 1.
+
+##### 5. Update Registry Generation Logic
+
+Update `scripts/generateRegistry.ts` to handle your new package:
 
 ```typescript
+// Add to the scanning logic
+else if (packageName === 'your-category') {
+    for (const file of componentFiles) {
+        const baseName = basename(file, extname(file));
+        const componentName = `your-category-${baseName}`;
+        // ... rest of the logic
+    }
+}
+
+// Add descriptions
 const COMPONENT_DESCRIPTIONS: Record<string, string> = {
   // ... existing descriptions
-  'your-component': 'Description of your component functionality',
-  // Add more component descriptions as needed
+  'your-category-component': 'Description of your component',
 };
 ```
 
-#### 5. Generate Registry
+### Registry Generation and Naming
 
-Run the registry generation script to automatically add your component to the registry:
+The registry automatically generates component names based on package structure:
 
-```bash
-# From the root directory
-pnpm run gen:registry
-```
+* **AI Package**: `ai-input`, `ai-response`, `ai-conversation`
+* **Code Package**: `code-editor`, `code-snippet`, `code-block`
+* **New Package**: `your-category-component-name`
 
-This will:
+### Component File Naming Best Practices
 
-* Scan all packages for `.tsx` and `.ts` component files
-* Update `registry.json` with your new components
-* Generate proper registry entries with metadata
+* Use **descriptive, kebab-case names**: `conversation.tsx`, `input.tsx`, `reasoning.tsx`
+* Avoid generic names like `component.tsx` or `index.tsx` (except for package exports)
+* Name should reflect the component's primary function
+* Keep names concise but clear
 
-#### 6. Test Your Component
+### Package Dependencies
 
-Add your component to the documentation site for testing:
+When adding dependencies to your component:
 
-1. Navigate to `apps/docs/`
-2. Add your component to the appropriate documentation pages
-3. Test locally:
+1. **Add to package.json**: Include in the appropriate package's `package.json`
+2. **Use workspace dependencies**: Reference other packages with `workspace:*`
+3. **External dependencies**: Add specific versions for external packages
 
-```bash
-pnpm run dev
+Example:
+
+```json
+{
+  "dependencies": {
+    "@repo/shadcn-ui": "workspace:*",  // Internal dependency
+    "@repo/ai": "workspace:*",         // Cross-package dependency
+    "react-markdown": "^10.1.0"       // External dependency
+  }
+}
 ```
 
 ## Adding a New Block
