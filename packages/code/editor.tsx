@@ -1,6 +1,6 @@
 'use client';
 
-import type { Editor, Range } from '@tiptap/core';
+import type { Editor as TiptapEditor, Range } from '@tiptap/core';
 import { mergeAttributes, Node } from '@tiptap/core';
 import CharacterCount from '@tiptap/extension-character-count';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
@@ -128,7 +128,7 @@ export interface SuggestionItem {
     description: string;
     icon: LucideIcon;
     searchTerms: string[];
-    command: (props: { editor: Editor; range: Range }) => void;
+    command: (props: { editor: TiptapEditor; range: Range }) => void;
 }
 
 export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>['items'] =
@@ -444,7 +444,7 @@ const lowlight = createLowlight(all);
 type EditorSlashMenuProps = {
     items: SuggestionItem[];
     command: (item: SuggestionItem) => void;
-    editor: Editor;
+    editor: TiptapEditor;
     range: Range;
 };
 

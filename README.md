@@ -313,13 +313,11 @@ When you run `pnpm run gen:registry`, you'll see output like:
 ```
 🔍 Scanning packages directory...
 📦 Processing package: ai
-📦 Processing package: code-block
-📦 Processing package: editor
+📦 Processing package: code
 ✅ Registry generated successfully!
 📄 Generated 14 component(s):
    - ai-branch: AI conversation branch component
-   - code-block: Enhanced code block component
-   - editor: Code editor component
+   - code: Code component (includes code-block, code-editor, code-snippet)  
 💾 Registry saved to: registry.json
 ```
 

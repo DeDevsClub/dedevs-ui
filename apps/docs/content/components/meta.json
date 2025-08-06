@@ -12,11 +12,9 @@
     "ai-sources",
     "ai-suggestion",
     "ai-tool",
-    "---Utilities---",
+    "---Code---",
     "code-block",
-    "editor",
-    "snippet",
-    "---Defi---",
-    "ticker"
+    "code-editor",
+    "code-snippet"
   ]
 }

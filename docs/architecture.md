@@ -5,10 +5,11 @@ This document provides a comprehensive architectural overview of the DeDevs UI D
 ## 🎯 System Overview
 
 DeDevs UI is a monorepo-based design system that provides:
-- **Component Registry**: A shadcn/ui-compatible component library
-- **CLI Tool**: Command-line interface for component installation
-- **Documentation Site**: Interactive documentation with live examples
-- **Build System**: Automated component discovery and registry generation
+
+* **Component Registry**: A shadcn/ui-compatible component library
+* **CLI Tool**: Command-line interface for component installation
+* **Documentation Site**: Interactive documentation with live examples
+* **Build System**: Automated component discovery and registry generation
 
 ## 🏛️ High-Level Architecture
 
@@ -428,15 +429,17 @@ sequenceDiagram
 ## 🔌 Integration Points
 
 ### External Dependencies
-- **Next.js**: Application framework for docs and web apps
-- **React**: UI library for components
-- **Tailwind CSS**: Utility-first CSS framework
-- **TypeScript**: Type-safe JavaScript
-- **Turborepo**: Monorepo build system
-- **PNPM**: Package manager with workspace support
-- **Shadcn/UI**: Base component library
+
+* **Next.js**: Application framework for docs and web apps
+* **React**: UI library for components
+* **Tailwind CSS**: Utility-first CSS framework
+* **TypeScript**: Type-safe JavaScript
+* **Turborepo**: Monorepo build system
+* **PNPM**: Package manager with workspace support
+* **Shadcn/UI**: Base component library
 
 ### Internal Dependencies
+
 ```mermaid
 graph LR
     subgraph "Shared Configurations"
@@ -446,10 +449,8 @@ graph LR
     
     subgraph "Component Packages"
         AI["🤖 ai"]
-        CODE_BLOCK["💻 code-block"]
-        EDITOR["✏️ editor"]
+        CODE["💻 code"]
         SHADCN["🎨 shadcn-ui"]
-        SNIPPET["📝 snippet"]
     end
     
     subgraph "Applications"
@@ -458,25 +459,20 @@ graph LR
     end
     
     ESLINT_CONFIG --> AI
-    ESLINT_CONFIG --> CODE_BLOCK
-    ESLINT_CONFIG --> EDITOR
+    ESLINT_CONFIG --> CODE
     ESLINT_CONFIG --> DOCS
     ESLINT_CONFIG --> WEB
     
     TS_CONFIG --> AI
-    TS_CONFIG --> CODE_BLOCK
-    TS_CONFIG --> EDITOR
+    TS_CONFIG --> CODE
     TS_CONFIG --> DOCS
     TS_CONFIG --> WEB
     
     SHADCN --> AI
-    SHADCN --> CODE_BLOCK
-    SHADCN --> EDITOR
+    SHADCN --> CODE
     
     AI --> DOCS
-    CODE_BLOCK --> DOCS
-    EDITOR --> DOCS
-    SNIPPET --> DOCS
+    CODE --> DOCS
 ```
 
 ## 🚀 Deployment Architecture
@@ -529,36 +525,41 @@ graph TB
 ## 📊 Performance Considerations
 
 ### Build Performance
-- **Turborepo Caching**: Intelligent build caching across packages
-- **Incremental Builds**: Only rebuild changed packages
-- **Parallel Execution**: Concurrent package builds
-- **Remote Caching**: Shared cache across team members
+
+* **Turborepo Caching**: Intelligent build caching across packages
+* **Incremental Builds**: Only rebuild changed packages
+* **Parallel Execution**: Concurrent package builds
+* **Remote Caching**: Shared cache across team members
 
 ### Runtime Performance
-- **Code Splitting**: Automatic code splitting in Next.js apps
-- **Tree Shaking**: Remove unused code from bundles
-- **Component Lazy Loading**: Load components on demand
-- **Static Generation**: Pre-generate documentation pages
+
+* **Code Splitting**: Automatic code splitting in Next.js apps
+* **Tree Shaking**: Remove unused code from bundles
+* **Component Lazy Loading**: Load components on demand
+* **Static Generation**: Pre-generate documentation pages
 
 ### CLI Performance
-- **Minimal Dependencies**: Keep CLI bundle size small
-- **Streaming Downloads**: Stream component files during installation
-- **Caching**: Cache registry data locally
-- **Parallel Operations**: Concurrent file operations
+
+* **Minimal Dependencies**: Keep CLI bundle size small
+* **Streaming Downloads**: Stream component files during installation
+* **Caching**: Cache registry data locally
+* **Parallel Operations**: Concurrent file operations
 
 ## 🔒 Security Considerations
 
 ### Package Security
-- **Dependency Scanning**: Regular security audits
-- **Version Pinning**: Lock dependency versions
-- **Minimal Permissions**: Least privilege access
-- **Code Signing**: Sign CLI releases
+
+* **Dependency Scanning**: Regular security audits
+* **Version Pinning**: Lock dependency versions
+* **Minimal Permissions**: Least privilege access
+* **Code Signing**: Sign CLI releases
 
 ### API Security
-- **Rate Limiting**: Prevent API abuse
-- **Input Validation**: Sanitize user inputs
-- **HTTPS Only**: Secure transport layer
-- **Token Management**: Secure API key handling
+
+* **Rate Limiting**: Prevent API abuse
+* **Input Validation**: Sanitize user inputs
+* **HTTPS Only**: Secure transport layer
+* **Token Management**: Secure API key handling
 
 ## 📈 Scalability Architecture
 
@@ -644,19 +645,21 @@ sequenceDiagram
 ## 🎯 Future Architecture Considerations
 
 ### Planned Enhancements
-- **Plugin System**: Extensible architecture for custom components
-- **Theme Engine**: Dynamic theming and customization
-- **Component Variants**: Multiple implementation options
-- **Version Management**: Semantic versioning for components
-- **Analytics Dashboard**: Usage metrics and insights
-- **AI Integration**: Intelligent component recommendations
+
+* **Plugin System**: Extensible architecture for custom components
+* **Theme Engine**: Dynamic theming and customization
+* **Component Variants**: Multiple implementation options
+* **Version Management**: Semantic versioning for components
+* **Analytics Dashboard**: Usage metrics and insights
+* **AI Integration**: Intelligent component recommendations
 
 ### Technical Debt
-- **Legacy Browser Support**: Gradual modernization
-- **Bundle Size Optimization**: Further size reductions
-- **Performance Monitoring**: Enhanced observability
-- **Testing Coverage**: Comprehensive test suite expansion
 
----
+* **Legacy Browser Support**: Gradual modernization
+* **Bundle Size Optimization**: Further size reductions
+* **Performance Monitoring**: Enhanced observability
+* **Testing Coverage**: Comprehensive test suite expansion
+
+***
 
 *This architecture documentation is maintained by the DeDevs UI team and updated regularly to reflect system changes and improvements.*

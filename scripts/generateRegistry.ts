@@ -62,7 +62,7 @@ function getComponentName(packageName: string): string {
         return 'ai-simple'; // Default AI component name
     }
     else if (packageName === 'code') {
-        return 'code-block'; // Default Code component name
+        return 'code-simple'; // Default Code component name
     }
     return packageName.startsWith('ai')
         ? `ai-${packageName.replace('ai', '').replace(/^-/, '')}`

@@ -274,12 +274,6 @@ function transformImports(content: string): string {
     "import $1 from '@/lib/utils'"
   );
 
-  // Transform @repo/code imports to direct component imports
-  transformed = transformed.replace(
-    /import\s+({[^}]*})\s+from\s+['"]@repo\/code['"]/g,
-    "import $1 from '@/components/ui/code'"
-  );
-
   // Transform other @repo/ imports by removing the @repo/ prefix
   transformed = transformed.replace(
     /import\s+([^\s]+)\s+from\s+['"]@repo\/([^'"]+)['"]/g,
@@ -445,7 +439,7 @@ async function listComponents() {
     // Group components by type
     const aiComponents = registry.items.filter((item: any) => item.name.startsWith('ai-'));
     const codeComponents = registry.items.filter((item: any) => item.name.startsWith('code-'));
-    const utilityComponents = registry.items.filter((item: any) => 
+    const utilityComponents = registry.items.filter((item: any) =>
       !item.name.startsWith('ai-') && !item.name.startsWith('code-')
     );
     // const defiComponents = registry.items.filter((item: any) => item.name.startsWith('defi-'));

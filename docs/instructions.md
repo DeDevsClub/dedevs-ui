@@ -14,7 +14,7 @@ This guide provides comprehensive instructions for contributing to the DeDevs UI
 
 ### Overview
 
-Components in the DeDevs UI registry are organized in the `packages/` directory. Each package represents a category of components (e.g., `ai`, `code-block`, `editor`).
+Components in the DeDevs UI registry are organized in the `packages/` directory. Each package represents a category of components (e.g., `ai`, `code`).
 
 ### Step-by-Step Process
 
