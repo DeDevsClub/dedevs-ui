@@ -77,7 +77,7 @@
   * **Details**: Display announcements to users.
 * \[ ] [**Banner**](`packages/display/banner`)
   * **Details**: Banner component for promotional content.
-* \[ ] [**Bento Grid**](`packages/display/bento-grid`)
+* \[ ] [**Bento Grid**](`packages/display/bento`)
   * **Details**: Grid layout for displaying content.
 * \[ ] [**Card**](`packages/display/card`)
   * **Details**: Card component for content display.

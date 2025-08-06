@@ -1,0 +1,376 @@
+---
+title: Bento Grid
+description: A flexible and animated bento-style grid component for showcasing features, metrics, and interactive content.
+icon: Grip
+full: true
+---
+
+<Preview path="site-bento" />
+
+## Installation
+
+<Installer packageName="site-bento" />
+
+## Overview
+
+The Bento Grid component creates beautiful, animated grid layouts perfect for landing pages, feature showcases, and portfolio sections. It supports multiple content types with smooth animations and interactive elements.
+
+## Features
+
+### Core Features
+- **Responsive Grid Layout**: Automatically adapts to different screen sizes
+- **Smooth Animations**: Built with Framer Motion for fluid transitions
+- **Multiple Content Types**: Support for 8 different feature types
+- **Customizable Sizing**: Small, medium, and large card sizes
+- **Interactive Elements**: Hover effects and click animations
+- **Dark Mode Support**: Seamless theme switching
+
+### Feature Types
+
+#### 1. Spotlight Features
+Highlight key features with animated checkmarks and smooth reveals.
+
+#### 2. Typing Animation
+Simulate code typing with syntax highlighting and realistic timing.
+
+#### 3. Counter Animation
+Animated number counters with customizable start/end values and suffixes.
+
+#### 4. Chart Visualization
+Simple animated charts for displaying metrics and data.
+
+#### 5. Timeline Display
+Vertical timeline with years and events for showcasing milestones.
+
+#### 6. Icon Showcase
+Grid of animated icons with hover effects and smooth transitions.
+
+#### 7. Metrics Dashboard
+Display multiple metrics with color-coded values and labels.
+
+#### 8. Code Snippets
+Syntax-highlighted code blocks with typing animations.
+
+## Packages Used
+
+This component leverages several powerful packages:
+
+- **[Framer Motion](https://www.framer.com/motion/)** `^11.17.0` - Advanced animations and transitions
+- **[Lucide React](https://lucide.dev/)** `^0.536.0` - Beautiful SVG icons
+- **[@repo/shadcn-ui](https://ui.shadcn.com/)** - Base UI components and utilities
+- **React** `^19.1.1` - Core React functionality
+
+## Usage
+
+### Basic Example
+
+```tsx
+import { BentoGrid } from "@repo/site";
+
+const items = [
+  {
+    id: "feature-1",
+    title: "AI-Powered Analytics",
+    description: "Get insights from your data with advanced AI algorithms",
+    feature: "spotlight",
+    spotlightItems: [
+      "Real-time Processing",
+      "Predictive Models",
+      "Custom Dashboards"
+    ],
+    size: "lg",
+    className: "col-span-2"
+  },
+  {
+    id: "metrics",
+    title: "Performance Metrics",
+    description: "Track your key performance indicators",
+    feature: "metrics",
+    metrics: [
+      { label: "Users", value: 10000, suffix: "+", color: "emerald" },
+      { label: "Revenue", value: 250000, suffix: "$", color: "blue" },
+      { label: "Growth", value: 85, suffix: "%", color: "purple" }
+    ]
+  }
+];
+
+export default function MyBentoGrid() {
+  return (
+    <BentoGrid 
+      items={items}
+      title="Our Features"
+      subtitle="Discover what makes us different"
+    />
+  );
+}
+```
+
+### Advanced Configuration
+
+```tsx
+import { BentoGrid, type BentoItem } from "@repo/site";
+
+const advancedItems: BentoItem[] = [
+  {
+    id: "typing-demo",
+    title: "Code Generation",
+    description: "Watch AI generate code in real-time",
+    feature: "typing",
+    typingText: `function generateAI() {
+  const model = new AIModel();
+  return model.generate({
+    prompt: "Create a React component",
+    temperature: 0.7
+  });
+}`,
+    size: "lg"
+  },
+  {
+    id: "counter-stats",
+    title: "User Growth",
+    description: "Our platform is growing fast",
+    feature: "counter",
+    statistic: {
+      value: "50K",
+      label: "Active Users",
+      start: 0,
+      end: 50000,
+      suffix: "+"
+    }
+  },
+  {
+    id: "timeline-history",
+    title: "Company Milestones",
+    description: "Our journey so far",
+    feature: "timeline",
+    timeline: [
+      { year: "2024", event: "Company Founded" },
+      { year: "2024", event: "First Product Launch" },
+      { year: "2025", event: "Series A Funding" }
+    ]
+  },
+  {
+    id: "chart-analytics",
+    title: "Performance Chart",
+    description: "Visual representation of our growth",
+    feature: "chart",
+    statistic: {
+      value: "85%",
+      label: "Improvement",
+      start: 0,
+      end: 85
+    }
+  }
+];
+
+export default function AdvancedBento() {
+  return (
+    <div className="container mx-auto px-4 py-12">
+      <BentoGrid 
+        items={advancedItems}
+        title="Advanced Features"
+        subtitle="Explore our comprehensive feature set"
+        className="max-w-6xl mx-auto"
+      />
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### BentoGrid Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `BentoItem[]` | - | Array of bento items to display |
+| `className` | `string` | - | Additional CSS classes |
+| `title` | `string` | - | Optional grid title |
+| `subtitle` | `string` | - | Optional grid subtitle |
+
+### BentoItem Interface
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `id` | `string` | Unique identifier for the item |
+| `title` | `string` | Card title |
+| `description` | `string` | Card description |
+| `feature` | `FeatureType` | Type of feature to display |
+| `size` | `"sm" \| "md" \| "lg"` | Card size |
+| `className` | `string` | Additional CSS classes |
+| `href` | `string` | Optional link URL |
+| `icons` | `boolean` | Whether to show icons feature |
+
+### Feature-Specific Properties
+
+#### Spotlight Feature
+```tsx
+spotlightItems?: string[]; // Array of feature highlights
+```
+
+#### Typing Feature
+```tsx
+typingText?: string; // Text to animate typing
+```
+
+#### Counter Feature
+```tsx
+statistic?: {
+  value: string;
+  label: string;
+  start?: number;
+  end?: number;
+  suffix?: string;
+};
+```
+
+#### Metrics Feature
+```tsx
+metrics?: Array<{
+  label: string;
+  value: number;
+  suffix?: string;
+  color?: string;
+}>;
+```
+
+#### Timeline Feature
+```tsx
+timeline?: Array<{
+  year: string;
+  event: string;
+}>;
+```
+
+#### Code Feature
+```tsx
+code?: string;     // Code content
+codeLang?: string; // Language for syntax highlighting
+```
+
+## Styling
+
+The component uses Tailwind CSS classes and supports dark mode out of the box. You can customize the appearance by:
+
+1. **Grid Layout**: Use `className` prop on individual items for custom grid positioning
+2. **Colors**: Customize metric colors using the `color` property
+3. **Animations**: Modify animation variants in the component source
+4. **Spacing**: Adjust container padding and margins
+
+### Custom Grid Layouts
+
+```tsx
+const customLayoutItems = [
+  {
+    id: "hero",
+    title: "Main Feature",
+    description: "Primary content area",
+    className: "col-span-2 row-span-2", // Large card
+    size: "lg"
+  },
+  {
+    id: "side-1",
+    title: "Side Feature 1",
+    description: "Secondary content",
+    className: "col-span-1 row-span-1", // Small card
+    size: "sm"
+  }
+];
+```
+
+## Accessibility
+
+- **Keyboard Navigation**: All interactive elements are keyboard accessible
+- **Screen Readers**: Proper ARIA labels and semantic HTML
+- **Reduced Motion**: Respects `prefers-reduced-motion` setting
+- **Color Contrast**: Meets WCAG guidelines for text contrast
+- **Focus Management**: Clear focus indicators for all interactive elements
+
+## Performance
+
+- **Lazy Loading**: Animations only trigger when elements are in view
+- **Optimized Animations**: Uses transform and opacity for smooth 60fps animations
+- **Minimal Bundle Size**: Tree-shakeable exports and optimized dependencies
+- **Memory Efficient**: Proper cleanup of animation listeners and timers
+
+## Examples
+
+### Landing Page Hero Section
+
+```tsx
+const heroItems = [
+  {
+    id: "main-hero",
+    title: "Build the Future",
+    description: "Create amazing applications with our component library",
+    feature: "spotlight",
+    spotlightItems: [
+      "Modern Design System",
+      "TypeScript Support",
+      "Dark Mode Ready",
+      "Fully Accessible"
+    ],
+    className: "col-span-2 row-span-1",
+    size: "lg"
+  },
+  {
+    id: "stats",
+    title: "Growing Fast",
+    description: "Join thousands of developers",
+    feature: "counter",
+    statistic: {
+      value: "10K+",
+      label: "Developers",
+      start: 0,
+      end: 10000,
+      suffix: "+"
+    }
+  }
+];
+```
+
+### Portfolio Showcase
+
+```tsx
+const portfolioItems = [
+  {
+    id: "skills",
+    title: "Technical Skills",
+    description: "Technologies I work with",
+    feature: "icons",
+    icons: true
+  },
+  {
+    id: "experience",
+    title: "Career Timeline",
+    description: "My professional journey",
+    feature: "timeline",
+    timeline: [
+      { year: "2020", event: "Started as Junior Developer" },
+      { year: "2022", event: "Promoted to Senior Developer" },
+      { year: "2024", event: "Tech Lead Position" }
+    ]
+  }
+];
+```
+
+## Best Practices
+
+1. **Content Balance**: Mix different feature types for visual variety
+2. **Grid Layout**: Use appropriate sizing for content hierarchy
+3. **Animation Timing**: Keep animations subtle and purposeful
+4. **Accessibility**: Always provide meaningful descriptions
+5. **Performance**: Limit the number of animated elements on screen
+6. **Mobile First**: Test layouts on various screen sizes
+
+## Troubleshooting
+
+### Common Issues
+
+**Animations not working**: Ensure Framer Motion is properly installed and imported.
+
+**Layout breaking on mobile**: Check grid classes and responsive breakpoints.
+
+**TypeScript errors**: Verify all required properties are provided in BentoItem objects.
+
+**Performance issues**: Reduce the number of simultaneous animations or use `prefers-reduced-motion`.

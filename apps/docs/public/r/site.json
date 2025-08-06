@@ -1,0 +1,13 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "site",
+  "type": "registry:ui",
+  "description": "Site index.tsx component",
+  "files": [
+    {
+      "path": "packages/site/index.tsx",
+      "content": "// Site Components - Landing page and marketing components\nexport { BentoGrid, BentoCard } from \"./bento\";\nexport type { BentoItem, BentoGridProps } from \"./bento\";\n\nexport { Hero } from \"./hero\";\nexport type { HeroProps } from \"./hero\";\n\nexport { Testimonials } from \"./testimonials\";\nexport type { TestimonialsProps, Testimonial } from \"./testimonials\";\n\nexport { Features } from \"./features\";\nexport type { FeaturesProps, Feature } from \"./features\";\n\nexport { CTA } from \"./cta\";\nexport type { CTAProps } from \"./cta\";\n",
+      "type": "registry:component"
+    }
+  ]
+}

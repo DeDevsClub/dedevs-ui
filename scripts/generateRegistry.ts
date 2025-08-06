@@ -41,6 +41,13 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
     'code-snippet': 'Code snippet component',
     // defi
     'defi-ticker': 'Ticker component for displaying real-time data',
+    'defi-chart': 'Chart component for displaying real-time data',
+    // site
+    'site-bento': 'Bento grid component for showcasing features and content',
+    'site-hero': 'Hero section component for landing pages',
+    'site-testimonials': 'Testimonials carousel component',
+    'site-features': 'Features showcase component with multiple layouts',
+    'site-cta': 'Call-to-action component with multiple variants',
 };
 
 // Get description for a component, with fallback
@@ -57,6 +64,10 @@ function getComponentDescription(packageName: string, fileName: string): string 
         const componentName = `defi-${fileName}`;
         return COMPONENT_DESCRIPTIONS[componentName] || `Defi ${fileName} component`;
     }
+    else if (packageName === 'site') {
+        const componentName = `site-${fileName}`;
+        return COMPONENT_DESCRIPTIONS[componentName] || `Site ${fileName} component`;
+    }
     return COMPONENT_DESCRIPTIONS[packageName] || `${packageName} component`;
 }
 
@@ -71,13 +82,18 @@ function getComponentName(packageName: string): string {
     else if (packageName === 'defi') {
         return 'defi'; // Default Defi component name
     }
+    else if (packageName === 'site') {
+        return 'site'; // Default Site component name
+    }
     return packageName.startsWith('ai')
         ? `ai-${packageName.replace('ai', '').replace(/^-/, '')}`
         : packageName.startsWith('code')
             ? `code-${packageName.replace('code', '').replace(/^-/, '')}`
             : packageName.startsWith('defi')
                 ? `defi-${packageName.replace('defi', '').replace(/^-/, '')}`
-                : packageName;
+                : packageName.startsWith('site')
+                    ? `site-${packageName.replace('site', '').replace(/^-/, '')}`
+                    : packageName;
 }
 
 // Check if a file is a valid TypeScript/TSX component file

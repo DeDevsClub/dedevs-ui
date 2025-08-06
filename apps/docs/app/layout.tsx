@@ -7,30 +7,23 @@ import { TooltipProvider } from '@repo/shadcn-ui/components/ui/tooltip';
 import { cn } from '@repo/shadcn-ui/lib/utils';
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
 import { RootProvider } from 'fumadocs-ui/provider';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { ThemeProvider } from '@/providers/theme';
 import { mono, sans } from '../lib/fonts';
+import { defaultMetadata } from '@/lib/metadata';
+import { OrganizationStructuredData, WebsiteStructuredData, SoftwareApplicationStructuredData } from '../components/structured-data';
 
-const sourceUrl =
-  process.env.NEXT_PUBLIC_SOURCE_URL || 'https://devcdn-ui.dedevs.com';
+export const metadata: Metadata = defaultMetadata;
 
-export const metadata: Metadata = {
-  title: 'DeDevs UI',
-  description:
-    'DeDevs UI is a custom registry of composable, accessible and extensible components designed for use with shadcn/ui.',
-  openGraph: {
-    title: 'DeDevs UI',
-    description:
-      'DeDevs UI is a custom registry of composable, accessible and extensible components designed for use with shadcn/ui.',
-    type: 'website',
-    images: [
-      {
-        url: `${sourceUrl}/opengraph-image.png`,
-        width: 1200,
-        height: 630,
-      },
-    ],
-  },
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+  ],
 };
 
 type LayoutProps = {
@@ -58,6 +51,9 @@ export default function RootLayout({ children }: Readonly<LayoutProps>) {
           <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         )} */}
         </ThemeProvider>
+        <OrganizationStructuredData />
+        <WebsiteStructuredData />
+        <SoftwareApplicationStructuredData />
         <Toaster />
       </body>
     </html>

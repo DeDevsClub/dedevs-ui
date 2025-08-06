@@ -180,12 +180,45 @@
       ]
     },
     {
+      "name": "defi-chart",
+      "type": "registry:ui",
+      "description": "Chart component for displaying real-time data",
+      "files": [
+        {
+          "path": "packages/defi/chart.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "defi-swap",
+      "type": "registry:ui",
+      "description": "Defi swap component",
+      "files": [
+        {
+          "path": "packages/defi/swap.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "defi-ticker",
       "type": "registry:ui",
       "description": "Ticker component for displaying real-time data",
       "files": [
         {
           "path": "packages/defi/ticker.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "site",
+      "type": "registry:ui",
+      "description": "Site index.tsx component",
+      "files": [
+        {
+          "path": "packages/site/index.tsx",
           "type": "registry:component"
         }
       ]

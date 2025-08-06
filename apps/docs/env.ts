@@ -37,6 +37,12 @@ export const env = createEnv({
     // Added by Sentry Integration, Vercel Marketplace
     SENTRY_ORG: z.string().optional(),
     SENTRY_PROJECT: z.string().optional(),
+
+    // SEO Verification Codes
+    // GOOGLE_SITE_VERIFICATION: z.string().optional(),
+    // BING_VERIFICATION: z.string().optional(),
+    // YANDEX_VERIFICATION: z.string().optional(),
+    // YAHOO_VERIFICATION: z.string().optional(),
   },
   client: {
     NEXT_PUBLIC_GA_MEASUREMENT_ID: z
@@ -53,6 +59,11 @@ export const env = createEnv({
 
     // Added by Sentry Integration, Vercel Marketplace
     NEXT_PUBLIC_SENTRY_DSN: z.string().optional().refine((val) => !val || z.string().url().safeParse(val).success, {
+      message: "Invalid URL"
+    }),
+
+    // Base URL for SEO and metadata
+    NEXT_PUBLIC_BASE_URL: z.string().optional().refine((val) => !val || z.string().url().safeParse(val).success, {
       message: "Invalid URL"
     }),
   },
@@ -75,6 +86,11 @@ export const env = createEnv({
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
-    GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET
+    GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
+    // GOOGLE_SITE_VERIFICATION: process.env.GOOGLE_SITE_VERIFICATION,
+    // BING_VERIFICATION: process.env.BING_VERIFICATION,
+    // YANDEX_VERIFICATION: process.env.YANDEX_VERIFICATION,
+    // YAHOO_VERIFICATION: process.env.YAHOO_VERIFICATION,
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL
   }
 });

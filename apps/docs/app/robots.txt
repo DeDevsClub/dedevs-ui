@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ui.dedevs.com/sitemap.xml
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /registry/
+
+# Allow important pages
+Allow: /docs
+Allow: /components
+Allow: /blocks
+Allow: /pricing
+
+# Crawl delay (optional, helps prevent server overload)
+Crawl-delay: 1
