@@ -379,18 +379,12 @@ importers:
       '@tiptap/core':
         specifier: ^3.0.9
         version: 3.0.9(@tiptap/pm@3.0.9)
-      '@tiptap/extension-bubble-menu':
-        specifier: ^3.0.9
-        version: 3.0.9(@tiptap/core@3.0.9(@tiptap/pm@3.0.9))(@tiptap/pm@3.0.9)
       '@tiptap/extension-character-count':
         specifier: ^3.0.9
         version: 3.0.9(@tiptap/extensions@3.0.9(@tiptap/core@3.0.9(@tiptap/pm@3.0.9))(@tiptap/pm@3.0.9))
       '@tiptap/extension-code-block-lowlight':
         specifier: ^3.0.9
         version: 3.0.9(@tiptap/core@3.0.9(@tiptap/pm@3.0.9))(@tiptap/extension-code-block@3.0.9(@tiptap/core@3.0.9(@tiptap/pm@3.0.9))(@tiptap/pm@3.0.9))(@tiptap/pm@3.0.9)(highlight.js@11.11.1)(lowlight@3.3.0)
-      '@tiptap/extension-floating-menu':
-        specifier: ^3.0.9
-        version: 3.0.9(@floating-ui/dom@1.7.3)(@tiptap/core@3.0.9(@tiptap/pm@3.0.9))(@tiptap/pm@3.0.9)
       '@tiptap/extension-placeholder':
         specifier: ^3.0.9
         version: 3.0.9(@tiptap/extensions@3.0.9(@tiptap/core@3.0.9(@tiptap/pm@3.0.9))(@tiptap/pm@3.0.9))
@@ -688,9 +682,6 @@ importers:
       '@repo/shadcn-ui':
         specifier: workspace:*
         version: link:../shadcn-ui
-      lucide-react:
-        specifier: ^0.536.0
-        version: 0.536.0(react@19.1.1)
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -10289,6 +10280,7 @@ snapshots:
       '@floating-ui/dom': 1.7.3
       '@tiptap/core': 3.0.9(@tiptap/pm@3.0.9)
       '@tiptap/pm': 3.0.9
+    optional: true
 
   '@tiptap/extension-bullet-list@3.0.9(@tiptap/extension-list@3.0.9(@tiptap/core@3.0.9(@tiptap/pm@3.0.9))(@tiptap/pm@3.0.9))':
     dependencies:
@@ -10328,6 +10320,7 @@ snapshots:
       '@floating-ui/dom': 1.7.3
       '@tiptap/core': 3.0.9(@tiptap/pm@3.0.9)
       '@tiptap/pm': 3.0.9
+    optional: true
 
   '@tiptap/extension-gapcursor@3.0.9(@tiptap/extensions@3.0.9(@tiptap/core@3.0.9(@tiptap/pm@3.0.9))(@tiptap/pm@3.0.9))':
     dependencies:

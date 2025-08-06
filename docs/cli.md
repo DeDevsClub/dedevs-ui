@@ -83,6 +83,9 @@ Available components:
   code-block      Enhanced code block component with syntax highlighting
   editor          Code editor component
   snippet         Code snippet component
+
+📊 Defi Components:
+  ticker          Ticker component for displaying real-time data
 ```
 
 You can also use the short alias:
