@@ -12,6 +12,9 @@ import { Separator } from '@/components/ui/separator'
 import { Loader2, Send, Copy, Download, Eye, Code, Sparkles } from 'lucide-react'
 import { toast } from 'sonner'
 import { createChat, sendMessage, type ChatResponse } from '../actions'
+import { useUsageLimit } from '@/hooks/use-usage-limit'
+import { UsageLimitBanner } from './usage-limit-banner'
+import { SubscriptionRequiredError } from '@/types/errors'
 
 interface ChatMessage {
     id: string
@@ -37,6 +40,9 @@ export function AiChatInterface() {
     const [generatedComponents, setGeneratedComponents] = useState<GeneratedComponent[]>([])
     const [activeTab, setActiveTab] = useState('chat')
     const messagesEndRef = useRef<HTMLDivElement>(null)
+    
+    // Usage limit management
+    const { isSubscribed, requestsUsed, requestsRemaining, isLoading: usageLoading, refreshUsage } = useUsageLimit()
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -85,10 +91,18 @@ export function AiChatInterface() {
                 setActiveTab('preview')
             }
 
+            // Refresh usage data after successful generation
+            await refreshUsage()
             toast.success('Component generated successfully!')
         } catch (error) {
             console.error('Error creating chat:', error)
-            toast.error('Failed to generate component. Please try again.')
+            
+            if (error instanceof SubscriptionRequiredError) {
+                toast.error(error.message)
+                await refreshUsage() // Refresh to show updated usage
+            } else {
+                toast.error('Failed to generate component. Please try again.')
+            }
 
             const errorMessage: ChatMessage = {
                 id: (Date.now() + 1).toString(),
@@ -143,10 +157,18 @@ export function AiChatInterface() {
                 setGeneratedComponents(updatedComponents)
             }
 
+            // Refresh usage data after successful update
+            await refreshUsage()
             toast.success('Component updated successfully!')
         } catch (error) {
             console.error('Error continuing chat:', error)
-            toast.error('Failed to update component. Please try again.')
+            
+            if (error instanceof SubscriptionRequiredError) {
+                toast.error(error.message)
+                await refreshUsage() // Refresh to show updated usage
+            } else {
+                toast.error('Failed to update component. Please try again.')
+            }
         } finally {
             setIsLoading(false)
         }
@@ -155,6 +177,12 @@ export function AiChatInterface() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         if (!input.trim() || isLoading) return
+        
+        // Check if user has reached their limit
+        if (!isSubscribed && requestsRemaining <= 0) {
+            toast.error('You\'ve reached your free limit. Please upgrade to continue.')
+            return
+        }
 
         const message = input.trim()
         setInput('')
@@ -200,6 +228,14 @@ export function AiChatInterface() {
                     Describe the UI component you want, and I'll generate it for you using v0.dev
                 </p>
             </div>
+
+            {/* Usage Limit Banner */}
+            <UsageLimitBanner 
+                isSubscribed={isSubscribed}
+                requestsUsed={requestsUsed}
+                requestsRemaining={requestsRemaining}
+                isLoading={usageLoading}
+            />
 
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                 <TabsList className="grid w-full grid-cols-3">
@@ -272,8 +308,12 @@ export function AiChatInterface() {
                                 <Textarea
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
-                                    placeholder="Describe the component you want to create..."
+                                    placeholder={!isSubscribed && requestsRemaining <= 0 
+                                        ? "Upgrade to Pro to continue generating components..."
+                                        : "Describe the component you want to create..."
+                                    }
                                     className="flex-1 min-h-[60px] resize-none"
+                                    disabled={!isSubscribed && requestsRemaining <= 0}
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter' && !e.shiftKey) {
                                             e.preventDefault()
@@ -281,7 +321,10 @@ export function AiChatInterface() {
                                         }
                                     }}
                                 />
-                                <Button type="submit" disabled={!input.trim() || isLoading}>
+                                <Button 
+                                    type="submit" 
+                                    disabled={!input.trim() || isLoading || (!isSubscribed && requestsRemaining <= 0)}
+                                >
                                     {isLoading ? (
                                         <Loader2 className="h-4 w-4 animate-spin" />
                                     ) : (

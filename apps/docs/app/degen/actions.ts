@@ -1,6 +1,10 @@
 'use server'
 
 import { v0 } from 'v0-sdk'
+import { validateSubscriptionAndUsage } from '@/lib/subscription'
+import { recordAIUsage } from '@/actions/ai-usage'
+import { getCurrentUserId } from '@/lib/shared'
+import { SubscriptionRequiredError } from '@/types/errors'
 
 export interface ChatFile {
   name: string
@@ -23,6 +27,17 @@ export interface SendMessageResponse {
 
 export async function createChat(message: string): Promise<ChatResponse> {
   try {
+    // Check usage limits and subscription status
+    const userId = await getCurrentUserId();
+    const validation = await validateSubscriptionAndUsage(userId);
+    
+    if (!validation.canProceed) {
+      throw new SubscriptionRequiredError(
+        validation.error || 'Usage limit exceeded',
+        { requestsRemaining: validation.requestsRemaining }
+      );
+    }
+
     const chat = await v0.chats.create({
       message: message.trim()
     })
@@ -36,6 +51,12 @@ export async function createChat(message: string): Promise<ChatResponse> {
       source: file.source || file.content || ''
     }))
 
+    // Record usage after successful API call
+    await recordAIUsage({
+      promptTokens: message.length, // Approximate token count
+      completionTokens: chat.files?.reduce((acc, file: any) => acc + ((file.source || file.content)?.length || 0), 0) || 0
+    });
+
     return {
       id: chat.id || '',
       url: chat.url || '',
@@ -44,12 +65,28 @@ export async function createChat(message: string): Promise<ChatResponse> {
     }
   } catch (error) {
     console.error('Error creating chat:', error)
+    
+    if (error instanceof SubscriptionRequiredError) {
+      throw error;
+    }
+    
     throw new Error('Failed to create chat with v0 API')
   }
 }
 
 export async function sendMessage(chatId: string, message: string): Promise<SendMessageResponse> {
   try {
+    // Check usage limits for follow-up messages too
+    const userId = await getCurrentUserId();
+    const validation = await validateSubscriptionAndUsage(userId);
+    
+    if (!validation.canProceed) {
+      throw new SubscriptionRequiredError(
+        validation.error || 'Usage limit exceeded',
+        { requestsRemaining: validation.requestsRemaining }
+      );
+    }
+
     const response = await v0.chats.sendMessage({
       chatId,
       message: message.trim()
@@ -64,11 +101,22 @@ export async function sendMessage(chatId: string, message: string): Promise<Send
       source: file.source || file.content || ''
     }))
 
+    // Record usage for follow-up messages
+    await recordAIUsage({
+      promptTokens: message.length,
+      completionTokens: response.files?.reduce((acc, file: any) => acc + ((file.source || file.content)?.length || 0), 0) || 0
+    });
+
     return {
       files: transformedFiles
     }
   } catch (error) {
     console.error('Error sending message:', error)
+    
+    if (error instanceof SubscriptionRequiredError) {
+      throw error;
+    }
+    
     throw new Error('Failed to send message to v0 API')
   }
 }
