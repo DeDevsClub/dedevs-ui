@@ -20,7 +20,7 @@ const commands = [
   {
     label: 'shadcn',
     icon: BoxIcon,
-    code: 'npx shadcn@latest add https://ui.dedevs.com/registry/snippet.json',
+    code: 'npx shadcn@latest add https://ui.dedevs.com/r/snippet.json',
   },
 ];
 

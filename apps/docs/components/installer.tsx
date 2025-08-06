@@ -29,7 +29,7 @@ export const Installer = ({ packageName }: InstallerProps) => {
     },
     shadcn: {
       image: shadcn,
-      code: `npx shadcn@latest add https://ui.dedevs.com/registry/${packageName}.json`,
+      code: `npx shadcn@latest add https://ui.dedevs.com/r/${packageName}.json`,
     },
   };
 

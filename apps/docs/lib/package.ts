@@ -68,7 +68,7 @@ export const getPackage = async (packageName: string) => {
     const packageName = dep.replace('@repo/', '');
 
     registryDependencies.push(
-      `https://ui.dedevs.com/registry/${packageName}.json`
+      `https://ui.dedevs.com/r/${packageName}.json`
     );
   }
 

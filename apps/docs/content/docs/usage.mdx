@@ -1,76 +1,165 @@
 ---
 title: Usage
-description: Learn how to use DeDevs UI components in your application.
+description: Learn how to use DeDevs UI components across different application domains.
 ---
 
-Once a DeDevs UI component is installed, you can import it and use it in your application like any other React component. The components are added as part of your codebase (not hidden in a library), so the usage feels very natural.
+Once a DeDevs UI component is installed, you can import it and use it in your application like any other React component. The components are added as part of your codebase (not hidden in a library), so the usage feels very natural across all application domains.
 
-## Example
+## Examples
 
-Let's say you want to create a chatbot interface using the DeDevs UI AI components. Here's how you might compose them together:
+Let's explore how to use DeDevs UI components across different application domains:
+
+### AI Interface Example
+
+Here's how you might create a conversational AI interface:
 
 ```jsx
-// ChatInterface.tsx
+// AIInterface.tsx
 'use client';
 
 import {
-  AIConversation,
-  AIMessage,
-  AIMessageAvatar,
-  AIMessageContent,
   AIResponse,
   AIInput
-} from '@/packages/ai/ai';
+} from '@/components/ui/dedevs-ui/ai';
 
-const ChatInterface = () => (
-  <div className="flex flex-col h-[600px]">
-    <AIConversation>
-      {/* User message */}
-      <AIMessage role="user">
-        <AIMessageContent>
-          How can I use DeDevs UI components?
-        </AIMessageContent>
-        <AIMessageAvatar fallback="U" />
-      </AIMessage>
-      
-      {/* AI response with markdown */}
-      <AIMessage role="assistant">
-        <AIMessageContent>
-          <AIResponse>
-            # DeDevs UI Components
-            
-            DeDevs UI provides specialized components for AI interfaces. Here's how to use them:
-            
-            1. Install the component you need
-            2. Import it into your React component
-            3. Use it in your JSX
-            
-            Example import:
-            import { AIResponse } from '@/packages/ai/ai';
-            
-            Components are available in your codebase for easy customization.
-          </AIResponse>
-        </AIMessageContent>
-        <AIMessageAvatar fallback="AI" />
-      </AIMessage>
-    </AIConversation>
-
-    {/* User input */}
-    <AIInput placeholder="Ask a question..." />
+const AIInterface = () => (
+  <div className="flex flex-col h-[600px] space-y-4">
+    <div className="flex-1 overflow-y-auto">
+      <AIResponse>
+        # Welcome to DeDevs UI
+        
+        This is an AI-powered interface built with DeDevs UI components.
+        You can ask questions and get intelligent responses.
+        
+        **Features:**
+        - Markdown rendering
+        - Code syntax highlighting  
+        - Responsive design
+      </AIResponse>
+    </div>
+    
+    <AIInput 
+      placeholder="Ask a question..." 
+      onSubmit={(message) => console.log('Submitted:', message)}
+    />
   </div>
 );
 
-export default ChatInterface;
+export default AIInterface;
 ```
 
-In the example above, we import various AI components from our DeDevs UI directory and compose them to create a complete chatbot interface. The `AIConversation` component acts as a container for the chat thread, `AIMessage` components represent individual messages with proper styling based on the sender role, and `AIResponse` renders markdown content from the AI assistant. The interface is completed with an `AIInput` component for user interaction.
+### Blockchain/Web3 Example
+
+Here's how you might create a Web3 dashboard:
+
+```jsx
+// Web3Dashboard.tsx
+'use client';
+
+import {
+  WalletConnect,
+  TokenBalance,
+  TransactionHistory
+} from '@/components/ui/dedevs-ui/web3';
+
+const Web3Dashboard = () => (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="col-span-full">
+      <WalletConnect 
+        onConnect={(address) => console.log('Connected:', address)}
+      />
+    </div>
+    
+    <TokenBalance 
+      tokens={[
+        { symbol: 'ETH', balance: '2.5', value: '$4,250' },
+        { symbol: 'USDC', balance: '1,000', value: '$1,000' }
+      ]}
+    />
+    
+    <div className="col-span-full lg:col-span-2">
+      <TransactionHistory 
+        transactions={[
+          { hash: '0x123...', type: 'send', amount: '0.1 ETH', status: 'confirmed' },
+          { hash: '0x456...', type: 'receive', amount: '100 USDC', status: 'pending' }
+        ]}
+      />
+    </div>
+  </div>
+);
+
+export default Web3Dashboard;
+```
+
+### Developer Portfolio Example
+
+Here's how you might create a professional portfolio:
+
+```jsx
+// Portfolio.tsx
+'use client';
+
+import {
+  ProjectShowcase,
+  CodeSnippet,
+  SkillMatrix
+} from '@/components/ui/dedevs-ui/portfolio';
+
+const Portfolio = () => (
+  <div className="space-y-12">
+    <section>
+      <h2 className="text-3xl font-bold mb-6">Featured Projects</h2>
+      <ProjectShowcase 
+        projects={[
+          {
+            title: 'E-commerce Platform',
+            description: 'Full-stack Next.js application with Stripe integration',
+            tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe'],
+            github: 'https://github.com/user/project',
+            demo: 'https://project-demo.com'
+          }
+        ]}
+      />
+    </section>
+    
+    <section>
+      <h2 className="text-3xl font-bold mb-6">Code Examples</h2>
+      <CodeSnippet 
+        language="typescript"
+        code={`
+const fetchUserData = async (id: string): Promise<User> => {
+  const response = await fetch(\`/api/users/\${id}\`);
+  if (!response.ok) throw new Error('Failed to fetch user');
+  return response.json();
+};
+        `}
+      />
+    </section>
+    
+    <section>
+      <h2 className="text-3xl font-bold mb-6">Skills & Technologies</h2>
+      <SkillMatrix 
+        skills={[
+          { name: 'React', level: 'Expert', years: 5 },
+          { name: 'TypeScript', level: 'Advanced', years: 3 },
+          { name: 'Node.js', level: 'Advanced', years: 4 }
+        ]}
+      />
+    </section>
+  </div>
+);
+
+export default Portfolio;
+```
+
+In the examples above, we import specialized components from our DeDevs UI directory and compose them to create complete interfaces for different application domains. Each component is designed to work seamlessly within its domain while maintaining consistency with shadcn's design system.
 
 Feel free to add as many DeDevs UI components as you need. Because components are added on-demand, you're not including code for features you aren't using. This keeps your app lean. Each component is isolated, so adding one won't bloat another – yet they all share the same design tokens (colors, fonts, etc.) from shadcn's theme.
 
 ## Extensibility
 
-All DeDevs UI components take as many primitive attributes as possible. For example, the `AIResponse` component extends `HTMLAttributes<HTMLDivElement>`, so you can pass any props that a `div` supports. This makes it easy to extend the component with your own styles or functionality.
+All DeDevs UI components take as many primitive attributes as possible. For example, most components extend standard HTML element attributes, so you can pass any props that the underlying element supports. This makes it easy to extend components with your own styles or functionality across all domains.
 
 ## Customization
 
-After installation, no additional setup is needed. The components come with their styles (Tailwind CSS classes) and functionality built-in. You can start using them in your app right away.
+After installation, no additional setup is needed. The components come with their styles (Tailwind CSS classes) and functionality built-in. You can start using them in your app right away, whether you're building AI interfaces, blockchain applications, developer portfolios, or any other specialized application type.

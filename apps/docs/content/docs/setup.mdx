@@ -1,11 +1,11 @@
 ---
 title: Setup
-description: How to install and set up DeDevs UI Design Registry components for AI chatbot interfaces
+description: How to install and set up DeDevs UI Design Registry components for modern web applications
 ---
 
 Installing the DeDevs UI Design Registry is straightforward and can be done in a couple of ways. You can use the dedicated DeDevs UI CLI for the fastest setup, or integrate via the standard shadcn/ui CLI if you've already adopted shadcn's workflow.
 
-This guide will walk you through the prerequisites and the installation steps for both methods, complete with example commands. By the end, you'll have specialized AI chatbot components ready to use in your project.
+This guide will walk you through the prerequisites and the installation steps for both methods, complete with example commands. By the end, you'll have specialized components ready to use in your project across various domains including AI interfaces, blockchain applications, and developer portfolios.
 
 ## Prerequisites
 
@@ -16,32 +16,45 @@ Before installing DeDevs UI Design Registry, make sure your environment meets th
 - [shadcn/ui](https://ui.shadcn.com/) installed in your project. In practice, this means you have already initialized shadcn in your project (for example by running `npx shadcn@latest init` and configuring Tailwind CSS). DeDevs UI Design Registry currently supports only the CSS Variables mode of shadcn/ui for theming.
 
 <Callout type="warning">
-Note: If you haven't installed `shadcn/ui` yet, you should do that first. Follow the official `shadcn/ui` setup instructions to configure Tailwind CSS and the base components. The Design Registry builds on that foundation, so having shadcn in place is required.
+Note: If you haven't installed `shadcn/ui` yet, you should do that first. Follow the official `shadcn/ui` setup instructions to configure Tailwind CSS and the base components. The Design Registry builds on that foundation, so having shadcn in place is required for all component types.
 </Callout>
 
 <Callout type="info">
   DeDevs UI Design Registry currently only supports the CSS Variables version of shadcn/ui
 </Callout>
 
-## Installing Chatbot Components
+## Installing Components
 
-You can install DeDevs UI Design Registry components using either the DeDevs UI CLI or the shadcn/ui CLI. Both achieve the same result: adding the selected component's code and any needed dependencies to your project. For example, to install the AI Conversation component, you would run:
+You can install DeDevs UI Design Registry components using either the DeDevs UI CLI or the shadcn/ui CLI. Both achieve the same result: adding the selected component's code and any needed dependencies to your project. For example, to install a component, you would run:
 
-<Installer packageName="ai-conversation" />
+<Installer packageName="snippet" />
 
 The CLI will download the component's code and integrate it into your project's directory (usually under your components folder). By default, Design Registry components are added to the `@/components/ui/dedevs-ui/` directory (or whatever folder you've configured in your shadcn components settings).
 
-For instance, the command above will place the AI Conversation component files in `@/components/ui/dedevs-ui/ai-conversation/`. The CLI also ensures that any required dependencies (for example, specific headless libraries a component might need) are installed automatically.
+For instance, the command above will place the component files in `@/components/ui/dedevs-ui/snippet/`. The CLI also ensures that any required dependencies (for example, specific headless libraries a component might need) are installed automatically.
 
-## Key Chatbot Components
+## Component Categories
 
-The Design Registry includes several specialized components for building AI chatbot interfaces:
+The Design Registry includes specialized components across multiple domains:
 
-- **AI Conversation** - A complete conversation container with messages, typing indicators, and user input
-- **Message Handler** - Components for rendering different message types (text, code, images)
-- **Reasoning Visualizer** - Shows AI reasoning steps and thought processes
-- **Source Attribution** - Displays citations and references for AI responses
-- **System Prompt Editor** - Interface for configuring AI behavior
+**AI Interface Components:**
+- **AI Response** - Renders AI-generated content with markdown support
+- **AI Input** - Enhanced input fields for AI conversations
+- **AI Reasoning** - Visualizes AI thought processes and decision-making
+
+**Blockchain/Web3 Components:**
+- **Wallet Connect** - Wallet connection and management interfaces
+- **Token Display** - Token balances and information displays
+- **Transaction History** - Transaction lists and status tracking
+
+**Developer Portfolio Components:**
+- **Project Showcase** - Interactive project galleries and case studies
+- **Code Snippet** - Syntax-highlighted code displays with copy functionality
+- **Skill Matrix** - Visual skill and technology displays
+
+**General Purpose Components:**
+- **Theme Switcher** - Dark/light mode toggle with system preference detection
+- **Interactive Elements** - Enhanced buttons, forms, and navigation components
 
 To install any of these components, use the same CLI command pattern:
 
