@@ -182,7 +182,7 @@
     {
       "name": "defi-ticker",
       "type": "registry:ui",
-      "description": "DeFi ticker component",
+      "description": "Ticker component for displaying real-time data",
       "files": [
         {
           "path": "packages/defi/ticker.tsx",

@@ -440,6 +440,8 @@ async function listComponents() {
     const aiComponents = registry.items.filter((item: any) => item.name.startsWith('ai-'));
     const codeComponents = registry.items.filter((item: any) => item.name.startsWith('code-'));
     const defiComponents = registry.items.filter((item: any) => item.name.startsWith('defi-'));
+    const siteComponents = registry.items.filter((item: any) => item.name.startsWith('site-'));
+    const composablesComponents = registry.items.filter((item: any) => item.name.startsWith('composables-'));
 
     if (aiComponents.length > 0) {
       console.log('🤖 AI Components:');
@@ -467,6 +469,21 @@ async function listComponents() {
       });
     }
 
+    if (siteComponents.length > 0) {
+      console.log('🏠 Site Components:');
+      siteComponents.forEach((item: any) => {
+        const name = item.name.padEnd(15);
+        console.log(`  ${name} ${item.description || 'No description available'}`);
+      });
+    }
+
+    if (composablesComponents.length > 0) {
+      console.log('🧩 Composables Components:');
+      composablesComponents.forEach((item: any) => {
+        const name = item.name.padEnd(15);
+        console.log(`  ${name} ${item.description || 'No description available'}`);
+      });
+    }
     console.log('');
     console.log(`Total: ${registry.items.length} components available`);
     console.log('');

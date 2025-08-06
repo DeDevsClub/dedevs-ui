@@ -1,7 +1,7 @@
 | **Type** | **Description** | **Subcategories** |
 |------|-------------|---------------------------|
-| AI | For AI-centric UX and interactions | ChatUI, PromptEditor, ReasoningTrace, FeedbackCollector |
-| DeFi | Financial UI for Web3/DApps | WalletConnect, TokenSwap, GasEstimator, TickerDisplay |
-| Code | Code display, interaction, or execution | CodeBlock, SnippetRunner, Playground, Terminal |
-| Interface | General UI building blocks | DevCard, FeatureList, HeroSection, Table, Modal |
+| AI | For AI-centric UX and interactions | Branch, Conversation, Input, Message, Reasoning, Response, Server, Simple, Source, Suggestion, Tool |
+| DeFi | Financial UI for Web3/DApps | Ticker |
+| Code | Code display, interaction, or execution | Block, Editor, Snippet, Server |
+| Site | General UI building blocks | DevCard, FeatureList, HeroSection, Table, Modal |
 | Composables | Layouts or templates combining other blocks | AI Chat App Shell, DeFi Dashboard, Dev Portfolio Page |

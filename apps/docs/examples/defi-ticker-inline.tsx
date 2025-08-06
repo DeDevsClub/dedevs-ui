@@ -1,25 +1,25 @@
 'use client';
 
 import {
-  Ticker,
-  TickerIcon,
-  TickerPrice,
-  TickerPriceChange,
-  TickerSymbol,
+  DeFiTicker,
+  DeFiTickerIcon,
+  DeFiTickerPrice,
+  DeFiTickerPriceChange,
+  DeFiTickerSymbol,
 } from '@repo/defi/ticker';
 
 const Example = () => (
   <p>
     In other autonomous vehicle news, Alphabet-owned{' '}
-    <Ticker className="px-1 text-base">
-      <TickerIcon
+    <DeFiTicker className="px-1 text-base">
+      <DeFiTickerIcon
         src="https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/GOOG.png"
         symbol="GOOG"
       />
-      <TickerSymbol symbol="GOOG" />
-      <TickerPrice price={175.41} />
-      <TickerPriceChange change={2.13} />
-    </Ticker>{' '}
+      <DeFiTickerSymbol symbol="GOOG" />
+      <DeFiTickerPrice price={175.41} />
+      <DeFiTickerPriceChange change={2.13} />
+    </DeFiTicker>{' '}
     Waymo is looking to bring its robotaxi service to New York.
   </p>
 );
