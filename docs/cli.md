@@ -167,13 +167,13 @@ npm run test:cli
 
 ```bash
 # Patch version (0.0.1 → 0.0.2)
-npm run publish:patch
+npm run pub:patch
 
 # Minor version (0.0.1 → 0.1.0)
-npm run publish:minor
+npm run pub:minor
 
 # Major version (0.0.1 → 1.0.0)
-npm run publish:major
+npm run pub:major
 ```
 
 ## Contributing

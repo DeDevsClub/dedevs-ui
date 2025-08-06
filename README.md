@@ -354,13 +354,13 @@ pnpm run build
 
 ```bash
 # Patch version (bug fixes)
-pnpm publish:patch
+pnpm pub:patch
 
 # Minor version (new features)
-pnpm publish:minor
+pnpm pub:minor
 
 # Major version (breaking changes)
-pnpm publish:major
+pnpm pub:major
 ```
 
 #### 3. Deploy Documentation
@@ -437,7 +437,7 @@ pnpm validate:registry
 4. **Commit changes** and create release
 5. **Publish to npm**:
    ```bash
-   pnpm publish:minor  # or patch/major
+   pnpm pub:minor  # or patch/major
    ```
 6. **Deploy documentation** to your hosting platform
 
@@ -452,7 +452,7 @@ pnpm validate:registry
 | `pnpm run gen:registry` | Generate registry.json by scanning packages |
 | `pnpm run build:registry` | Build individual component JSON files |
 | `pnpm run registry` | Complete registry generation and build |
-| `pnpm publish:patch/minor/major` | Version bump and publish |
+| `pnpm pub:patch/minor/major` | Version bump and publish |
 | `pnpm lint` | Lint codebase |
 | `pnpm format` | Format code |
 | `pnpm clean` | Clean node\_modules and build artifacts |

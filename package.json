@@ -41,10 +41,10 @@
     "bump-ui": "npx shadcn@latest add --all --overwrite -c packages/shadcn-ui",
     "clean": "git clean -xdf node_modules",
     "prepublishOnly": "tsup",
-    "publish:cli": "npm run build:cli && npm publish",
-    "publish:patch": "npm version patch && npm run publish:cli",
-    "publish:minor": "npm version minor && npm run publish:cli",
-    "publish:major": "npm version major && npm run publish:cli",
+    "pub:cli": "npm run build:cli && npm publish",
+    "pub:patch": "npm version patch && npm run pub:cli",
+    "pub:minor": "npm version minor && npm run pub:cli",
+    "pub:major": "npm version major && npm run pub:cli",
     "test:cli": "npm run build:cli && chmod +x dist/index.js && node dist/index.js --help"
   },
   "devDependencies": {
