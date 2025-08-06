@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import ApiKeyStorage from "../../lib/api-key-storage"
+import ApiKeyStorage from "./api-key-storage"
 
 interface ApiKeyInputProps {
     onApiKeySet: (apiKey: string) => void
