@@ -10,6 +10,7 @@ interface RegistryItem {
     description: string;
     files: {
         path: string;
+        content?: string;
         type: string;
     }[];
 }
@@ -84,6 +85,8 @@ async function scanPackageDirectory(packagePath: string, packageName: string): P
             for (const file of componentFiles) {
                 const baseName = basename(file, extname(file));
                 const componentName = `ai-${baseName}`;
+                const filePath = join(packagePath, file);
+                const content = await readFile(filePath, 'utf-8');
 
                 items.push({
                     name: componentName,
@@ -91,6 +94,7 @@ async function scanPackageDirectory(packagePath: string, packageName: string): P
                     description: getComponentDescription('ai', baseName),
                     files: [{
                         path: `packages/${packageName}/${file}`,
+                        content: content,
                         type: 'registry:component'
                     }]
                 });
@@ -99,6 +103,8 @@ async function scanPackageDirectory(packagePath: string, packageName: string): P
             // For other packages, use the main file or index file
             const mainFile = componentFiles.find(f => f === 'index.tsx' || f === 'index.ts') || componentFiles[0];
             const componentName = getComponentName(packageName);
+            const filePath = join(packagePath, mainFile);
+            const content = await readFile(filePath, 'utf-8');
 
             items.push({
                 name: componentName,
@@ -106,6 +112,7 @@ async function scanPackageDirectory(packagePath: string, packageName: string): P
                 description: getComponentDescription(packageName, mainFile),
                 files: [{
                     path: `packages/${packageName}/${mainFile}`,
+                    content: content,
                     type: 'registry:component'
                 }]
             });

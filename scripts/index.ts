@@ -75,6 +75,9 @@ async function addComponentWithDependencies(packageName: string) {
     // Install the component using shadcn
     execSync(`npx shadcn@latest add ${url.toString()}`, { stdio: 'inherit' });
 
+    // Rename the installed file to use the component name
+    await renameInstalledComponent(packageName, componentData);
+
     // Transform imports in the generated component files
     await transformComponentImports(packageName);
 
@@ -442,6 +445,7 @@ async function listComponents() {
     // Group components by type
     const aiComponents = registry.items.filter((item: any) => item.name.startsWith('ai-'));
     const utilityComponents = registry.items.filter((item: any) => !item.name.startsWith('ai-'));
+    const defiComponents = registry.items.filter((item: any) => item.name.startsWith('defi-'));
 
     if (aiComponents.length > 0) {
       console.log('🤖 AI Components:');
@@ -455,6 +459,14 @@ async function listComponents() {
     if (utilityComponents.length > 0) {
       console.log('🛠️  Utility Components:');
       utilityComponents.forEach((item: any) => {
+        const name = item.name.padEnd(15);
+        console.log(`  ${name} ${item.description || 'No description available'}`);
+      });
+    }
+
+    if (defiComponents.length > 0) {
+      console.log('💰 Defi Components:');
+      defiComponents.forEach((item: any) => {
         const name = item.name.padEnd(15);
         console.log(`  ${name} ${item.description || 'No description available'}`);
       });
@@ -500,6 +512,46 @@ function fetchJson(url: string): Promise<any> {
       reject(error);
     });
   });
+}
+
+async function renameInstalledComponent(packageName: string, componentData: any) {
+  if (!componentData.files || !Array.isArray(componentData.files)) {
+    return;
+  }
+
+  const componentsDir = join(process.cwd(), 'components', 'ui');
+  
+  for (const file of componentData.files) {
+    if (file.path) {
+      // Extract the original filename from the path (e.g., "packages/ticker/index.tsx" -> "index.tsx")
+      const originalFileName = file.path.split('/').pop();
+      
+      if (originalFileName && originalFileName !== `${packageName}.tsx`) {
+        const originalFilePath = join(componentsDir, originalFileName);
+        const newFilePath = join(componentsDir, `${packageName}.tsx`);
+        
+        // Check if the original file exists and rename it
+        if (existsSync(originalFilePath)) {
+          try {
+            // Read the content
+            const content = readFileSync(originalFilePath, 'utf-8');
+            
+            // Write to new location
+            writeFileSync(newFilePath, content, 'utf-8');
+            
+            // Remove the original file if it's different from the new one
+            if (originalFilePath !== newFilePath) {
+              const fs = require('fs');
+              fs.unlinkSync(originalFilePath);
+              console.log(`✨ Renamed ${originalFileName} to ${packageName}.tsx`);
+            }
+          } catch (error) {
+            console.warn(`⚠️  Could not rename ${originalFileName} to ${packageName}.tsx:`, error instanceof Error ? error.message : String(error));
+          }
+        }
+      }
+    }
+  }
 }
 
 function extractComponentDependencies(componentData: any): string[] {
