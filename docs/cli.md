@@ -85,7 +85,7 @@ Available components:
   code-snippet    Code snippet component
 
 📊 Defi Components:
-  ticker          Ticker component for displaying real-time data
+  defi-ticker     Ticker component for displaying real-time data
 ```
 
 You can also use the short alias:

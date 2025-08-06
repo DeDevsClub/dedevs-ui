@@ -40,7 +40,7 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
     'code-editor': 'Code editor component',
     'code-snippet': 'Code snippet component',
     // defi
-    // 'ticker': 'Ticker component for displaying real-time data',
+    'defi-ticker': 'Ticker component for displaying real-time data',
 };
 
 // Get description for a component, with fallback
@@ -53,22 +53,31 @@ function getComponentDescription(packageName: string, fileName: string): string 
         const componentName = `code-${fileName}`;
         return COMPONENT_DESCRIPTIONS[componentName] || `Code ${fileName} component`;
     }
+    else if (packageName === 'defi') {
+        const componentName = `defi-${fileName}`;
+        return COMPONENT_DESCRIPTIONS[componentName] || `Defi ${fileName} component`;
+    }
     return COMPONENT_DESCRIPTIONS[packageName] || `${packageName} component`;
 }
 
 // Extract component name from package name
 function getComponentName(packageName: string): string {
     if (packageName === 'ai') {
-        return 'ai-simple'; // Default AI component name
+        return 'ai'; // Default AI component name
     }
     else if (packageName === 'code') {
-        return 'code-simple'; // Default Code component name
+        return 'code'; // Default Code component name
+    }
+    else if (packageName === 'defi') {
+        return 'defi'; // Default Defi component name
     }
     return packageName.startsWith('ai')
         ? `ai-${packageName.replace('ai', '').replace(/^-/, '')}`
         : packageName.startsWith('code')
             ? `code-${packageName.replace('code', '').replace(/^-/, '')}`
-            : packageName;
+            : packageName.startsWith('defi')
+                ? `defi-${packageName.replace('defi', '').replace(/^-/, '')}`
+                : packageName;
 }
 
 // Check if a file is a valid TypeScript/TSX component file
@@ -118,6 +127,22 @@ async function scanPackageDirectory(packagePath: string, packageName: string): P
                     name: componentName,
                     type: 'registry:ui',
                     description: getComponentDescription('code', baseName),
+                    files: [{
+                        path: `packages/${packageName}/${file}`,
+                        type: 'registry:component'
+                    }]
+                });
+            }
+        } else if (packageName === 'defi') {
+            for (const file of componentFiles) {
+                const baseName = basename(file, extname(file));
+                // Get component name from package name
+                const componentName = getComponentName(`defi-${baseName}`);
+
+                items.push({
+                    name: componentName,
+                    type: 'registry:ui',
+                    description: getComponentDescription('defi', baseName),
                     files: [{
                         path: `packages/${packageName}/${file}`,
                         type: 'registry:component'

@@ -1,6 +1,6 @@
 {
-    "name": "@repo/ticker",
-    "description": "Ticker component for displaying scrolling text or prices.",
+    "name": "@repo/defi",
+    "description": "Defi components for building DeFi interfaces.",
     "version": "0.0.0",
     "private": true,
     "dependencies": {

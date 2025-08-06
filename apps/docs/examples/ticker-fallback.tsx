@@ -1,20 +1,20 @@
 'use client';
 
 import {
-  Ticker,
-  TickerIcon,
-  TickerPrice,
-  TickerPriceChange,
-  TickerSymbol,
-} from '@repo/ticker';
+  DeFiTicker,
+  DeFiTickerIcon,
+  DeFiTickerPrice,
+  DeFiTickerPriceChange,
+  DeFiTickerSymbol,
+} from '@repo/defi/ticker';
 
 const Example = () => (
-  <Ticker>
-    <TickerIcon src="invalid-icon-url" symbol="AAPL" />
-    <TickerSymbol symbol="AAPL" />
-    <TickerPrice price={196.58} />
-    <TickerPriceChange change={-1.25} />
-  </Ticker>
+  <DeFiTicker>
+    <DeFiTickerIcon src="invalid-icon-url" symbol="AAPL" />
+    <DeFiTickerSymbol symbol="AAPL" />
+    <DeFiTickerPrice price={196.58} />
+    <DeFiTickerPriceChange change={-1.25} />
+  </DeFiTicker>
 );
 
 export default Example;

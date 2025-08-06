@@ -5,7 +5,7 @@ import { createContext, memo, useContext, useMemo } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/shadcn-ui/components/ui/avatar';
 import { cn } from '@repo/shadcn-ui/lib/utils';
 
-type TickerContextValue = {
+type DeFiTickerContextValue = {
     formatter: Intl.NumberFormat;
 };
 
@@ -19,25 +19,25 @@ const defaultFormatter = new Intl.NumberFormat(DEFAULT_LOCALE, {
     maximumFractionDigits: 2,
 });
 
-const TickerContext = createContext<TickerContextValue>({
+const DeFiTickerContext = createContext<DeFiTickerContextValue>({
     formatter: defaultFormatter,
 });
 
-export const useTickerContext = () => useContext(TickerContext);
+export const useDeFiTickerContext = () => useContext(DeFiTickerContext);
 
-export type TickerProps = HTMLAttributes<HTMLButtonElement> & {
+export type DeFiTickerProps = HTMLAttributes<HTMLButtonElement> & {
     currency?: string;
     locale?: string;
 };
 
-export const Ticker = memo(
+export const DeFiTicker = memo(
     ({
         children,
         className,
         currency = DEFAULT_CURRENCY,
         locale = DEFAULT_LOCALE,
         ...props
-    }: TickerProps & { children: ReactNode }) => {
+    }: DeFiTickerProps & { children: ReactNode }) => {
         const formatter = useMemo(() => {
             try {
                 return new Intl.NumberFormat(locale, {
@@ -52,7 +52,7 @@ export const Ticker = memo(
         }, [currency, locale]);
 
         return (
-            <TickerContext.Provider value={{ formatter }}>
+            <DeFiTickerContext.Provider value={{ formatter }}>
                 <button
                     className={cn(
                         'inline-flex items-center gap-1.5 whitespace-nowrap align-middle',
@@ -63,19 +63,19 @@ export const Ticker = memo(
                 >
                     {children}
                 </button>
-            </TickerContext.Provider>
+            </DeFiTickerContext.Provider>
         );
     }
 );
-Ticker.displayName = 'Ticker';
+DeFiTicker.displayName = 'DeFiTicker';
 
-export type TickerIconProps = HTMLAttributes<HTMLImageElement> & {
+export type DeFiTickerIconProps = HTMLAttributes<HTMLImageElement> & {
     src: string;
     symbol: string;
 };
 
-export const TickerIcon = memo(
-    ({ src, symbol, className, ...props }: TickerIconProps) => {
+export const DeFiTickerIcon = memo(
+    ({ src, symbol, className, ...props }: DeFiTickerIconProps) => {
         if (!src) {
             return null;
         }
@@ -91,28 +91,28 @@ export const TickerIcon = memo(
         );
     }
 );
-TickerIcon.displayName = 'TickerIcon';
+DeFiTickerIcon.displayName = 'DeFiTickerIcon';
 
-export type TickerSymbolProps = HTMLAttributes<HTMLSpanElement> & {
+export type DeFiTickerSymbolProps = HTMLAttributes<HTMLSpanElement> & {
     symbol: string;
 };
 
-export const TickerSymbol = memo(
-    ({ symbol, className, ...props }: TickerSymbolProps) => (
+export const DeFiTickerSymbol = memo(
+    ({ symbol, className, ...props }: DeFiTickerSymbolProps) => (
         <span className={cn('font-medium', className)} {...props}>
             {symbol.toUpperCase()}
         </span>
     )
 );
-TickerSymbol.displayName = 'TickerSymbol';
+DeFiTickerSymbol.displayName = 'DeFiTickerSymbol';
 
-export type TickerPriceProps = HTMLAttributes<HTMLSpanElement> & {
+export type DeFiTickerPriceProps = HTMLAttributes<HTMLSpanElement> & {
     price: number;
 };
 
-export const TickerPrice = memo(
-    ({ price, className, ...props }: TickerPriceProps) => {
-        const context = useTickerContext();
+export const DeFiTickerPrice = memo(
+    ({ price, className, ...props }: DeFiTickerPriceProps) => {
+        const context = useDeFiTickerContext();
 
         const formattedPrice = useMemo(
             () => context.formatter.format(price),
@@ -126,17 +126,17 @@ export const TickerPrice = memo(
         );
     }
 );
-TickerPrice.displayName = 'TickerPrice';
+DeFiTickerPrice.displayName = 'DeFiTickerPrice';
 
-export type TickerPriceChangeProps = HTMLAttributes<HTMLSpanElement> & {
+export type DeFiTickerPriceChangeProps = HTMLAttributes<HTMLSpanElement> & {
     change: number;
     isPercent?: boolean;
 };
 
-export const TickerPriceChange = memo(
-    ({ change, isPercent, className, ...props }: TickerPriceChangeProps) => {
+export const DeFiTickerPriceChange = memo(
+    ({ change, isPercent, className, ...props }: DeFiTickerPriceChangeProps) => {
         const isPositiveChange = useMemo(() => change >= 0, [change]);
-        const context = useTickerContext();
+        const context = useDeFiTickerContext();
 
         const changeFormatted = useMemo(() => {
             if (isPercent) {
@@ -176,4 +176,4 @@ export const TickerPriceChange = memo(
         );
     }
 );
-TickerPriceChange.displayName = 'TickerPriceChange';
+DeFiTickerPriceChange.displayName = 'DeFiTickerPriceChange';

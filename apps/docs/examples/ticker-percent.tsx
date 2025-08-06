@@ -10,7 +10,7 @@ import {
   type TickerPriceProps,
   TickerSymbol,
   type TickerSymbolProps,
-} from '@repo/ticker';
+} from '@repo/defi/ticker';
 
 const items: {
   symbol: TickerSymbolProps['symbol'];
@@ -18,19 +18,19 @@ const items: {
   price: TickerPriceProps['price'];
   change: TickerPriceChangeProps['change'];
 }[] = [
-  {
-    symbol: 'TSLA',
-    src: 'https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/TSLA.png',
-    price: 182.12,
-    change: -3.12,
-  },
-  {
-    symbol: 'MSFT',
-    src: 'https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/MSFT.png',
-    price: 409.33,
-    change: 2.18,
-  },
-];
+    {
+      symbol: 'TSLA',
+      src: 'https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/TSLA.png',
+      price: 182.12,
+      change: -3.12,
+    },
+    {
+      symbol: 'MSFT',
+      src: 'https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/MSFT.png',
+      price: 409.33,
+      change: 2.18,
+    },
+  ];
 
 const Example = () => (
   <>

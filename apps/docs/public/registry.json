@@ -180,12 +180,12 @@
       ]
     },
     {
-      "name": "ticker",
+      "name": "defi-ticker",
       "type": "registry:ui",
-      "description": "ticker component",
+      "description": "DeFi ticker component",
       "files": [
         {
-          "path": "packages/ticker/index.tsx",
+          "path": "packages/defi/ticker.tsx",
           "type": "registry:component"
         }
       ]

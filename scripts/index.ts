@@ -423,7 +423,7 @@ async function listComponents() {
           { name: 'code-editor', description: 'Code editor component' },
           { name: 'code-snippet', description: 'Code snippet component' },
           // defi
-          { name: 'ticker', description: 'Ticker component for displaying real-time data' }
+          { name: 'defi-ticker', description: 'Ticker component for displaying real-time data' }
         ]
       };
     }
@@ -439,10 +439,7 @@ async function listComponents() {
     // Group components by type
     const aiComponents = registry.items.filter((item: any) => item.name.startsWith('ai-'));
     const codeComponents = registry.items.filter((item: any) => item.name.startsWith('code-'));
-    const utilityComponents = registry.items.filter((item: any) =>
-      !item.name.startsWith('ai-') && !item.name.startsWith('code-')
-    );
-    // const defiComponents = registry.items.filter((item: any) => item.name.startsWith('defi-'));
+    const defiComponents = registry.items.filter((item: any) => item.name.startsWith('defi-'));
 
     if (aiComponents.length > 0) {
       console.log('🤖 AI Components:');
@@ -462,21 +459,13 @@ async function listComponents() {
       console.log('');
     }
 
-    if (utilityComponents.length > 0) {
-      console.log('🛠️  Utility Components:');
-      utilityComponents.forEach((item: any) => {
+    if (defiComponents.length > 0) {
+      console.log('💰 Defi Components:');
+      defiComponents.forEach((item: any) => {
         const name = item.name.padEnd(15);
         console.log(`  ${name} ${item.description || 'No description available'}`);
       });
     }
-
-    // if (defiComponents.length > 0) {
-    //   console.log('💰 Defi Components:');
-    //   defiComponents.forEach((item: any) => {
-    //     const name = item.name.padEnd(15);
-    //     console.log(`  ${name} ${item.description || 'No description available'}`);
-    //   });
-    // }
 
     console.log('');
     console.log(`Total: ${registry.items.length} components available`);
@@ -529,7 +518,7 @@ async function renameInstalledComponent(packageName: string, componentData: any)
 
   for (const file of componentData.files) {
     if (file.path) {
-      // Extract the original filename from the path (e.g., "packages/ticker/index.tsx" -> "index.tsx")
+      // Extract the original filename from the path (e.g., "packages/<NAME>/index.tsx" -> "index.tsx")
       const originalFileName = file.path.split('/').pop();
       const expectedFileName = `${packageName}.tsx`;
 

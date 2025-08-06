@@ -6,7 +6,7 @@ import {
   TickerPrice,
   TickerPriceChange,
   TickerSymbol,
-} from '@repo/ticker';
+} from '@repo/defi/ticker';
 
 const Example = () => (
   <Ticker>
