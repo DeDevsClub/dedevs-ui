@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "ticker",
   "type": "registry:ui",
-  "description": "Ticker component for displaying real-time data",
+  "description": "ticker component",
   "files": [
     {
       "path": "packages/ticker/index.tsx",

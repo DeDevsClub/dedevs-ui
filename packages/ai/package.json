@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@radix-ui/react-use-controllable-state": "^1.2.2",
-    "@repo/code-block": "workspace:*",
+    "@repo/code": "workspace:*",
     "@repo/shadcn-ui": "workspace:*",
     "katex": "^0.16.22",
     "lucide-react": "^0.536.0",

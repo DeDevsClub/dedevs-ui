@@ -1,13 +1,13 @@
 'use client';
 
 import {
-  Snippet,
-  SnippetCopyButton,
-  SnippetHeader,
-  SnippetTabsContent,
-  SnippetTabsList,
-  SnippetTabsTrigger,
-} from '@repo/snippet';
+  CodeSnippet,
+  CodeSnippetCopyButton,
+  CodeSnippetHeader,
+  CodeSnippetTabsContent,
+  CodeSnippetTabsList,
+  CodeSnippetTabsTrigger,
+} from '@repo/code';
 import { track } from '@vercel/analytics/react';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -34,15 +34,15 @@ export const Installer = ({ packageName }: InstallerProps) => {
   };
 
   return (
-    <Snippet
+    <CodeSnippet
       className="not-prose shiki shiki-themes github-light github-dark"
       onValueChange={setValue}
       value={value}
     >
-      <SnippetHeader>
-        <SnippetTabsList>
+      <CodeSnippetHeader>
+        <CodeSnippetTabsList>
           {Object.entries(commands).map(([key, command]) => (
-            <SnippetTabsTrigger key={key} value={key}>
+            <CodeSnippetTabsTrigger key={key} value={key}>
               <Image
                 alt=""
                 className="dark:invert"
@@ -51,10 +51,10 @@ export const Installer = ({ packageName }: InstallerProps) => {
                 width={14}
               />
               {key}
-            </SnippetTabsTrigger>
+            </CodeSnippetTabsTrigger>
           ))}
-        </SnippetTabsList>
-        <SnippetCopyButton
+        </CodeSnippetTabsList>
+        <CodeSnippetCopyButton
           onCopy={() => {
             toast.success('Copied to clipboard');
             track('Copy installer code', {
@@ -65,12 +65,12 @@ export const Installer = ({ packageName }: InstallerProps) => {
           onError={() => toast.error('Failed to copy to clipboard')}
           value={commands[value as keyof typeof commands].code}
         />
-      </SnippetHeader>
+      </CodeSnippetHeader>
       {Object.entries(commands).map(([key, command]) => (
-        <SnippetTabsContent key={key} value={key}>
+        <CodeSnippetTabsContent key={key} value={key}>
           {command.code}
-        </SnippetTabsContent>
+        </CodeSnippetTabsContent>
       ))}
-    </Snippet>
+    </CodeSnippet>
   );
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import type { Editor, JSONContent } from '@repo/editor';
+import type { Editor, JSONContent } from '@repo/code';
 import {
   EditorBubbleMenu,
   EditorCharacterCount,
@@ -42,7 +42,7 @@ import {
   EditorTableRowDelete,
   EditorTableRowMenu,
   EditorTableSplitCell,
-} from '@repo/editor';
+} from '@repo/code/editor';
 import { useState } from 'react';
 
 const Example = () => {

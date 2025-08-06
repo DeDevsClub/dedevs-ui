@@ -1,6 +1,6 @@
 'use client';
 
-import type { BundledLanguage } from '@repo/code-block';
+import type { BundledLanguage } from '@repo/code';
 import {
   CodeBlock,
   CodeBlockBody,
@@ -15,7 +15,7 @@ import {
   CodeBlockSelectItem,
   CodeBlockSelectTrigger,
   CodeBlockSelectValue,
-} from '@repo/code-block';
+} from '@repo/code/block';
 
 const code = [
   {

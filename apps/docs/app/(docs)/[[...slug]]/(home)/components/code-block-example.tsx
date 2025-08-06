@@ -15,7 +15,7 @@ import {
   CodeBlockSelectItem,
   CodeBlockSelectTrigger,
   CodeBlockSelectValue,
-} from '@repo/code-block';
+} from '@repo/code';
 
 const exampleCode = [
   {

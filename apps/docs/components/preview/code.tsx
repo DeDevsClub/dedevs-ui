@@ -7,7 +7,7 @@ import {
   CodeBlockContent,
   CodeBlockItem,
   type CodeBlockProps,
-} from '@repo/code-block';
+} from '@repo/code';
 
 type PreviewCodeProps = {
   code: string;

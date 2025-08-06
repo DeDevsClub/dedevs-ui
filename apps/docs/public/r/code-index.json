@@ -1,0 +1,13 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "code-index",
+  "type": "registry:ui",
+  "description": "Code index component",
+  "files": [
+    {
+      "path": "packages/code/index.tsx",
+      "content": "// Editor components\nexport * from './editor';\n\n// Code block components (server-side)\nexport { CodeBlockContent as ServerCodeBlockContent } from './server';\nexport type { CodeBlockContentProps as ServerCodeBlockContentProps } from './server';\n\n// Code snippet components\nexport * from './snippet';\n\n// Block component (client-side)\nexport * from './block';\n",
+      "type": "registry:component"
+    }
+  ]
+}

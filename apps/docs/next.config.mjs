@@ -94,8 +94,8 @@ const config = {
         permanent: true,
       },
       {
-        source: '/code-block',
-        destination: '/components/code-block',
+        source: '/code/code-block',
+        destination: '/components/code/code-block',
         permanent: true,
       },
       {

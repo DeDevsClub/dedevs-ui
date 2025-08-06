@@ -1,6 +1,6 @@
 {
-  "name": "@repo/editor",
-  "description": "The Editor component is a powerful and flexible text editor that allows you to create and edit rich text content.",
+  "name": "@repo/code",
+  "description": "A comprehensive rich text editor and code display package built with TipTap, featuring slash commands, syntax highlighting, tables, formatting tools, and server-side code rendering capabilities.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
@@ -28,7 +28,11 @@
     "lucide-react": "^0.536.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "tippy.js": "^6.3.7"
+    "tippy.js": "^6.3.7",
+    "@icons-pack/react-simple-icons": "^13.7.0",
+    "@radix-ui/react-use-controllable-state": "^1.2.2",
+    "@shikijs/transformers": "^3.9.1",
+    "shiki": "3.4.2"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",

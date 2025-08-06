@@ -161,9 +161,9 @@ function mapWorkspaceDependency(packageName: string, importPath: string): string
     return null; // shadcn/ui components are installed via shadcn CLI, not npm
   }
 
-  // Handle @repo/code-block - this is a workspace package that doesn't need external deps
-  // The code-block component is part of the registry and gets installed as a component
-  if (packageName === '@repo/code-block') {
+  // Handle @repo/code - this is a workspace package that doesn't need external deps
+  // The code component is part of the registry and gets installed as a component
+  if (packageName === '@repo/code') {
     return null; // This will be handled by the component installation process
   }
 
@@ -274,10 +274,10 @@ function transformImports(content: string): string {
     "import $1 from '@/lib/utils'"
   );
 
-  // Transform @repo/code-block imports to direct component imports
+  // Transform @repo/code imports to direct component imports
   transformed = transformed.replace(
-    /import\s+({[^}]*})\s+from\s+['"]@repo\/code-block['"]/g,
-    "import $1 from '@/components/ui/code-block'"
+    /import\s+({[^}]*})\s+from\s+['"]@repo\/code['"]/g,
+    "import $1 from '@/components/ui/code'"
   );
 
   // Transform other @repo/ imports by removing the @repo/ prefix
@@ -426,8 +426,8 @@ async function listComponents() {
           { name: 'ai-tool', description: 'AI tool component for function calling interfaces' },
           // utilities
           { name: 'code-block', description: 'Enhanced code block component with syntax highlighting' },
-          { name: 'editor', description: 'Code editor component' },
-          { name: 'snippet', description: 'Code snippet component' },
+          { name: 'code-editor', description: 'Code editor component' },
+          { name: 'code-snippet', description: 'Code snippet component' },
           // defi
           { name: 'ticker', description: 'Ticker component for displaying real-time data' }
         ]
@@ -444,12 +444,24 @@ async function listComponents() {
 
     // Group components by type
     const aiComponents = registry.items.filter((item: any) => item.name.startsWith('ai-'));
-    const utilityComponents = registry.items.filter((item: any) => !item.name.startsWith('ai-'));
-    const defiComponents = registry.items.filter((item: any) => item.name.startsWith('defi-'));
+    const codeComponents = registry.items.filter((item: any) => item.name.startsWith('code-'));
+    const utilityComponents = registry.items.filter((item: any) => 
+      !item.name.startsWith('ai-') && !item.name.startsWith('code-')
+    );
+    // const defiComponents = registry.items.filter((item: any) => item.name.startsWith('defi-'));
 
     if (aiComponents.length > 0) {
       console.log('🤖 AI Components:');
       aiComponents.forEach((item: any) => {
+        const name = item.name.padEnd(15);
+        console.log(`  ${name} ${item.description || 'No description available'}`);
+      });
+      console.log('');
+    }
+
+    if (codeComponents.length > 0) {
+      console.log('💻 Code Components:');
+      codeComponents.forEach((item: any) => {
         const name = item.name.padEnd(15);
         console.log(`  ${name} ${item.description || 'No description available'}`);
       });
@@ -464,13 +476,13 @@ async function listComponents() {
       });
     }
 
-    if (defiComponents.length > 0) {
-      console.log('💰 Defi Components:');
-      defiComponents.forEach((item: any) => {
-        const name = item.name.padEnd(15);
-        console.log(`  ${name} ${item.description || 'No description available'}`);
-      });
-    }
+    // if (defiComponents.length > 0) {
+    //   console.log('💰 Defi Components:');
+    //   defiComponents.forEach((item: any) => {
+    //     const name = item.name.padEnd(15);
+    //     console.log(`  ${name} ${item.description || 'No description available'}`);
+    //   });
+    // }
 
     console.log('');
     console.log(`Total: ${registry.items.length} components available`);
@@ -520,35 +532,45 @@ async function renameInstalledComponent(packageName: string, componentData: any)
   }
 
   const componentsDir = join(process.cwd(), 'components', 'ui');
-  
+
   for (const file of componentData.files) {
     if (file.path) {
       // Extract the original filename from the path (e.g., "packages/ticker/index.tsx" -> "index.tsx")
       const originalFileName = file.path.split('/').pop();
-      
-      if (originalFileName && originalFileName !== `${packageName}.tsx`) {
+      const expectedFileName = `${packageName}.tsx`;
+
+      if (originalFileName && originalFileName !== expectedFileName) {
         const originalFilePath = join(componentsDir, originalFileName);
-        const newFilePath = join(componentsDir, `${packageName}.tsx`);
-        
+        const newFilePath = join(componentsDir, expectedFileName);
+
         // Check if the original file exists and rename it
         if (existsSync(originalFilePath)) {
           try {
             // Read the content
             const content = readFileSync(originalFilePath, 'utf-8');
-            
-            // Write to new location
+
+            // Write to new location with the component name as filename
             writeFileSync(newFilePath, content, 'utf-8');
-            
-            // Remove the original file if it's different from the new one
-            if (originalFilePath !== newFilePath) {
-              const fs = require('fs');
-              fs.unlinkSync(originalFilePath);
-              console.log(`✨ Renamed ${originalFileName} to ${packageName}.tsx`);
-            }
+
+            // Remove the original file since we've renamed it
+            const fs = require('fs');
+            fs.unlinkSync(originalFilePath);
+            console.log(`✨ Renamed ${originalFileName} to ${expectedFileName}`);
+
           } catch (error) {
-            console.warn(`⚠️  Could not rename ${originalFileName} to ${packageName}.tsx:`, error instanceof Error ? error.message : String(error));
+            console.warn(`⚠️  Could not rename ${originalFileName} to ${expectedFileName}:`, error instanceof Error ? error.message : String(error));
+          }
+        } else {
+          // If the original file doesn't exist, check if the expected file already exists
+          if (existsSync(newFilePath)) {
+            console.log(`  ✅ ${expectedFileName} already exists with correct name`);
+          } else {
+            console.warn(`⚠️  Neither ${originalFileName} nor ${expectedFileName} found in ${componentsDir}`);
           }
         }
+      } else if (originalFileName === expectedFileName) {
+        // File already has the correct name
+        console.log(`  ✅ ${expectedFileName} already has correct filename`);
       }
     }
   }

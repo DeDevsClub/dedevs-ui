@@ -7,7 +7,7 @@ import {
   CodeBlockBody,
   CodeBlockContent,
   CodeBlockItem,
-} from '@repo/code-block';
+} from '@repo/code';
 import {
   Accordion,
   AccordionContent,

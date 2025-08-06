@@ -12,9 +12,9 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@repo/shadcn-ui/lib/utils';
 
-export type SnippetProps = ComponentProps<typeof Tabs>;
+export type CodeSnippetProps = ComponentProps<typeof Tabs>;
 
-export const Snippet = ({ className, ...props }: SnippetProps) => (
+export const CodeSnippet = ({ className, ...props }: CodeSnippetProps) => (
   <Tabs
     className={cn(
       'group w-full gap-0 overflow-hidden rounded-md border',
@@ -24,9 +24,9 @@ export const Snippet = ({ className, ...props }: SnippetProps) => (
   />
 );
 
-export type SnippetHeaderProps = HTMLAttributes<HTMLDivElement>;
+export type CodeSnippetHeaderProps = HTMLAttributes<HTMLDivElement>;
 
-export const SnippetHeader = ({ className, ...props }: SnippetHeaderProps) => (
+export const CodeSnippetHeader = ({ className, ...props }: CodeSnippetHeaderProps) => (
   <div
     className={cn(
       'flex flex-row items-center justify-between border-b bg-secondary p-1',
@@ -36,14 +36,14 @@ export const SnippetHeader = ({ className, ...props }: SnippetHeaderProps) => (
   />
 );
 
-export type SnippetCopyButtonProps = ComponentProps<typeof Button> & {
+export type CodeSnippetCopyButtonProps = ComponentProps<typeof Button> & {
   value: string;
   onCopy?: () => void;
   onError?: (error: Error) => void;
   timeout?: number;
 };
 
-export const SnippetCopyButton = ({
+export const CodeSnippetCopyButton = ({
   asChild,
   value,
   onCopy,
@@ -51,7 +51,7 @@ export const SnippetCopyButton = ({
   timeout = 2000,
   children,
   ...props
-}: SnippetCopyButtonProps) => {
+}: CodeSnippetCopyButtonProps) => {
   const [isCopied, setIsCopied] = useState(false);
 
   const copyToClipboard = () => {
@@ -93,26 +93,26 @@ export const SnippetCopyButton = ({
   );
 };
 
-export type SnippetTabsListProps = ComponentProps<typeof TabsList>;
+export type CodeSnippetTabsListProps = ComponentProps<typeof TabsList>;
 
-export const SnippetTabsList = TabsList;
+export const CodeSnippetTabsList = TabsList;
 
-export type SnippetTabsTriggerProps = ComponentProps<typeof TabsTrigger>;
+export type CodeSnippetTabsTriggerProps = ComponentProps<typeof TabsTrigger>;
 
-export const SnippetTabsTrigger = ({
+export const CodeSnippetTabsTrigger = ({
   className,
   ...props
-}: SnippetTabsTriggerProps) => (
+}: CodeSnippetTabsTriggerProps) => (
   <TabsTrigger className={cn('gap-1.5', className)} {...props} />
 );
 
-export type SnippetTabsContentProps = ComponentProps<typeof TabsContent>;
+export type CodeSnippetTabsContentProps = ComponentProps<typeof TabsContent>;
 
-export const SnippetTabsContent = ({
+export const CodeSnippetTabsContent = ({
   className,
   children,
   ...props
-}: SnippetTabsContentProps) => (
+}: CodeSnippetTabsContentProps) => (
   <TabsContent
     asChild
     className={cn('mt-0 bg-background p-4 text-sm', className)}

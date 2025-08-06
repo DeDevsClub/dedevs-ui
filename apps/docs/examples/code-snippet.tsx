@@ -1,13 +1,13 @@
 'use client';
 
 import {
-  Snippet,
-  SnippetCopyButton,
-  SnippetHeader,
-  SnippetTabsContent,
-  SnippetTabsList,
-  SnippetTabsTrigger,
-} from '@repo/snippet';
+  CodeSnippet,
+  CodeSnippetCopyButton,
+  CodeSnippetHeader,
+  CodeSnippetTabsContent,
+  CodeSnippetTabsList,
+  CodeSnippetTabsTrigger,
+} from '@repo/code/snippet';
 import { BoxIcon, Code2Icon } from 'lucide-react';
 import { useState } from 'react';
 
@@ -29,18 +29,18 @@ const Example = () => {
   const activeCommand = commands.find((command) => command.label === value);
 
   return (
-    <Snippet onValueChange={setValue} value={value}>
-      <SnippetHeader>
-        <SnippetTabsList>
+    <CodeSnippet onValueChange={setValue} value={value}>
+      <CodeSnippetHeader>
+        <CodeSnippetTabsList>
           {commands.map((command) => (
-            <SnippetTabsTrigger key={command.label} value={command.label}>
+            <CodeSnippetTabsTrigger key={command.label} value={command.label}>
               <command.icon size={14} />
               <span>{command.label}</span>
-            </SnippetTabsTrigger>
+            </CodeSnippetTabsTrigger>
           ))}
-        </SnippetTabsList>
+        </CodeSnippetTabsList>
         {activeCommand && (
-          <SnippetCopyButton
+          <CodeSnippetCopyButton
             onCopy={() =>
               console.log(`Copied "${activeCommand.code}" to clipboard`)
             }
@@ -52,13 +52,13 @@ const Example = () => {
             value={activeCommand.code}
           />
         )}
-      </SnippetHeader>
+      </CodeSnippetHeader>
       {commands.map((command) => (
-        <SnippetTabsContent key={command.label} value={command.label}>
+        <CodeSnippetTabsContent key={command.label} value={command.label}>
           {command.code}
-        </SnippetTabsContent>
+        </CodeSnippetTabsContent>
       ))}
-    </Snippet>
+    </CodeSnippet>
   );
 };
 

@@ -10,7 +10,6 @@ interface RegistryItem {
     description: string;
     files: {
         path: string;
-        content?: string;
         type: string;
     }[];
 }
@@ -38,10 +37,10 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
     'ai-tool': 'AI tool component for function calling interfaces',
     // utilities
     'code-block': 'Enhanced code block component with syntax highlighting',
-    'editor': 'Code editor component',
-    'snippet': 'Code snippet component',
+    'code-editor': 'Code editor component',
+    'code-snippet': 'Code snippet component',
     // defi
-    'ticker': 'Ticker component for displaying real-time data',
+    // 'ticker': 'Ticker component for displaying real-time data',
 };
 
 // Get description for a component, with fallback
@@ -49,6 +48,10 @@ function getComponentDescription(packageName: string, fileName: string): string 
     if (packageName === 'ai') {
         const componentName = `ai-${fileName}`;
         return COMPONENT_DESCRIPTIONS[componentName] || `AI ${fileName} component`;
+    }
+    else if (packageName === 'code') {
+        const componentName = `code-${fileName}`;
+        return COMPONENT_DESCRIPTIONS[componentName] || `Code ${fileName} component`;
     }
     return COMPONENT_DESCRIPTIONS[packageName] || `${packageName} component`;
 }
@@ -58,7 +61,14 @@ function getComponentName(packageName: string): string {
     if (packageName === 'ai') {
         return 'ai-simple'; // Default AI component name
     }
-    return packageName.startsWith('ai') ? `ai-${packageName.replace('ai', '').replace(/^-/, '')}` : packageName;
+    else if (packageName === 'code') {
+        return 'code-block'; // Default Code component name
+    }
+    return packageName.startsWith('ai')
+        ? `ai-${packageName.replace('ai', '').replace(/^-/, '')}`
+        : packageName.startsWith('code')
+            ? `code-${packageName.replace('code', '').replace(/^-/, '')}`
+            : packageName;
 }
 
 // Check if a file is a valid TypeScript/TSX component file
@@ -84,9 +94,8 @@ async function scanPackageDirectory(packagePath: string, packageName: string): P
         if (packageName === 'ai') {
             for (const file of componentFiles) {
                 const baseName = basename(file, extname(file));
-                const componentName = `ai-${baseName}`;
-                const filePath = join(packagePath, file);
-                const content = await readFile(filePath, 'utf-8');
+                // Get component name from package name
+                const componentName = getComponentName(`ai-${baseName}`);
 
                 items.push({
                     name: componentName,
@@ -94,7 +103,23 @@ async function scanPackageDirectory(packagePath: string, packageName: string): P
                     description: getComponentDescription('ai', baseName),
                     files: [{
                         path: `packages/${packageName}/${file}`,
-                        content: content,
+                        type: 'registry:component'
+                    }]
+                });
+            }
+            // For Code package, create separate items for each component file
+        } else if (packageName === 'code') {
+            for (const file of componentFiles) {
+                const baseName = basename(file, extname(file));
+                // Get component name from package name
+                const componentName = getComponentName(`code-${baseName}`);
+
+                items.push({
+                    name: componentName,
+                    type: 'registry:ui',
+                    description: getComponentDescription('code', baseName),
+                    files: [{
+                        path: `packages/${packageName}/${file}`,
                         type: 'registry:component'
                     }]
                 });
@@ -102,9 +127,8 @@ async function scanPackageDirectory(packagePath: string, packageName: string): P
         } else {
             // For other packages, use the main file or index file
             const mainFile = componentFiles.find(f => f === 'index.tsx' || f === 'index.ts') || componentFiles[0];
+            // Get component name from package name
             const componentName = getComponentName(packageName);
-            const filePath = join(packagePath, mainFile);
-            const content = await readFile(filePath, 'utf-8');
 
             items.push({
                 name: componentName,
@@ -112,7 +136,6 @@ async function scanPackageDirectory(packagePath: string, packageName: string): P
                 description: getComponentDescription(packageName, mainFile),
                 files: [{
                     path: `packages/${packageName}/${mainFile}`,
-                    content: content,
                     type: 'registry:component'
                 }]
             });
