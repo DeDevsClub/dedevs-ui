@@ -106,18 +106,21 @@ The documentation site will be available at `http://localhost:3422`
 ### 3. Component Categories
 
 #### AI Application Components
+
 * **AI Chat**: Conversation interfaces with streaming support
 * **AI Branch**: Multi-path conversation displays
 * **Code Block**: Syntax-highlighted code with AI integration
 * **Response Display**: AI-generated content presentation
 
 #### Developer Tool Components
+
 * **Editor**: Advanced code editing interfaces
 * **Snippet**: Code snippet management and display
 * **Terminal**: Command-line interface components
 * **Documentation**: Interactive API documentation
 
 #### Portfolio & Professional Components
+
 * **Project Showcase**: Portfolio project displays
 * **Skill Matrix**: Technology and skill visualization
 * **Timeline**: Career and project timelines
@@ -426,7 +429,7 @@ pnpm validate:registry
    ```bash
    pnpm discover:components
    pnpm register:all
-   pnpm generate:registry
+   pnpm gen:registry
    ```
 3. **Build and test CLI**:
    ```bash

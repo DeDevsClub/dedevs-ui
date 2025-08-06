@@ -28,7 +28,7 @@ const Terminal = () => (
         <code className="text-muted-foreground">npx dedevs-ui add&nbsp;</code>
         <TextLoop>
           {components.map((component) => (
-            <span className="text-accent-foreground" key={component}>
+            <span className="text-foreground" key={component}>
               {component}
             </span>
           ))}

@@ -23,6 +23,7 @@ interface Registry {
 
 // Component type mappings based on package names
 const COMPONENT_DESCRIPTIONS: Record<string, string> = {
+    // ai
     'ai-branch': 'AI conversation branch component for displaying branched conversations',
     'ai-conversation': 'AI conversation container component',
     'ai-input': 'AI chat input component with advanced features',
@@ -34,9 +35,12 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
     'ai-source': 'AI source attribution component',
     'ai-suggestion': 'AI suggestion component for prompts and recommendations',
     'ai-tool': 'AI tool component for function calling interfaces',
+    // utilities
     'code-block': 'Enhanced code block component with syntax highlighting',
     'editor': 'Code editor component',
     'snippet': 'Code snippet component',
+    // defi
+    'ticker': 'Ticker component for displaying real-time data',
 };
 
 // Get description for a component, with fallback

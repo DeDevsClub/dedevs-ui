@@ -6,6 +6,7 @@ import { type ComponentType, createElement } from 'react';
 // import AiResponseExample from '../../../../../examples/ai-message-markdown'; // Disabled
 import { source } from '../../../../../lib/source';
 import { CodeBlockExample } from './code-block-example';
+import AiResponseExample from '@/examples/ai-response';
 
 const codeBlock = source.getPage(['components', 'code-block']);
 const aiResponse = source.getPage(['components', 'ai-response']);
@@ -21,11 +22,7 @@ const examples = [
     icon: aiResponse?.data.icon,
     name: aiResponse?.data.title,
     description: aiResponse?.data.description,
-    component: () => (
-      <div className="flex items-center justify-center p-4 bg-muted rounded">
-        <p className="text-sm text-muted-foreground">AI Response Component</p>
-      </div>
-    ),
+    component: () => <AiResponseExample />,
   },
 ];
 

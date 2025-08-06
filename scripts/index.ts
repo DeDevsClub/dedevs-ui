@@ -409,6 +409,7 @@ async function listComponents() {
       console.log('Using local registry data...');
       registry = {
         items: [
+          // ai
           { name: 'ai-branch', description: 'AI conversation branch component for displaying branched conversations' },
           { name: 'ai-conversation', description: 'AI conversation container component' },
           { name: 'ai-input', description: 'AI chat input component with advanced features' },
@@ -420,9 +421,12 @@ async function listComponents() {
           { name: 'ai-source', description: 'AI source attribution component' },
           { name: 'ai-suggestion', description: 'AI suggestion component for prompts and recommendations' },
           { name: 'ai-tool', description: 'AI tool component for function calling interfaces' },
+          // utilities
           { name: 'code-block', description: 'Enhanced code block component with syntax highlighting' },
           { name: 'editor', description: 'Code editor component' },
-          { name: 'snippet', description: 'Code snippet component' }
+          { name: 'snippet', description: 'Code snippet component' },
+          // defi
+          { name: 'ticker', description: 'Ticker component for displaying real-time data' }
         ]
       };
     }

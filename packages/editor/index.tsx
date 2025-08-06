@@ -18,10 +18,6 @@ import Typography from '@tiptap/extension-typography';
 import type { DOMOutputSpec, Node as ProseMirrorNode } from '@tiptap/pm/model';
 import { PluginKey } from '@tiptap/pm/state';
 import {
-  BubbleMenu,
-  type BubbleMenuProps,
-  FloatingMenu,
-  type FloatingMenuProps,
   ReactRenderer,
   EditorProvider as TiptapEditorProvider,
   type EditorProviderProps as TiptapEditorProviderProps,
@@ -52,7 +48,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { cn } from '@/lib/utils';
+import { cn } from '@repo/shadcn-ui/lib/utils';
 
 export type { Editor, JSONContent } from '@tiptap/react';
 
@@ -710,6 +706,10 @@ export const EditorProvider = ({
     <TooltipProvider>
       <div className={cn(className, '[&_.ProseMirror-focused]:outline-none')}>
         <TiptapEditorProvider
+          // avoid re-rendering the editor on every keystroke
+          // this is a performance optimization
+          // see https://tiptap.dev/api/components/editor-provider#immediately-render
+          immediatelyRender={false}
           editorProps={{
             handleKeyDown: (_view, event) => {
               handleCommandNavigation(event);
@@ -723,56 +723,67 @@ export const EditorProvider = ({
   );
 };
 
-export type EditorFloatingMenuProps = Omit<FloatingMenuProps, 'editor'>;
+export type EditorFloatingMenuProps = {
+  className?: string;
+  children?: React.ReactNode;
+};
 
 export const EditorFloatingMenu = ({
   className,
-  ...props
-}: EditorFloatingMenuProps) => (
-  <FloatingMenu
-    className={cn('flex items-center bg-secondary', className)}
-    editor={null}
-    tippyOptions={{
-      offset: [32, 0],
-    }}
-    {...props}
-  />
-);
+  children,
+}: EditorFloatingMenuProps) => {
+  const { editor } = useCurrentEditor();
 
-export type EditorBubbleMenuProps = Omit<BubbleMenuProps, 'editor'>;
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <div className={cn('flex items-center bg-secondary', className)}>
+      {children}
+    </div>
+  );
+};
+
+export type EditorBubbleMenuProps = {
+  className?: string;
+  children?: React.ReactNode;
+};
 
 export const EditorBubbleMenu = ({
   className,
   children,
-  ...props
-}: EditorBubbleMenuProps) => (
-  <BubbleMenu
-    className={cn(
-      'flex rounded-xl border bg-background p-0.5 shadow',
-      '[&>*:first-child]:rounded-l-[9px]',
-      '[&>*:last-child]:rounded-r-[9px]',
-      className
-    )}
-    editor={null}
-    tippyOptions={{
-      maxWidth: 'none',
-    }}
-    {...props}
-  >
-    {children && Array.isArray(children)
-      ? children.reduce((acc: ReactNode[], child, index) => {
-        if (index === 0) {
-          return [child];
-        }
+}: EditorBubbleMenuProps) => {
+  const { editor } = useCurrentEditor();
 
-        // biome-ignore lint/suspicious/noArrayIndexKey: "only iterator we have"
-        acc.push(<Separator key={index} orientation="vertical" />);
-        acc.push(child);
-        return acc;
-      }, [])
-      : children}
-  </BubbleMenu>
-);
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <div
+      className={cn(
+        'flex rounded-xl border bg-background p-0.5 shadow',
+        '[&>*:first-child]:rounded-l-[9px]',
+        '[&>*:last-child]:rounded-r-[9px]',
+        className
+      )}
+    >
+      {children && Array.isArray(children)
+        ? children.reduce((acc: ReactNode[], child, index) => {
+          if (index === 0) {
+            return [child];
+          }
+
+          // biome-ignore lint/suspicious/noArrayIndexKey: "only iterator we have"
+          acc.push(<Separator key={index} orientation="vertical" />);
+          acc.push(child);
+          return acc;
+        }, [])
+        : children}
+    </div>
+  );
+};
 
 type EditorButtonProps = {
   name: string;
@@ -1256,7 +1267,6 @@ export const EditorFormatUnderline = ({
 
   return (
     <BubbleMenuButton
-      // @ts-expect-error "TipTap extensions are not typed"
       command={() => editor.chain().focus().toggleUnderline().run()}
       hideName={hideName}
       icon={UnderlineIcon}
@@ -1317,7 +1327,6 @@ export const EditorLinkSelector = ({
     const href = getUrlFromString(url);
 
     if (href) {
-      // @ts-expect-error "TipTap extensions are not typed"
       editor.chain().focus().setLink({ href }).run();
       onOpenChange?.(false);
     }
@@ -1362,7 +1371,6 @@ export const EditorLinkSelector = ({
             <Button
               className="flex h-8 items-center rounded-sm p-1 text-destructive transition-all hover:bg-destructive-foreground dark:hover:bg-destructive"
               onClick={() => {
-                // @ts-expect-error "TipTap extensions are not typed"
                 editor.chain().focus().unsetLink().run();
                 onOpenChange?.(false);
               }}

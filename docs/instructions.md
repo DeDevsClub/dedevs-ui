@@ -4,11 +4,11 @@ This guide provides comprehensive instructions for contributing to the DeDevs UI
 
 ## Table of Contents
 
-- [Adding a New Component](#adding-a-new-component)
-- [Adding a New Block](#adding-a-new-block)
-- [Deploying the Registry](#deploying-the-registry)
-- [Debugging Guide](#debugging-guide)
-- [FAQ](#faq)
+* [Adding a New Component](#adding-a-new-component)
+* [Adding a New Block](#adding-a-new-block)
+* [Deploying the Registry](#deploying-the-registry)
+* [Debugging Guide](#debugging-guide)
+* [FAQ](#faq)
 
 ## Adding a New Component
 
@@ -69,7 +69,7 @@ Create a `tsconfig.json` file:
 
 #### 3. Create Your Component
 
-Create your component file (e.g., `your-component.tsx`):
+Create your component file (e.g., `your-component.tsx` or `index.tsx`):
 
 ```tsx
 import React from 'react';
@@ -116,13 +116,14 @@ Run the registry generation script to automatically add your component to the re
 
 ```bash
 # From the root directory
-pnpm run generate:registry
+pnpm run gen:registry
 ```
 
 This will:
-- Scan all packages for `.tsx` and `.ts` component files
-- Update `registry.json` with your new components
-- Generate proper registry entries with metadata
+
+* Scan all packages for `.tsx` and `.ts` component files
+* Update `registry.json` with your new components
+* Generate proper registry entries with metadata
 
 #### 6. Test Your Component
 
@@ -190,29 +191,30 @@ Blocks use the `registry:block` type in the registry. The generation script will
 
 Create comprehensive documentation for your block:
 
-- Usage examples
-- Props documentation
-- Integration guidelines
-- Customization options
+* Usage examples
+* Props documentation
+* Integration guidelines
+* Customization options
 
 ## Deploying the Registry
 
 ### Overview
 
 The DeDevs UI registry uses a multi-stage deployment process involving:
-- CLI package deployment to NPM
-- Documentation site deployment to Vercel
-- Registry JSON hosting
+
+* CLI package deployment to NPM
+* Documentation site deployment to Vercel
+* Registry JSON hosting
 
 ### Deployment Process
 
 #### 1. Pre-Deployment Checklist
 
-- [ ] All components are properly tested
-- [ ] Registry is generated and up-to-date
-- [ ] Documentation is complete
-- [ ] Version numbers are updated
-- [ ] All tests pass
+* \[ ] All components are properly tested
+* \[ ] Registry is generated and up-to-date
+* \[ ] Documentation is complete
+* \[ ] Version numbers are updated
+* \[ ] All tests pass
 
 #### 2. CLI Deployment
 
@@ -249,9 +251,10 @@ pnpm run start
 #### 4. Registry Updates
 
 The `registry.json` file is automatically updated when:
-- New components are added to packages
-- The generation script is run
-- Changes are pushed to the main branch
+
+* New components are added to packages
+* The generation script is run
+* Changes are pushed to the main branch
 
 ### Manual Deployment Steps
 
@@ -263,7 +266,7 @@ The `registry.json` file is automatically updated when:
 
 2. **Generate Registry**:
    ```bash
-   pnpm run generate:registry
+   pnpm run gen:registry
    ```
 
 3. **Build and Test**:
@@ -293,68 +296,75 @@ The `registry.json` file is automatically updated when:
 **Problem**: Component not appearing in registry
 
 **Solutions**:
-- Ensure file has `.tsx` or `.ts` extension
-- Check that the component is in a valid package directory
-- Verify the component exports are properly formatted
-- Run `pnpm run generate:registry` manually
+
+* Ensure file has `.tsx` or `.ts` extension
+* Check that the component is in a valid package directory
+* Verify the component exports are properly formatted
+* Run `pnpm run gen:registry` manually
 
 **Problem**: Incorrect component descriptions
 
 **Solutions**:
-- Update `COMPONENT_DESCRIPTIONS` in `scripts/generateRegistry.ts`
-- Ensure component names match the mapping keys
-- Re-run registry generation
+
+* Update `COMPONENT_DESCRIPTIONS` in `scripts/generateRegistry.ts`
+* Ensure component names match the mapping keys
+* Re-run registry generation
 
 #### Build Issues
 
 **Problem**: TypeScript compilation errors
 
 **Solutions**:
-- Check `tsconfig.json` configuration
-- Ensure all dependencies are properly installed
-- Verify import paths are correct
-- Run `pnpm run build` to see detailed errors
+
+* Check `tsconfig.json` configuration
+* Ensure all dependencies are properly installed
+* Verify import paths are correct
+* Run `pnpm run build` to see detailed errors
 
 **Problem**: Missing dependencies
 
 **Solutions**:
-- Run `pnpm install` in the root directory
-- Check workspace dependencies in package.json files
-- Ensure peer dependencies are satisfied
+
+* Run `pnpm install` in the root directory
+* Check workspace dependencies in package.json files
+* Ensure peer dependencies are satisfied
 
 #### CLI Issues
 
 **Problem**: CLI not installing components correctly
 
 **Solutions**:
-- Verify registry.json is accessible and valid
-- Check component file paths in registry entries
-- Ensure target project has required dependencies
-- Test with `dedevs-ui add component-name --dry-run`
+
+* Verify registry.json is accessible and valid
+* Check component file paths in registry entries
+* Ensure target project has required dependencies
+* Test with `dedevs-ui add component-name --dry-run`
 
 #### Deployment Issues
 
 **Problem**: Documentation site build failures
 
 **Solutions**:
-- Check Next.js configuration
-- Verify all imports are resolvable
-- Ensure environment variables are set
-- Test build locally first
+
+* Check Next.js configuration
+* Verify all imports are resolvable
+* Ensure environment variables are set
+* Test build locally first
 
 **Problem**: NPM publish failures
 
 **Solutions**:
-- Verify NPM authentication
-- Check package.json configuration
-- Ensure version number is incremented
-- Verify build artifacts exist
+
+* Verify NPM authentication
+* Check package.json configuration
+* Ensure version number is incremented
+* Verify build artifacts exist
 
 ### Debugging Commands
 
 ```bash
 # Check registry generation
-pnpm run generate:registry
+pnpm run gen:registry
 
 # Validate registry JSON
 node -e "console.log(JSON.parse(require('fs').readFileSync('registry.json', 'utf8')))"
@@ -374,10 +384,10 @@ pnpm list --depth=0
 
 ### Logging and Monitoring
 
-- **Build Logs**: Available in GitHub Actions workflow runs
-- **Deployment Logs**: Available in Vercel dashboard
-- **NPM Logs**: Available in NPM package dashboard
-- **Error Tracking**: Integrated with Sentry for runtime errors
+* **Build Logs**: Available in GitHub Actions workflow runs
+* **Deployment Logs**: Available in Vercel dashboard
+* **NPM Logs**: Available in NPM package dashboard
+* **Error Tracking**: Integrated with Sentry for runtime errors
 
 ## FAQ
 
@@ -386,19 +396,21 @@ pnpm list --depth=0
 **Q: How do I know if my component is compatible with the registry?**
 
 A: Components should:
-- Be built with React and TypeScript
-- Use Tailwind CSS for styling
-- Follow the established patterns in existing components
-- Include proper TypeScript types
-- Be self-contained with minimal external dependencies
+
+* Be built with React and TypeScript
+* Use Tailwind CSS for styling
+* Follow the established patterns in existing components
+* Include proper TypeScript types
+* Be self-contained with minimal external dependencies
 
 **Q: Can I add components that depend on external APIs?**
 
 A: Yes, but ensure:
-- API dependencies are clearly documented
-- Components gracefully handle API failures
-- Required environment variables are documented
-- Consider providing mock data for development
+
+* API dependencies are clearly documented
+* Components gracefully handle API failures
+* Required environment variables are documented
+* Consider providing mock data for development
 
 **Q: How do I update an existing component?**
 
@@ -409,6 +421,7 @@ A: Simply edit the component file and run the registry generation script. The re
 **Q: Why isn't my component showing up in the CLI?**
 
 A: Check:
+
 1. Component file is in a valid package directory
 2. File has `.tsx` or `.ts` extension
 3. Registry has been regenerated
@@ -425,7 +438,8 @@ A: Yes, but clearly mark them as server components and document any special requ
 
 **Q: How do I test my components before submitting?**
 
-A: 
+A:
+
 1. Add them to the documentation site
 2. Test with the CLI locally
 3. Run the build process
@@ -436,14 +450,16 @@ A:
 **Q: How often should I regenerate the registry?**
 
 A: The registry should be regenerated whenever you:
-- Add new components
-- Modify component files
-- Change component descriptions
-- Update package structure
+
+* Add new components
+* Modify component files
+* Change component descriptions
+* Update package structure
 
 **Q: What's the review process for new components?**
 
-A: 
+A:
+
 1. Create a pull request with your changes
 2. Ensure all tests pass
 3. Request review from maintainers
@@ -452,7 +468,8 @@ A:
 
 **Q: How do I handle breaking changes?**
 
-A: 
+A:
+
 1. Document breaking changes clearly
 2. Update version numbers appropriately
 3. Provide migration guides
@@ -466,15 +483,17 @@ A: Yes! Create theme variants as separate components or provide styling props th
 
 **Q: My build is failing with dependency errors**
 
-A: 
-1. Clear node_modules: `rm -rf node_modules && pnpm install`
+A:
+
+1. Clear node\_modules: `rm -rf node_modules && pnpm install`
 2. Check for version conflicts in package.json files
 3. Ensure workspace dependencies use `workspace:*`
 4. Verify peer dependencies are satisfied
 
 **Q: The CLI can't find my component**
 
-A: 
+A:
+
 1. Check registry.json contains your component
 2. Verify file paths are correct
 3. Ensure component is properly exported
@@ -482,14 +501,16 @@ A:
 
 **Q: Documentation site won't start**
 
-A: 
+A:
+
 1. Check for TypeScript errors
 2. Verify all imports are resolvable
 3. Ensure required environment variables are set
 4. Check Next.js configuration
 
 For additional support, please:
-- Check existing GitHub issues
-- Create a new issue with detailed reproduction steps
-- Join our Discord community for real-time help
-- Review the architecture documentation for system understanding
+
+* Check existing GitHub issues
+* Create a new issue with detailed reproduction steps
+* Join our Discord community for real-time help
+* Review the architecture documentation for system understanding

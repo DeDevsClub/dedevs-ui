@@ -156,6 +156,17 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "ticker",
+      "type": "registry:ui",
+      "description": "Ticker component for displaying real-time data",
+      "files": [
+        {
+          "path": "packages/ticker/index.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }
