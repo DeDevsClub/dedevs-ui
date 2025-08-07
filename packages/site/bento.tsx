@@ -15,7 +15,7 @@ import {
   Zap,
   Plus,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/shadcn-ui/lib/utils";
 
 export interface BentoItem {
   id: string;

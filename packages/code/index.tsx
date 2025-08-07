@@ -10,3 +10,6 @@ export * from './snippet';
 
 // Block component (client-side)
 export * from './block';
+
+// Tree component
+export * from './tree';

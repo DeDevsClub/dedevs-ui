@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { RiSettings4Line, RiArrowDownLine } from "@remixicon/react";
 import { I18nProvider, Input, Label, NumberField } from "react-aria-components";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/shadcn-ui/lib/utils";
 
 interface ConverterFieldProps {
     className?: string;

@@ -29,6 +29,7 @@
     "@tiptap/suggestion": "^3.0.9",
     "class-variance-authority": "^0.7.1",
     "date-fns": "^4.1.0",
+    "framer-motion": "^12.1.0",
     "fuse.js": "^7.1.0",
     "lowlight": "^3.3.0",
     "lucide-react": "^0.536.0",

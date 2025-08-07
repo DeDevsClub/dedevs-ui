@@ -4,8 +4,8 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ChevronRight, Folder, File, FolderOpen } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
-import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@repo/shadcn-ui/lib/utils";
 
 // Tree Context
 interface TreeContextType {

@@ -1,4 +1,6 @@
 // site-features.tsx
+"use client";
+
 import { Features, type Feature } from "@repo/site";
 import { 
   Zap, 

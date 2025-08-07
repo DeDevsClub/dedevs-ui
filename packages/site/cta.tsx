@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Star } from "lucide-react";
 import { Button } from "@repo/shadcn-ui/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/shadcn-ui/lib/utils";
 
 export interface CTAAction {
   label: string;

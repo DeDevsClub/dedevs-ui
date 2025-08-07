@@ -23,7 +23,7 @@ import {
   Database
 } from "lucide-react";
 
-import { TreeProvider, Tree, TreeItem } from "@repo/code/tree";
+// import { TreeProvider, Tree, TreeItem } from "@repo/code/tree";
 
 <Tabs items={["Preview", "Code"]}>
   <Tab value="Preview">
