@@ -1,0 +1,160 @@
+---
+title: Defi NFT Card
+---
+
+A beautiful, responsive NFT card component designed for displaying digital collectibles in DeFi marketplaces and NFT platforms.
+
+## Features
+
+- **Responsive Design**: Optimized for all screen sizes with mobile-first approach
+- **Interactive Elements**: Favorite button with state management and hover effects
+- **Time-based Auctions**: Optional countdown timer for auction-based NFTs
+- **Ethereum Integration**: Built-in ETH icon and price display formatting
+- **Modern Styling**: Glass morphism effects, smooth animations, and dark mode support
+- **Accessibility**: Proper ARIA labels, keyboard navigation, and screen reader support
+- **Customizable**: Flexible props for different use cases and styling needs
+
+## Installation
+
+```bash
+npx dedevs-ui add defi-nft-card
+```
+
+## Usage
+
+### Basic Usage
+
+<ComponentPreview name="defi-nft-card-basic" />
+
+### Marketplace Grid
+
+<ComponentPreview name="defi-nft-card-marketplace" />
+
+### Full Example
+
+<ComponentPreview name="defi-nft-card" />
+
+## Component Structure
+
+The NFT Card component consists of several key elements:
+
+- **Image Display**: High-quality NFT artwork with aspect ratio preservation
+- **Overlay Elements**: Time remaining indicator and favorite button
+- **Content Section**: Title, highest bid information, and current price
+- **Interactive States**: Hover effects, favorite toggling, and responsive behavior
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `id` | `string` | - | Unique identifier for the NFT |
+| `imageUrl` | `string` | - | URL of the NFT image |
+| `title` | `string` | - | Name/title of the NFT |
+| `highestBid` | `string` | - | Current highest bid (e.g., "1/1", "5 bids") |
+| `price` | `string` | - | Current price in ETH format |
+| `timeLeft` | `string` | - | Optional auction time remaining |
+| `onFavorite` | `() => void` | - | Optional callback for favorite button |
+| `isFavorited` | `boolean` | `false` | Whether the NFT is favorited |
+| `className` | `string` | `""` | Additional CSS classes |
+
+## Data Structure
+
+```typescript
+interface NftCardProps {
+    id: string;
+    imageUrl: string;
+    title: string;
+    highestBid: string;
+    price: string;
+    timeLeft?: string;
+    onFavorite?: () => void;
+    isFavorited?: boolean;
+    className?: string;
+}
+```
+
+## Styling Features
+
+### Visual Design
+- **Card Layout**: Rounded corners with subtle shadows and borders
+- **Image Handling**: Aspect-ratio maintained square images with rounded corners
+- **Typography**: Space Grotesk font for modern, clean appearance
+- **Color Scheme**: Supports both light and dark themes
+
+### Interactive States
+- **Hover Effects**: Subtle lift animation and enhanced shadows
+- **Favorite Button**: Heart icon with fill state and color transitions
+- **Time Display**: Responsive countdown with clock icon
+- **Mobile Optimization**: Condensed time display on smaller screens
+
+### Responsive Behavior
+- **Grid Layout**: Works seamlessly in CSS Grid and Flexbox layouts
+- **Text Scaling**: Responsive font sizes across different screen sizes
+- **Touch Targets**: Appropriately sized interactive elements for mobile
+- **Content Overflow**: Text truncation with title tooltips
+
+## Integration Examples
+
+### With State Management
+
+```tsx
+const [favorites, setFavorites] = useState<Record<string, boolean>>({});
+
+const handleFavorite = (id: string) => {
+    setFavorites(prev => ({ ...prev, [id]: !prev[id] }));
+};
+
+<NftCard
+    id="nft-001"
+    imageUrl="https://example.com/nft.jpg"
+    title="Digital Art Piece"
+    highestBid="1/1"
+    price="0.5 ETH"
+    timeLeft="02:30:00"
+    isFavorited={favorites["nft-001"]}
+    onFavorite={() => handleFavorite("nft-001")}
+/>
+```
+
+### In Grid Layouts
+
+```tsx
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    {nftData.map((nft) => (
+        <NftCard key={nft.id} {...nft} />
+    ))}
+</div>
+```
+
+### Custom Styling
+
+```tsx
+<NftCard
+    {...nftProps}
+    className="max-w-sm mx-auto shadow-2xl"
+/>
+```
+
+## Accessibility
+
+- **Keyboard Navigation**: All interactive elements are keyboard accessible
+- **Screen Readers**: Proper ARIA labels and semantic HTML structure
+- **Focus Management**: Clear focus indicators for all interactive elements
+- **Image Alt Text**: Descriptive alt text using the NFT title
+- **Color Contrast**: WCAG compliant color combinations
+
+## Performance
+
+- **Optimized Images**: Lazy loading and proper aspect ratios
+- **Minimal Re-renders**: Efficient state management and prop handling
+- **CSS Animations**: Hardware-accelerated transforms for smooth interactions
+- **Bundle Size**: Lightweight component with minimal dependencies
+
+## Use Cases
+
+- **NFT Marketplaces**: Primary display component for digital collectibles
+- **Portfolio Dashboards**: Showcase owned NFT collections
+- **Auction Platforms**: Time-sensitive bidding interfaces
+- **Gallery Views**: Artistic presentation of digital assets
+- **Trading Interfaces**: Quick overview of available NFTs
+- **Mobile Apps**: Responsive design for mobile NFT browsers
