@@ -1,0 +1,13 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "defi-index",
+  "type": "registry:ui",
+  "description": "Defi index component",
+  "files": [
+    {
+      "path": "packages/defi/index.tsx",
+      "content": "export * as Chart from './chart';\nexport * as OrderBook from './orderbook';\nexport * as Swap from './swap';\nexport * as Ticker from './ticker';\nexport * as NftCard from './nft-card';\n",
+      "type": "registry:component"
+    }
+  ]
+}

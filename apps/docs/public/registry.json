@@ -125,6 +125,17 @@
       ]
     },
     {
+      "name": "code-big-calendar",
+      "type": "registry:ui",
+      "description": "Big calendar component for displaying events",
+      "files": [
+        {
+          "path": "packages/code/big-calendar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "code-block",
       "type": "registry:ui",
       "description": "Enhanced code block component with syntax highlighting",
@@ -180,6 +191,17 @@
       ]
     },
     {
+      "name": "code-tree",
+      "type": "registry:ui",
+      "description": "Tree component for displaying hierarchical data",
+      "files": [
+        {
+          "path": "packages/code/tree.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "defi-chart",
       "type": "registry:ui",
       "description": "Chart component for displaying real-time data",
@@ -191,9 +213,42 @@
       ]
     },
     {
+      "name": "defi-index",
+      "type": "registry:ui",
+      "description": "Defi index component",
+      "files": [
+        {
+          "path": "packages/defi/index.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "defi-nft-card",
+      "type": "registry:ui",
+      "description": "Defi nft-card component",
+      "files": [
+        {
+          "path": "packages/defi/nft-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "defi-orderbook",
+      "type": "registry:ui",
+      "description": "Orderbook component for displaying real-time orderbook data",
+      "files": [
+        {
+          "path": "packages/defi/orderbook.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "defi-swap",
       "type": "registry:ui",
-      "description": "Defi swap component",
+      "description": "Swap component for displaying real-time swap data",
       "files": [
         {
           "path": "packages/defi/swap.tsx",
@@ -213,12 +268,67 @@
       ]
     },
     {
-      "name": "site",
+      "name": "site-bento",
       "type": "registry:ui",
-      "description": "Site index.tsx component",
+      "description": "Bento grid component for showcasing features and content",
+      "files": [
+        {
+          "path": "packages/site/bento.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "site-cta",
+      "type": "registry:ui",
+      "description": "Call-to-action component with multiple variants",
+      "files": [
+        {
+          "path": "packages/site/cta.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "site-features",
+      "type": "registry:ui",
+      "description": "Features showcase component with multiple layouts",
+      "files": [
+        {
+          "path": "packages/site/features.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "site-hero",
+      "type": "registry:ui",
+      "description": "Hero section component for landing pages",
+      "files": [
+        {
+          "path": "packages/site/hero.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "site-index",
+      "type": "registry:ui",
+      "description": "Site index component",
       "files": [
         {
           "path": "packages/site/index.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "site-testimonials",
+      "type": "registry:ui",
+      "description": "Testimonials carousel component",
+      "files": [
+        {
+          "path": "packages/site/testimonials.tsx",
           "type": "registry:component"
         }
       ]
