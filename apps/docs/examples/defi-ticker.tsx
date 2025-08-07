@@ -9,15 +9,17 @@ import {
 } from '@repo/defi/ticker';
 
 const Example = () => (
-  <DeFiTicker>
-    <DeFiTickerIcon
-      src="https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/GOOG.png"
-      symbol="GOOG"
-    />
-    <DeFiTickerSymbol symbol="GOOG" />
-    <DeFiTickerPrice price={175.41} />
-    <DeFiTickerPriceChange change={2.13} />
-  </DeFiTicker>
+  <div className="flex items-center justify-center min-h-[200px] p-6">
+    <DeFiTicker>
+      <DeFiTickerIcon
+        src="https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/GOOG.png"
+        symbol="GOOG"
+      />
+      <DeFiTickerSymbol symbol="GOOG" />
+      <DeFiTickerPrice price={175.41} />
+      <DeFiTickerPriceChange change={2.13} />
+    </DeFiTicker>
+  </div>
 );
 
 export default Example;

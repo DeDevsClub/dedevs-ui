@@ -42,7 +42,7 @@ const Example = () => {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto space-y-6">
+    <div className="flex flex-col w-full max-w-7xl mx-auto space-y-6 p-6 min-h-[1200px]">
       {/* Header with Market Overview */}
       <Card>
         <CardHeader>

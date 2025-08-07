@@ -25,7 +25,7 @@ const Example = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto space-y-6">
+    <div className="w-full max-w-6xl mx-auto space-y-6 p-6 min-h-[900px]">
       {/* Header Controls */}
       <Card>
         <CardHeader>

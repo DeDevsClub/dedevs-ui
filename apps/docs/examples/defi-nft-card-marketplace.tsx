@@ -71,7 +71,7 @@ export default function DefiNftCardMarketplace() {
     };
 
     return (
-        <div className="w-full max-w-7xl mx-auto p-6">
+        <div className="w-full max-w-7xl mx-auto p-6 min-h-[800px]">
             {/* Header */}
             <div className="mb-8 text-center">
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
