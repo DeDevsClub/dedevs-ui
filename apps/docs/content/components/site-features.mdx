@@ -1,0 +1,136 @@
+---
+title: Site Features
+description: A flexible features showcase component with multiple layout options for landing pages and marketing sites.
+icon: Zap
+full: true
+---
+
+<Preview path="site-features" />
+
+## Installation
+
+<Installer packageName="site-features" />
+
+## Usage
+
+```tsx
+import { Features, type Feature } from "@repo/site";
+import { Zap, Shield, Palette } from "lucide-react";
+
+const features: Feature[] = [
+  {
+    id: "performance",
+    title: "Lightning Fast",
+    description: "Built with performance in mind. Components are optimized for speed and efficiency.",
+    icon: Zap,
+    iconColor: "text-yellow-500",
+    badge: "New"
+  },
+  {
+    id: "secure",
+    title: "Secure by Default",
+    description: "Security best practices built into every component. Your data stays safe.",
+    icon: Shield,
+    iconColor: "text-green-500"
+  },
+  {
+    id: "customizable",
+    title: "Fully Customizable",
+    description: "Tailwind CSS powered components that adapt to your design system.",
+    icon: Palette,
+    iconColor: "text-purple-500"
+  }
+];
+
+export default function Example() {
+  return (
+    <Features
+      features={features}
+      title="Why Choose Our Components?"
+      subtitle="Everything you need to build modern web applications"
+      layout="grid"
+      columns={3}
+    />
+  );
+}
+```
+
+## Examples
+
+### Grid Layout
+
+The default grid layout displays features in a responsive grid.
+
+```tsx
+<Features
+  features={features}
+  title="Core Features"
+  subtitle="Built for modern development"
+  layout="grid"
+  columns={3}
+/>
+```
+
+### List Layout
+
+A vertical list layout for detailed feature descriptions.
+
+```tsx
+<Features
+  features={features}
+  title="Feature Details"
+  layout="list"
+/>
+```
+
+### Alternating Layout
+
+An alternating layout with optional images for highlighted features.
+
+```tsx
+<Features
+  features={features}
+  title="Highlighted Features"
+  layout="alternating"
+  showImages={true}
+/>
+```
+
+## API Reference
+
+### Features
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `features` | `Feature[]` | - | Array of feature objects to display |
+| `title` | `string` | `"Features"` | Main title for the features section |
+| `subtitle` | `string` | - | Optional subtitle text |
+| `layout` | `"grid" \| "list" \| "alternating"` | `"grid"` | Layout style for the features |
+| `columns` | `2 \| 3 \| 4` | `3` | Number of columns in grid layout |
+| `showImages` | `boolean` | `false` | Whether to show images in alternating layout |
+| `className` | `string` | - | Additional CSS classes |
+
+### Feature
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `id` | `string` | Unique identifier for the feature |
+| `title` | `string` | Feature title |
+| `description` | `string` | Feature description |
+| `icon` | `LucideIcon` | Optional Lucide icon component |
+| `iconColor` | `string` | Optional Tailwind color class for the icon |
+| `href` | `string` | Optional link URL |
+| `image` | `string` | Optional image URL for alternating layout |
+| `badge` | `string` | Optional badge text (e.g., "New", "Popular") |
+
+## Features
+
+### Core Features
+- Multiple layout options (grid, list, alternating)
+- Responsive design with customizable columns
+- Smooth animations powered by Framer Motion
+- Icon support with customizable colors
+- Badge support for highlighting features
+- Optional image support for alternating layout
+- TypeScript support with full type definitions
+- Accessible and keyboard navigable

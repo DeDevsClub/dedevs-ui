@@ -1,0 +1,207 @@
+---
+title: DeFi Chart
+description: Professional candlestick chart component for displaying cryptocurrency and financial market data with real-time updates.
+icon: BarChart3
+---
+
+<Preview path="defi-chart" />
+
+## Installation
+
+<Installer packageName="defi-chart" />
+
+## Features
+
+- **Candlestick Visualization**: Professional OHLC (Open, High, Low, Close) chart display
+- **Real-time Data**: Live market data with automatic updates
+- **Interactive Tooltips**: Detailed price information on hover
+- **Reference Lines**: Current price indicators with color-coded trends
+- **Responsive Design**: Adapts to different screen sizes and containers
+- **Custom Styling**: Professional trading interface appearance
+- **Time-based X-axis**: Smart date formatting with monthly labels
+- **Dynamic Scaling**: Automatic Y-axis scaling based on data range
+
+## Examples
+
+### Basic Usage
+
+<Preview path="defi-chart-basic" />
+
+### Advanced Integration
+
+The main example demonstrates a comprehensive trading interface with:
+
+- Trading pair selection and price information
+- Multiple timeframe controls (1H, 4H, 1D, 1W, 1M)
+- Chart comparison views (Single, Comparison, Portfolio)
+- Technical analysis indicators
+- Market sentiment analysis
+- Real-time price updates
+
+## Component Structure
+
+The CandlestickChart component includes:
+
+- **Chart Container**: Responsive wrapper with proper aspect ratio
+- **Candlestick Bars**: OHLC data visualization with color coding
+- **Grid Lines**: Horizontal and vertical reference lines
+- **Tooltips**: Interactive data display on hover
+- **Reference Lines**: Current price indicators
+- **Axis Labels**: Time-based X-axis and price Y-axis
+
+## Usage Examples
+
+### Basic Chart
+
+```tsx
+import { CandlestickChart } from '@repo/defi/chart';
+
+export function TradingChart() {
+  return (
+    <div className="w-full h-96">
+      <CandlestickChart />
+    </div>
+  );
+}
+```
+
+### With Controls
+
+```tsx
+import { CandlestickChart } from '@repo/defi/chart';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { useState } from 'react';
+
+export function ChartWithControls() {
+  const [timeframe, setTimeframe] = useState('1d');
+  
+  return (
+    <Card>
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <CardTitle>ETH/USD Chart</CardTitle>
+          <div className="flex gap-2">
+            {['1H', '4H', '1D', '1W'].map((tf) => (
+              <Button
+                key={tf}
+                variant={timeframe === tf.toLowerCase() ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setTimeframe(tf.toLowerCase())}
+              >
+                {tf}
+              </Button>
+            ))}
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div className="h-96">
+          <CandlestickChart key={timeframe} />
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+### Portfolio View
+
+```tsx
+import { CandlestickChart } from '@repo/defi/chart';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+const assets = [
+  { symbol: 'ETH/USD', price: '$2,345.67' },
+  { symbol: 'BTC/USD', price: '$43,567.89' },
+  { symbol: 'SOL/USD', price: '$98.45' }
+];
+
+export function PortfolioCharts() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {assets.map((asset) => (
+        <Card key={asset.symbol}>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm">{asset.symbol}</CardTitle>
+            <div className="text-lg font-bold">{asset.price}</div>
+          </CardHeader>
+          <CardContent>
+            <div className="h-32">
+              <CandlestickChart />
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+}
+```
+
+## Data Structure
+
+The chart uses candlestick data with the following structure:
+
+```tsx
+interface CandlestickData {
+  date: string;              // ISO date string
+  openClose: [number, number]; // [open, close] prices
+  high: number;              // Highest price
+  low: number;               // Lowest price
+}
+```
+
+## Chart Features
+
+### Candlestick Rendering
+
+- **Green Candles**: Close price higher than open (bullish)
+- **Red Candles**: Close price lower than open (bearish)
+- **Wicks**: Show high and low price ranges
+- **Body**: Represents open to close price movement
+
+### Interactive Elements
+
+- **Hover Tooltips**: Display OHLC data for specific time periods
+- **Reference Lines**: Show current price with trend indicators
+- **Grid Lines**: Horizontal price levels and time intervals
+- **Responsive Scaling**: Automatic adjustment to container size
+
+## Styling
+
+The component uses:
+
+- **Professional Colors**: Green for bullish, red for bearish movements
+- **Clean Grid**: Subtle grid lines for easy reading
+- **Modern Typography**: Clear, readable labels and numbers
+- **Responsive Design**: Adapts to different screen sizes
+
+## Technical Analysis
+
+Perfect for displaying:
+
+- **Price Movements**: OHLC candlestick patterns
+- **Trend Analysis**: Visual trend identification
+- **Support/Resistance**: Key price levels
+- **Volume Analysis**: Trading activity visualization
+- **Time-based Patterns**: Historical price movements
+
+## Integration
+
+Ideal for:
+
+- **Trading Platforms**: Core chart functionality
+- **Portfolio Dashboards**: Asset performance tracking
+- **Market Analysis Tools**: Technical analysis interfaces
+- **DeFi Applications**: Token price visualization
+- **Financial Dashboards**: Market data presentation
+
+## Customization
+
+The component can be customized by:
+
+- Modifying the data array for different time periods
+- Adjusting chart dimensions and aspect ratios
+- Customizing colors and styling
+- Adding additional technical indicators
+- Implementing real-time data feeds

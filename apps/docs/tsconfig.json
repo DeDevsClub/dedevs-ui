@@ -13,7 +13,7 @@
         "../../packages/shadcn-ui/components/*"
       ],
       "@/lib/utils": [
-        "../../packages/shadcn-ui/lib/utils/*"
+        "../../packages/shadcn-ui/lib/utils"
       ]
     }
   },

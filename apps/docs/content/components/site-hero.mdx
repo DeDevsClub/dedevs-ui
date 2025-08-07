@@ -1,0 +1,220 @@
+---
+title: Site Hero
+description: A powerful hero section component with animations, call-to-action buttons, features showcase, and testimonials for landing pages.
+icon: Sparkles
+---
+
+<Preview path="site-hero" />
+
+## Installation
+
+<Installer packageName="site-hero" />
+
+## Features
+
+- **Animated Entrance**: Smooth fade-in animations using Framer Motion
+- **Flexible Content**: Support for title, subtitle, description, and features
+- **Dual Actions**: Primary and secondary call-to-action buttons
+- **Testimonial Integration**: Optional customer testimonial display
+- **Background Support**: Custom background images with overlay
+- **Responsive Design**: Mobile-first responsive layout
+- **Accessibility**: Full keyboard navigation and screen reader support
+
+## Examples
+
+### Basic Usage
+
+<Preview path="site-hero-basic" />
+
+### With Features
+
+<Preview path="site-hero-features" />
+
+### With Testimonial
+
+<Preview path="site-hero-testimonial" />
+
+### With Background
+
+<Preview path="site-hero-background" />
+
+## Component Structure
+
+The Hero component includes:
+
+- **Main Content**: Title, subtitle, and description with animations
+- **Action Buttons**: Primary and secondary CTAs with hover effects
+- **Features List**: Animated feature highlights
+- **Testimonial Section**: Customer quote with author details
+- **Background Layer**: Optional background image with overlay
+
+## Usage Examples
+
+### Basic Hero
+
+```tsx
+import { Hero } from '@repo/site/hero';
+
+export function LandingHero() {
+  return (
+    <Hero
+      title="Build Amazing Applications"
+      description="Create stunning user interfaces with our comprehensive component library designed for modern web applications."
+      primaryAction={{
+        label: "Get Started",
+        href: "/docs"
+      }}
+      secondaryAction={{
+        label: "View Components",
+        href: "/components"
+      }}
+    />
+  );
+}
+```
+
+### With Features
+
+```tsx
+import { Hero } from '@repo/site/hero';
+
+export function FeatureHero() {
+  return (
+    <Hero
+      title="DeFi Components"
+      subtitle="Professional Trading Interface"
+      description="Build sophisticated DeFi applications with our specialized components for trading, charting, and market data."
+      primaryAction={{
+        label: "Explore Components",
+        href: "/components"
+      }}
+      features={[
+        "Real-time market data",
+        "Professional charts",
+        "Trading interfaces",
+        "Responsive design"
+      ]}
+    />
+  );
+}
+```
+
+### With Testimonial
+
+```tsx
+import { Hero } from '@repo/site/hero';
+
+export function TestimonialHero() {
+  return (
+    <Hero
+      title="Trusted by Developers"
+      description="Join thousands of developers building amazing applications with our component library."
+      primaryAction={{
+        label: "Start Building",
+        href: "/docs"
+      }}
+      testimonial={{
+        text: "This component library has transformed how we build user interfaces. The quality and attention to detail is outstanding.",
+        author: "Sarah Chen",
+        role: "Lead Developer at TechCorp",
+        avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=64&h=64&fit=crop&crop=face"
+      }}
+    />
+  );
+}
+```
+
+### With Background
+
+```tsx
+import { Hero } from '@repo/site/hero';
+
+export function BackgroundHero() {
+  return (
+    <Hero
+      title="Beautiful Interfaces"
+      description="Create stunning user experiences with our modern component library."
+      primaryAction={{
+        label: "Get Started",
+        href: "/docs"
+      }}
+      backgroundImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop"
+      className="text-white"
+    />
+  );
+}
+```
+
+## Props Interface
+
+```tsx
+interface HeroProps {
+  title: string;
+  subtitle?: string;
+  description: string;
+  primaryAction?: {
+    label: string;
+    href?: string;
+    onClick?: () => void;
+  };
+  secondaryAction?: {
+    label: string;
+    href?: string;
+    onClick?: () => void;
+  };
+  features?: string[];
+  testimonial?: {
+    text: string;
+    author: string;
+    role: string;
+    avatar?: string;
+  };
+  backgroundImage?: string;
+  className?: string;
+}
+```
+
+## Animation Features
+
+The component uses Framer Motion for smooth animations:
+
+- **Staggered Entrance**: Elements animate in sequence
+- **Fade In Up**: Smooth upward motion with opacity transition
+- **Hover Effects**: Interactive button and feature animations
+- **Responsive Timing**: Optimized animation timing for different screen sizes
+
+## Styling
+
+- **Typography**: Responsive text sizing with proper hierarchy
+- **Spacing**: Consistent spacing using Tailwind utilities
+- **Colors**: Semantic color usage with dark mode support
+- **Shadows**: Subtle shadows and gradients for depth
+- **Responsive**: Mobile-first responsive design
+
+## Accessibility
+
+- Proper heading hierarchy (h1 for title)
+- Screen reader friendly content structure
+- Keyboard navigation support
+- High contrast color schemes
+- Focus management for interactive elements
+
+## Integration
+
+Perfect for:
+
+- **Landing Pages**: Main hero section for product pages
+- **Marketing Sites**: Feature announcements and promotions
+- **Documentation**: Getting started sections
+- **Portfolio Sites**: Personal or company introductions
+- **SaaS Applications**: Product showcases and onboarding
+
+## Customization
+
+The component can be customized by:
+
+- Modifying animation timing and effects
+- Customizing color schemes and typography
+- Adding additional content sections
+- Integrating with routing libraries
+- Adding analytics tracking to CTAs

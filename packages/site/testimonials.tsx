@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { cn } from "@repo/shadcn-ui/lib/utils";
+import { Button } from "@repo/shadcn-ui/components/ui/button";
 
 export interface Testimonial {
   id: string;

@@ -51,10 +51,10 @@
     "@auto-it/first-time-contributor": "^11.3.0",
     "@biomejs/biome": "2.0.0",
     "@types/node": "^24.0.1",
+    "ts-node": "^10.9.2",
     "turbo": "^2.5.4",
     "typescript": "^5.8.3",
-    "ultracite": "^5.0.3",
-    "ts-node": "^10.9.2"
+    "ultracite": "^5.0.3"
   },
   "engines": {
     "node": ">=18"
@@ -62,7 +62,12 @@
   "packageManager": "pnpm@10.12.1",
   "type": "module",
   "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.536.0",
+    "tailwind-merge": "^3.3.1",
     "tsup": "^8.5.0",
+    "tw-animate-css": "^1.3.6",
     "zod": "^3.25.64"
   }
 }

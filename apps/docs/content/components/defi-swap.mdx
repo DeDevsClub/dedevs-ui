@@ -1,0 +1,160 @@
+---
+title: DeFi Swap
+description: A comprehensive token swap interface with multi-tab support for Convert, Buy, and Send operations.
+icon: ArrowRightLeft
+---
+
+<Preview path="defi-swap" />
+
+## Installation
+
+<Installer packageName="defi-swap" />
+
+## Features
+
+- **Multi-Tab Interface**: Convert, Buy, and Send operations in a single component
+- **Token Selection**: Dropdown with coin icons and names
+- **Real-time Conversion**: Live amount calculations with formatted numbers
+- **Balance Display**: Shows available token balances
+- **Transaction Summary**: Detailed breakdown of fees and totals
+- **Modern Design**: Clean, professional UI with dark mode support
+- **Accessibility**: Full keyboard navigation and screen reader support
+
+## Examples
+
+### Basic Usage
+
+<Preview path="defi-swap-basic" />
+
+### Advanced Integration
+
+The main example demonstrates a comprehensive swap interface with:
+
+- Pool information and statistics
+- Multiple swap modes (Standard, Pro, Limit Orders)
+- Recent transaction history
+- Pool comparison and selection
+- Market analytics integration
+
+## Component Structure
+
+The Converter component includes:
+
+- **Tab Navigation**: Convert, Buy, Send modes
+- **Converter Fields**: Input/output token selection and amounts
+- **Transaction Summary**: Fees, totals, and exchange rates
+- **Settings Button**: Additional configuration options
+
+## Usage Examples
+
+### Basic Swap Interface
+
+```tsx
+import { Converter } from '@repo/defi/swap';
+
+export function SwapWidget() {
+  return (
+    <div className="w-full max-w-md">
+      <Converter />
+    </div>
+  );
+}
+```
+
+### With Pool Information
+
+```tsx
+import { Converter } from '@repo/defi/swap';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+export function SwapWithInfo() {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="lg:col-span-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Swap Tokens</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Converter />
+          </CardContent>
+        </Card>
+      </div>
+      <div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Pool Information</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span>TVL</span>
+                <span>$2.4B</span>
+              </div>
+              <div className="flex justify-between">
+                <span>APY</span>
+                <span>12.5%</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
+```
+
+## Token Configuration
+
+The component uses a coins array for token selection:
+
+```tsx
+const coins = [
+  {
+    id: "1",
+    name: "Ark",
+    image: "https://example.com/ark-icon.svg"
+  },
+  {
+    id: "2", 
+    name: "Tok",
+    image: "https://example.com/tok-icon.svg"
+  }
+];
+```
+
+## Styling Features
+
+- **Gradient Backgrounds**: Modern card designs with subtle gradients
+- **Masked Borders**: Unique visual effects with CSS mask properties
+- **Icon Integration**: Coin icons with proper fallbacks
+- **Responsive Design**: Adapts to different screen sizes
+- **Dark Mode**: Full dark theme support
+
+## Accessibility
+
+- Screen reader labels for all interactive elements
+- Keyboard navigation support
+- Proper ARIA attributes
+- Focus management
+- High contrast color schemes
+
+## Integration
+
+Perfect for:
+
+- **DeFi Applications**: Core swapping functionality
+- **Trading Platforms**: Token exchange interfaces
+- **Wallet Applications**: Built-in swap features
+- **Portfolio Managers**: Asset conversion tools
+- **DEX Aggregators**: Multi-protocol swap routing
+
+## Customization
+
+The component can be customized by:
+
+- Modifying the coins array for different tokens
+- Adjusting default values and balances
+- Customizing the transaction summary fields
+- Adding additional tabs or functionality
+- Styling with custom CSS classes

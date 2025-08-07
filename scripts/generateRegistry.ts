@@ -39,9 +39,13 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
     'code-block': 'Enhanced code block component with syntax highlighting',
     'code-editor': 'Code editor component',
     'code-snippet': 'Code snippet component',
+    'code-tree': 'Tree component for displaying hierarchical data',
+    'code-big-calendar': 'Big calendar component for displaying events',
     // defi
     'defi-ticker': 'Ticker component for displaying real-time data',
+    'defi-orderbook': 'Orderbook component for displaying real-time orderbook data',
     'defi-chart': 'Chart component for displaying real-time data',
+    'defi-swap': 'Swap component for displaying real-time swap data',
     // site
     'site-bento': 'Bento grid component for showcasing features and content',
     'site-hero': 'Hero section component for landing pages',
@@ -159,6 +163,22 @@ async function scanPackageDirectory(packagePath: string, packageName: string): P
                     name: componentName,
                     type: 'registry:ui',
                     description: getComponentDescription('defi', baseName),
+                    files: [{
+                        path: `packages/${packageName}/${file}`,
+                        type: 'registry:component'
+                    }]
+                });
+            }
+        } else if (packageName === 'site') {
+            for (const file of componentFiles) {
+                const baseName = basename(file, extname(file));
+                // Get component name from package name
+                const componentName = getComponentName(`site-${baseName}`);
+
+                items.push({
+                    name: componentName,
+                    type: 'registry:ui',
+                    description: getComponentDescription('site', baseName),
                     files: [{
                         path: `packages/${packageName}/${file}`,
                         type: 'registry:component'

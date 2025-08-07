@@ -423,7 +423,16 @@ async function listComponents() {
           { name: 'code-editor', description: 'Code editor component' },
           { name: 'code-snippet', description: 'Code snippet component' },
           // defi
-          { name: 'defi-ticker', description: 'Ticker component for displaying real-time data' }
+          { name: 'defi-ticker', description: 'Ticker component for displaying real-time data' },
+          { name: 'defi-orderbook', description: 'Orderbook component for displaying real-time orderbook data' },
+          { name: 'defi-chart', description: 'Chart component for displaying real-time data' },
+          { name: 'defi-swap', description: 'Swap component for displaying real-time swap data' },
+          // site
+          { name: 'site-bento', description: 'Bento grid component for showcasing features and content' },
+          { name: 'site-hero', description: 'Hero section component for landing pages' },
+          { name: 'site-testimonials', description: 'Testimonials carousel component' },
+          { name: 'site-features', description: 'Features showcase component with multiple layouts' },
+          { name: 'site-cta', description: 'Call-to-action component with multiple variants' }
         ]
       };
     }
@@ -467,6 +476,7 @@ async function listComponents() {
         const name = item.name.padEnd(15);
         console.log(`  ${name} ${item.description || 'No description available'}`);
       });
+      console.log('');
     }
 
     if (siteComponents.length > 0) {
@@ -475,6 +485,7 @@ async function listComponents() {
         const name = item.name.padEnd(15);
         console.log(`  ${name} ${item.description || 'No description available'}`);
       });
+      console.log('');
     }
 
     if (composablesComponents.length > 0) {

@@ -86,6 +86,16 @@ Available components:
 
 📊 Defi Components:
   defi-ticker     Ticker component for displaying real-time data
+  defi-swap       Swap component for displaying real-time swap data
+  defi-chart      Chart component for displaying real-time chart data
+  defi-orderbook  Orderbook component for displaying real-time orderbook data
+
+🌐 Site Components:
+  site-bento      Bento component for displaying a grid of items
+  site-features   Features component for displaying a list of features
+  site-hero       Hero component for displaying a hero section
+  site-testimonials Testimonials component for displaying a list of testimonials
+  site-cta        CTA component for displaying a call to action
 ```
 
 You can also use the short alias:

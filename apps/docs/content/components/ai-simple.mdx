@@ -1,0 +1,149 @@
+---
+title: AI Simple
+description: A lightweight AI component for basic demonstrations and prototyping with minimal setup required.
+icon: Sparkles
+---
+
+<Preview path="ai-simple" />
+
+## Installation
+
+<Installer packageName="ai-simple" />
+
+## Features
+
+- **Minimal Setup**: Ready to use with zero configuration
+- **Lightweight**: Small bundle size for quick prototyping
+- **Customizable**: Easy to extend and modify
+- **Accessible**: Built-in accessibility features
+- **Responsive**: Works on all screen sizes
+
+## Usage
+
+The AI Simple component is perfect for quick prototypes, demos, and educational purposes. It provides a basic AI interface without the complexity of full-featured components.
+
+### Basic Usage
+
+```tsx
+import { SimpleAI } from '@repo/ai/simple';
+
+export function QuickDemo() {
+  return (
+    <div className="max-w-md mx-auto">
+      <SimpleAI />
+    </div>
+  );
+}
+```
+
+### With Custom Content
+
+```tsx
+import { SimpleAI } from '@repo/ai/simple';
+
+export function CustomAIDemo() {
+  return (
+    <SimpleAI>
+      <p className="text-sm text-muted-foreground">
+        This is a custom message inside the AI component.
+      </p>
+    </SimpleAI>
+  );
+}
+```
+
+### Multiple Instances
+
+```tsx
+import { SimpleAI } from '@repo/ai/simple';
+
+export function MultipleAI() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <SimpleAI>
+        <p>AI Assistant #1</p>
+      </SimpleAI>
+      <SimpleAI>
+        <p>AI Assistant #2</p>
+      </SimpleAI>
+    </div>
+  );
+}
+```
+
+## Props
+
+```tsx
+interface SimpleAIProps {
+  children?: React.ReactNode;
+  className?: string;
+}
+```
+
+## Use Cases
+
+Perfect for:
+
+- **Prototyping**: Quick AI interface mockups
+- **Education**: Teaching AI concepts and interfaces
+- **Demos**: Simple demonstrations and presentations
+- **Placeholders**: Temporary AI components during development
+- **Testing**: Basic testing of AI-related layouts
+
+## Customization
+
+The component can be easily customized:
+
+```tsx
+import { SimpleAI } from '@repo/ai/simple';
+import { Button } from '@/components/ui/button';
+
+export function CustomizedAI() {
+  return (
+    <SimpleAI>
+      <div className="space-y-3">
+        <h4 className="font-semibold">Custom AI Interface</h4>
+        <p className="text-sm">
+          This demonstrates how to customize the simple AI component.
+        </p>
+        <div className="flex gap-2">
+          <Button size="sm">Ask Question</Button>
+          <Button size="sm" variant="outline">Clear</Button>
+        </div>
+      </div>
+    </SimpleAI>
+  );
+}
+```
+
+## Styling
+
+The component uses standard Tailwind classes and can be styled with:
+
+- **Card styling**: Clean card-based design
+- **Spacing**: Consistent padding and margins
+- **Typography**: Clear text hierarchy
+- **Interactive elements**: Hover and focus states
+
+## Best Practices
+
+1. **Keep it Simple**: Use for basic demonstrations only
+2. **Extend Gradually**: Start simple, then upgrade to full components
+3. **Consistent Styling**: Follow your design system
+4. **Accessibility**: Ensure proper labels and navigation
+5. **Performance**: Lightweight by design, perfect for quick loads
+
+## Migration Path
+
+When ready to upgrade from Simple AI to full components:
+
+```tsx
+// From Simple AI
+import { SimpleAI } from '@repo/ai/simple';
+
+// To Full AI Response
+import { AIResponse } from '@repo/ai/response';
+import { AIInput } from '@repo/ai/input';
+```
+
+This provides a clear upgrade path as your AI interface needs grow more complex.

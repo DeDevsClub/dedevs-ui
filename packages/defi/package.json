@@ -4,12 +4,13 @@
     "version": "0.0.0",
     "private": true,
     "dependencies": {
-        "@repo/shadcn-ui": "workspace:*",
         "@remixicon/react": "^4.6.0",
+        "@repo/shadcn-ui": "workspace:*",
+        "lucide-react": "^0.536.0",
         "react": "^19.1.1",
+        "react-aria-components": "^1.11.0",
         "react-dom": "^19.1.1",
-        "recharts": "^3.1.0",
-        "react-aria-components": "^1.11.0"
+        "recharts": "^3.1.0"
     },
     "devDependencies": {
         "@repo/typescript-config": "workspace:*",

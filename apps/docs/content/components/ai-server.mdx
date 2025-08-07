@@ -1,0 +1,152 @@
+---
+title: AI Server
+description: Server-side AI response component for rendering AI content on the server with proper hydration support.
+icon: Server
+---
+
+<Preview path="ai-server" />
+
+## Installation
+
+<Installer packageName="ai-server" />
+
+## Features
+
+- **Server-Side Rendering**: Optimized for SSR and static generation
+- **Hydration Support**: Seamless client-side hydration
+- **Performance**: Reduced initial bundle size
+- **SEO Friendly**: Better search engine optimization
+- **Type Safety**: Full TypeScript support with proper prop types
+
+## Usage
+
+The AI Server component is a server-optimized version of the AI Response component, designed for use in server components and static generation scenarios.
+
+### Basic Usage
+
+```tsx
+import { AIResponse } from '@repo/ai/server';
+
+export function ServerAIResponse() {
+  return (
+    <AIResponse className="max-w-2xl">
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold">AI Response</h3>
+        <p>This is a server-rendered AI response component.</p>
+      </div>
+    </AIResponse>
+  );
+}
+```
+
+### In Server Components
+
+```tsx
+// app/ai-chat/page.tsx
+import { AIResponse } from '@repo/ai/server';
+
+export default function AIPage() {
+  return (
+    <main className="container mx-auto py-8">
+      <AIResponse className="max-w-4xl mx-auto">
+        <div className="prose prose-gray dark:prose-invert">
+          <h1>AI Assistant</h1>
+          <p>Welcome to our AI-powered assistant interface.</p>
+        </div>
+      </AIResponse>
+    </main>
+  );
+}
+```
+
+### With Static Generation
+
+```tsx
+// pages/ai/[id].tsx
+import { AIResponse } from '@repo/ai/server';
+import { GetStaticProps, GetStaticPaths } from 'next';
+
+interface Props {
+  content: string;
+}
+
+export default function AIResponsePage({ content }: Props) {
+  return (
+    <AIResponse>
+      <div dangerouslySetInnerHTML={{ __html: content }} />
+    </AIResponse>
+  );
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  // Fetch AI response content
+  const content = await fetchAIContent(params?.id);
+  
+  return {
+    props: { content },
+    revalidate: 3600 // Revalidate every hour
+  };
+};
+```
+
+## Props
+
+The AI Server component accepts the same props as the client-side AI Response component:
+
+```tsx
+interface AIResponseProps {
+  className?: string;
+  options?: AIResponseOptions;
+  children?: React.ReactNode;
+}
+```
+
+## Performance Benefits
+
+- **Reduced Bundle Size**: Server-only rendering reduces client JavaScript
+- **Faster Initial Load**: Content rendered on server for immediate display
+- **Better SEO**: Search engines can crawl server-rendered content
+- **Improved Core Web Vitals**: Better LCP and CLS scores
+
+## Use Cases
+
+Perfect for:
+
+- **Static AI Content**: Pre-generated AI responses
+- **SEO Pages**: AI-powered landing pages and content
+- **Documentation**: AI-generated documentation sections
+- **Blog Posts**: AI-assisted content creation
+- **Marketing Pages**: AI-powered product descriptions
+
+## Integration with Client Components
+
+You can combine server and client components for optimal performance:
+
+```tsx
+// Server Component
+import { AIResponse } from '@repo/ai/server';
+import { ClientInteractions } from './client-interactions';
+
+export default function HybridAIPage() {
+  return (
+    <div>
+      {/* Server-rendered content */}
+      <AIResponse>
+        <h1>AI Assistant</h1>
+        <p>This content is server-rendered for SEO.</p>
+      </AIResponse>
+      
+      {/* Client-side interactions */}
+      <ClientInteractions />
+    </div>
+  );
+}
+```
+
+## Best Practices
+
+1. **Use for Static Content**: Best suited for content that doesn't change frequently
+2. **Combine with Client Components**: Use server components for initial content, client components for interactions
+3. **Optimize Images**: Use Next.js Image component for AI-generated images
+4. **Cache Appropriately**: Implement proper caching strategies for AI content
+5. **Monitor Performance**: Track Core Web Vitals and loading performance

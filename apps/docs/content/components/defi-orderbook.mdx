@@ -1,0 +1,180 @@
+---
+title: DeFi OrderBook
+description: A real-time order book component for displaying buy and sell orders in DeFi trading interfaces.
+icon: BarChart3
+---
+
+<Preview path="defi-orderbook" />
+
+## Installation
+
+<Installer packageName="defi-orderbook" />
+
+## Features
+
+- **Real-time Updates**: Automatically refreshes order data every 2 seconds
+- **Visual Depth**: Color-coded depth visualization with background bars
+- **Bid/Ask Separation**: Clear visual distinction between buy (green) and sell (red) orders
+- **Spread Display**: Shows current bid-ask spread with trending indicator
+- **Responsive Design**: Adapts to different screen sizes and container widths
+- **Professional Styling**: Clean, modern design suitable for trading applications
+
+## Component Structure
+
+The OrderBook component displays:
+
+- **Header**: Trading pair badge and title
+- **Asks (Sell Orders)**: Red-colored orders above the spread
+- **Spread Section**: Current bid-ask spread with trend indicator
+- **Bids (Buy Orders)**: Green-colored orders below the spread
+- **Depth Visualization**: Background bars showing relative order sizes
+
+## Examples
+
+### Basic Usage
+
+<Preview path="defi-orderbook-basic" />
+
+### Exchange Comparison
+
+<Preview path="defi-orderbook-comparison" />
+
+### Advanced Integration
+
+The main example demonstrates a comprehensive trading interface with:
+
+- Trading pair selection dropdown
+- Market statistics display
+- Refresh functionality
+- Multiple orderbook layouts
+- Analysis metrics
+
+## Usage Examples
+
+### Basic Order Book
+
+```tsx
+import { OrderBook } from '@repo/defi/orderbook';
+
+export function TradingInterface() {
+  return (
+    <div className="w-full max-w-md">
+      <OrderBook />
+    </div>
+  );
+}
+```
+
+### With Market Stats
+
+Integrate the OrderBook with additional market data:
+
+```tsx
+import { OrderBook } from '@repo/defi/orderbook';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+export function MarketDepth() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>ETH/USD Market Depth</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="space-y-2">
+            <div className="text-sm text-gray-600">24h Volume</div>
+            <div className="text-lg font-mono">1,234.56 ETH</div>
+          </div>
+          <div className="md:col-span-2">
+            <OrderBook />
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+### Exchange Comparison
+
+Compare order books from different exchanges:
+
+```tsx
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <Card>
+    <CardHeader>
+      <CardTitle>Binance</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <OrderBook />
+    </CardContent>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>Coinbase</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <OrderBook />
+    </CardContent>
+  </Card>
+</div>
+```
+
+## Data Structure
+
+The component uses the following data structure for order entries:
+
+```tsx
+interface OrderBookEntry {
+  price: number;    // Order price in quote currency
+  amount: number;   // Order amount in base currency
+  total: number;    // Total value (price × amount)
+}
+```
+
+## Styling
+
+The component uses Tailwind CSS classes for styling:
+
+- **Asks**: Red color scheme (`text-red-600`, `bg-red-50`)
+- **Bids**: Green color scheme (`text-emerald-600`, `bg-emerald-50`)
+- **Spread**: Gray background with trend indicator
+- **Depth Bars**: Semi-transparent background bars showing order depth
+
+## Real-time Updates
+
+The component simulates real-time market data by:
+
+1. Generating random order book data around a base price
+2. Updating every 2 seconds automatically
+3. Calculating spread between best bid and ask
+4. Maintaining realistic price increments
+
+## Accessibility
+
+- Uses semantic HTML structure
+- Provides clear visual hierarchy
+- Includes proper color contrast
+- Supports keyboard navigation
+- Screen reader friendly with proper labeling
+
+## Integration
+
+Perfect for:
+
+- **DeFi Trading Platforms**: Core component for trading interfaces
+- **Market Analysis Tools**: Display order book depth and liquidity
+- **Educational Applications**: Demonstrate market microstructure
+- **Portfolio Dashboards**: Show market depth for held assets
+- **Exchange Comparisons**: Compare liquidity across platforms
+
+## Customization
+
+The component can be customized by:
+
+- Modifying the update interval
+- Changing color schemes
+- Adjusting the number of displayed orders
+- Customizing the trading pair display
+- Adding additional market data fields
