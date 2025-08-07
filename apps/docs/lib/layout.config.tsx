@@ -25,11 +25,10 @@ export const baseOptions: BaseLayoutProps = {
       <div className="flex items-center gap-2 rounded-md border border-border p-2 hover:bg-muted/60">
         <Image
           alt="DeDevs UI Design Registry"
-          height={24}
+          height={28}
           src="/logo.svg"
-          width={24}
+          width={28}
         />
-        <span className="font-semibold text-lg">DeDevs UI Design Registry</span>
       </div>
     ),
   },
