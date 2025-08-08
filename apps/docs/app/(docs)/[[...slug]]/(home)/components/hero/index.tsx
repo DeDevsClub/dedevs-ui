@@ -11,11 +11,9 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@repo/shadcn-ui/components/ui/tooltip';
-import Image from 'next/image';
 import Link from 'next/link';
-import { DemoVideo } from '../demo-video';
 import { GitHubButton } from '../github-button';
-import shadcn from './shadcn.jpg';
+import Image from 'next/image';
 
 const icons = [
   {
@@ -108,7 +106,14 @@ export const Hero = () => (
         </div>
       </div>
       <div className="-mb-24 overflow-hidden rounded-4xl border-background/10 border-x bg-gradient-to-b from-background/15 to-background/40 p-8 backdrop-blur-lg">
-        <DemoVideo url="https://youtu.be/FqQ9j6bqtf0" />
+        {/* <DemoVideo url="https://youtu.be/FqQ9j6bqtf0" /> */}
+        <Image
+          src="https://ui.dedevs.com/hero.png"
+          alt="Hero"
+          width={1000}
+          height={600}
+          className="w-full rounded-4xl"
+        />
       </div>
     </div>
   </section>
