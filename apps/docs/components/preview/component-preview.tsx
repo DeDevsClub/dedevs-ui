@@ -1,6 +1,6 @@
 import { existsSync } from 'fs';
 import { join } from 'path';
-import { Preview } from './preview';
+import { Preview } from '.';
 
 interface ComponentPreviewProps {
   name: string;

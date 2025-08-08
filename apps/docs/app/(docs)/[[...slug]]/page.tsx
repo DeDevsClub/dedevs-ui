@@ -7,7 +7,7 @@ import {
 } from 'fumadocs-ui/page';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ComponentPreview } from '../../../components/component-preview';
+import { ComponentPreview } from '../../../components/preview/component-preview';
 import { Installer } from '../../../components/installer';
 import { PoweredBy } from '../../../components/powered-by';
 import { Preview } from '../../../components/preview';
