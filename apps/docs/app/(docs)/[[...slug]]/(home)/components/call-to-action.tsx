@@ -40,17 +40,25 @@ const Terminal = () => (
 );
 
 export const CallToAction = () => (
-  <div className="container mx-auto grid gap-8 rounded-4xl bg-secondary px-8 pt-8 md:px-16 md:pt-16">
-    <div className="grid gap-2">
-      <h2 className="font-semibold text-3xl text-foreground">
-        Get started with DeDevs UI
-      </h2>
-      <p className="text-balance text-lg text-muted-foreground">
-        Install your first component in seconds with the DeDevs UI or shadcn CLI.
-      </p>
+  <section className="relative py-16 sm:py-20 lg:py-24">
+    <div className="container">
+      <div className="relative overflow-hidden rounded-4xl bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5 p-8 md:p-16">
+        <div className="absolute inset-0 bg-grid-white/10 [mask-image:radial-gradient(white,transparent_70%)]" />
+        <div className="relative grid gap-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              Ready to build something amazing?
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Join thousands of developers using DeDevs UI to build modern applications. Get started in seconds.
+            </p>
+          </div>
+          
+          <div className="dark">
+            <Terminal />
+          </div>
+        </div>
+      </div>
     </div>
-    <div className="dark">
-      <Terminal />
-    </div>
-  </div>
+  </section>
 );

@@ -64,32 +64,41 @@ export const Hero = () => (
     <div className="container relative z-10 grid gap-8 sm:gap-12 md:gap-16">
       <div className="mx-auto flex flex-col justify-center gap-6 text-balance">
         <h1 className="mb-0 text-balance text-center font-semibold text-4xl tracking-[-0.06em]! sm:text-5xl md:text-6xl xl:text-7xl">
-          Components built for Developers with{' '}
-          <div className="-space-x-2 -translate-y-1.5 md:-translate-y-2.5 inline-flex items-center justify-center">
+          The Ultimate{' '}
+          <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            Modular Design Registry
+          </span>{' '}
+          for Modern Web Apps
+        </h1>
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="mt-0 mb-0 text-muted-foreground lg:text-lg xl:text-xl 2xl:text-2xl">
+            Build AI interfaces, DeFi applications, and developer portfolios with our collection of 50+ production-ready, accessible components. Copy, paste, and customize with ease.
+          </p>
+        </div>
+        
+        {/* Technology Icons */}
+        <div className="flex items-center justify-center gap-2 opacity-60">
+          <span className="text-sm text-muted-foreground">Built with</span>
+          <div className="-space-x-2 inline-flex items-center justify-center">
             {icons.map((icon, index) => (
               <Tooltip key={icon.name}>
                 <TooltipTrigger asChild>
                   <div
-                    className="inline-flex size-8 items-center justify-center rounded-full text-white sm:size-10 md:size-12 lg:size-14"
+                    className="inline-flex size-6 items-center justify-center rounded-full text-white sm:size-7 md:size-8"
                     style={{
                       backgroundColor: icon.color,
                       maskImage: index
-                        ? 'radial-gradient(circle 28px at -17px 50%, transparent 99%, white 100%)'
+                        ? 'radial-gradient(circle 20px at -12px 50%, transparent 99%, white 100%)'
                         : 'none',
                     }}
                   >
-                    <icon.icon className="size-3 sm:size-4 md:size-5 lg:size-6" />
+                    <icon.icon className="size-3 sm:size-3.5 md:size-4" />
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>{icon.name}</TooltipContent>
               </Tooltip>
             ))}
           </div>
-        </h1>
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="mt-0 mb-0 text-muted-foreground lg:text-lg xl:text-xl 2xl:text-2xl">
-            {`DeDevs UI is a custom registry of composable, accessible and extensible components designed for use with shadcn/ui.`}
-          </p>
         </div>
         <div className="flex items-center justify-center gap-4">
           <Button asChild size="lg">
