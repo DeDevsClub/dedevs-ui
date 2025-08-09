@@ -110,9 +110,9 @@ export const Hero = () => (
         <Image
           src="https://ui.dedevs.com/hero.png"
           alt="Hero"
-          width={1000}
-          height={600}
-          className="w-full rounded-4xl"
+          width={3072}
+          height={2048}
+          className="w-full rounded-md"
         />
       </div>
     </div>

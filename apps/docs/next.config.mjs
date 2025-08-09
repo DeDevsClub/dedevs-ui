@@ -51,6 +51,16 @@ const config = {
     formats: ['image/avif', 'image/webp'],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ui.dedevs.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dedevs.com',
+      },
+    ],
   },
   
   // Enable compression
