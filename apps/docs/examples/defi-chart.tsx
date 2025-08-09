@@ -331,7 +331,7 @@ const Example = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-text">Volatility</span>
-                  <Badge variant="secondary">Medium</Badge>
+                  <Badge variant="outline">Medium</Badge>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-text">Volume</span>

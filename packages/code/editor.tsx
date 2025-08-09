@@ -1381,7 +1381,7 @@ export const EditorLinkSelector = ({
                             <TrashIcon size={12} />
                         </Button>
                     ) : (
-                        <Button className="h-8" size="icon" variant="secondary">
+                        <Button className="h-8" size="icon" variant="outline">
                             <CheckIcon size={12} />
                         </Button>
                     )}

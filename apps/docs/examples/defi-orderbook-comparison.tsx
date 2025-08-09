@@ -10,7 +10,7 @@ const exchanges = [
   { name: 'Kraken', variant: 'outline' as const },
 ];
 
-const Example = () => {
+const DefiOrderbookComparisonExample = () => {
   return (
     <div className="grid grid-cols-1 gap-6">
       {exchanges.map((exchange, index) => (
@@ -30,4 +30,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default DefiOrderbookComparisonExample;

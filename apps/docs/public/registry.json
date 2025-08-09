@@ -72,7 +72,7 @@
     {
       "name": "ai-server",
       "type": "registry:ui",
-      "description": "AI server component utilities",
+      "description": "AI server component",
       "files": [
         {
           "path": "packages/ai/server.tsx",
@@ -279,17 +279,6 @@
       ]
     },
     {
-      "name": "site-cta",
-      "type": "registry:ui",
-      "description": "Call-to-action component with multiple variants",
-      "files": [
-        {
-          "path": "packages/site/cta.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
       "name": "site-features",
       "type": "registry:ui",
       "description": "Features showcase component with multiple layouts",
@@ -301,12 +290,12 @@
       ]
     },
     {
-      "name": "site-hero",
+      "name": "site-github-card",
       "type": "registry:ui",
-      "description": "Hero section component for landing pages",
+      "description": "Site github-card component",
       "files": [
         {
-          "path": "packages/site/hero.tsx",
+          "path": "packages/site/github-card.tsx",
           "type": "registry:component"
         }
       ]
@@ -323,12 +312,12 @@
       ]
     },
     {
-      "name": "site-testimonials",
+      "name": "site-kanban",
       "type": "registry:ui",
-      "description": "Testimonials carousel component",
+      "description": "Kanban board component for showcasing features and content",
       "files": [
         {
-          "path": "packages/site/testimonials.tsx",
+          "path": "packages/site/kanban.tsx",
           "type": "registry:component"
         }
       ]

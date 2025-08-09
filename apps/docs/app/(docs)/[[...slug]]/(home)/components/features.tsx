@@ -90,7 +90,7 @@ export const Features = () => (
                   <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <feature.icon className="h-6 w-6" />
                   </div>
-                  <Badge variant="secondary" className="text-xs">
+                  <Badge variant="outline" className="text-xs">
                     {feature.badge}
                   </Badge>
                 </div>

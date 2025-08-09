@@ -413,7 +413,6 @@ async function listComponents() {
           { name: 'ai-message', description: 'AI message display component' },
           { name: 'ai-reasoning', description: 'AI reasoning visualization component' },
           { name: 'ai-response', description: 'AI response component with streaming support' },
-          { name: 'ai-server', description: 'AI server component utilities' },
           { name: 'ai-simple', description: 'Simple AI component for basic interactions' },
           { name: 'ai-source', description: 'AI source attribution component' },
           { name: 'ai-suggestion', description: 'AI suggestion component for prompts and recommendations' },
@@ -429,10 +428,8 @@ async function listComponents() {
           { name: 'defi-swap', description: 'Swap component for displaying real-time swap data' },
           // site
           { name: 'site-bento', description: 'Bento grid component for showcasing features and content' },
-          { name: 'site-hero', description: 'Hero section component for landing pages' },
-          { name: 'site-testimonials', description: 'Testimonials carousel component' },
+          { name: 'site-kanban', description: 'Kanban board component for showcasing features and content' },
           { name: 'site-features', description: 'Features showcase component with multiple layouts' },
-          { name: 'site-cta', description: 'Call-to-action component with multiple variants' }
         ]
       };
     }

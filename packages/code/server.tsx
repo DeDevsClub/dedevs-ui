@@ -57,6 +57,7 @@ export const CodeBlockContent = async ({
     <div
       // biome-ignore lint/security/noDangerouslySetInnerHtml: "Kinda how Shiki works"
       dangerouslySetInnerHTML={{ __html: html }}
+      className="bg-background border rounded-lg"
       {...props}
     />
   );

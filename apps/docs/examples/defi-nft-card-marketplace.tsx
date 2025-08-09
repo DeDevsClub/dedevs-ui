@@ -74,10 +74,10 @@ export default function DefiNftCardMarketplace() {
         <div className="w-full max-w-7xl mx-auto p-6 min-h-[800px]">
             {/* Header */}
             <div className="mb-8 text-center">
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                <h1 className="text-3xl font-bold text-text dark:text-text mb-2">
                     NFT Marketplace
                 </h1>
-                <p className="text-gray-600 dark:text-gray-400">
+                <p className="text-text dark:text-text">
                     Discover, collect, and trade unique digital assets
                 </p>
             </div>
@@ -101,27 +101,27 @@ export default function DefiNftCardMarketplace() {
 
             {/* Stats */}
             <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="text-center p-6 bg-background dark:bg-background rounded-lg">
+                    <div className="text-2xl font-bold text-text dark:text-text">
                         {nftData.length}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-text dark:text-text">
                         Total NFTs
                     </div>
                 </div>
-                <div className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="text-center p-6 bg-background dark:bg-background rounded-lg">
+                    <div className="text-2xl font-bold text-text dark:text-text">
                         {Object.values(favorites).filter(Boolean).length}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-text dark:text-text">
                         Favorited
                     </div>
                 </div>
-                <div className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="text-center p-6 bg-background dark:bg-background rounded-lg">
+                    <div className="text-2xl font-bold text-text dark:text-text">
                         {nftData.reduce((sum, nft) => sum + parseFloat(nft.price.replace(' ETH', '')), 0).toFixed(3)} ETH
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-text dark:text-text">
                         Total Value
                     </div>
                 </div>

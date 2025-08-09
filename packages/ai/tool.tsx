@@ -56,7 +56,7 @@ const getStatusBadge = (status: AIToolStatus) => {
   } as const;
 
   return (
-    <Badge className="rounded-full text-xs" variant="secondary">
+    <Badge className="rounded-full text-xs" variant="outline">
       {icons[status]}
       {labels[status]}
     </Badge>

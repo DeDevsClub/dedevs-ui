@@ -1,12 +1,14 @@
 {
   "name": "@repo/site",
-  "description": "Site components including bento grid, hero sections, testimonials, and other landing page components for building modern websites.",
+  "description": "Site components including bento grid, kanban board, and other page components for building modern websites.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
     "@repo/shadcn-ui": "workspace:*",
+    "@iconify/react": "^4.1.0",
     "framer-motion": "^11.17.0",
     "lucide-react": "^0.536.0",
+    "next": "^15.3.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

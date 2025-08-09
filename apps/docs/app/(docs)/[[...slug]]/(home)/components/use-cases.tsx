@@ -115,7 +115,7 @@ export const UseCases = () => (
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-background/80 text-primary backdrop-blur-sm">
                     <useCase.icon className="h-6 w-6" />
                   </div>
-                  <Badge variant="secondary" className="bg-background/80 backdrop-blur-sm">
+                  <Badge variant="outline" className="bg-background/80 backdrop-blur-sm">
                     {useCase.badge}
                   </Badge>
                 </div>

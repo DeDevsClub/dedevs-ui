@@ -30,7 +30,6 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
     'ai-message': 'AI message display component',
     'ai-reasoning': 'AI reasoning visualization component',
     'ai-response': 'AI response component with streaming support',
-    'ai-server': 'AI server component utilities',
     'ai-simple': 'Simple AI component for basic interactions',
     'ai-source': 'AI source attribution component',
     'ai-suggestion': 'AI suggestion component for prompts and recommendations',
@@ -48,10 +47,8 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
     'defi-swap': 'Swap component for displaying real-time swap data',
     // site
     'site-bento': 'Bento grid component for showcasing features and content',
-    'site-hero': 'Hero section component for landing pages',
-    'site-testimonials': 'Testimonials carousel component',
+    'site-kanban': 'Kanban board component for showcasing features and content',
     'site-features': 'Features showcase component with multiple layouts',
-    'site-cta': 'Call-to-action component with multiple variants',
 };
 
 // Get description for a component, with fallback

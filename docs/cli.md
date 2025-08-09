@@ -93,9 +93,7 @@ Available components:
 🌐 Site Components:
   site-bento      Bento component for displaying a grid of items
   site-features   Features component for displaying a list of features
-  site-hero       Hero component for displaying a hero section
-  site-testimonials Testimonials component for displaying a list of testimonials
-  site-cta        CTA component for displaying a call to action
+  site-kanban     Kanban component for showcasing features and content with multiple layouts
 ```
 
 You can also use the short alias:

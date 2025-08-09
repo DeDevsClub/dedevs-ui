@@ -1,0 +1,59 @@
+---
+title: GitHub Card
+description: A beautiful GitHub profile card component for showcasing your GitHub profile.
+icon: GithubIcon
+---
+
+## Preview
+
+<Preview path="site-github-card" />
+
+## Installation
+
+<Installer packageName="site-github-card" />
+
+## Overview
+
+The `GitHub Card` is a client component that fetches a GitHub user's profile via the public GitHub API and renders a polished profile card with avatar, bio, stats, links, and a contributions heatmap-style grid.
+
+Features:
+
+- __Search input__: Look up any GitHub username.
+- __Profile info__: Avatar, name/login, bio, social links, email/blog when available.
+- __Stats__: Followers, following, public repos.
+- __Contributions grid__: GitHub-like weekly activity visualization.
+- __Share actions__: Quick share to Twitter/X and LinkedIn.
+
+Note: The component uses the public GitHub REST API and is subject to unauthenticated rate limits.
+
+## Usage
+
+Import the component from `@repo/site` and render it in a client page or component:
+
+```tsx
+"use client";
+import React from "react";
+import { GitHubCard } from "@repo/site";
+
+export default function Page() {
+  return (
+    <div className="container py-10">
+      <GitHubCard />
+    </div>
+  );
+}
+```
+
+## Props
+
+This component does not currently accept props. It provides a search UI where users can enter a GitHub username to fetch data.
+
+## Accessibility
+
+- __Keyboard__: Search input supports Enter key submission.
+- __Labels__: Interactive icons include meaningful labels or context via titles/ARIA where relevant.
+- __Contrast__: Tailwind classes provide adequate contrast in light/dark modes.
+
+## Example
+
+The live example above is sourced from `apps/docs/examples/site-github-card.tsx`.

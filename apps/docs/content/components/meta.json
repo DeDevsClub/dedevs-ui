@@ -9,7 +9,6 @@
     "ai-message",
     "ai-reasoning",
     "ai-response",
-    "ai-server",
     "ai-simple",
     "ai-sources",
     "ai-suggestion",
@@ -17,10 +16,8 @@
     "---Code---",
     "code-block",
     "code-editor",
-    "code-server",
     "code-snippet",
     "---Defi---",
-    "defi-chart",
     "defi-nft-card",
     "defi-orderbook",
     "defi-swap",
@@ -28,8 +25,7 @@
     "---Site---",
     "site-bento",
     "site-features",
-    "site-hero",
-    "site-testimonials",
-    "site-cta"
+    "site-github-card",
+    "site-kanban"
   ]
 }

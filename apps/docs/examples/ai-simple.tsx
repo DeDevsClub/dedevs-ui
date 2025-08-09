@@ -17,7 +17,7 @@ const Example = () => {
               <Sparkles className="w-5 h-5" />
               Basic AI Simple Component
             </CardTitle>
-            <Badge variant="secondary" className="flex items-center gap-1">
+            <Badge variant="outline" className="flex items-center gap-1">
               <Zap className="w-3 h-3" />
               Lightweight
             </Badge>

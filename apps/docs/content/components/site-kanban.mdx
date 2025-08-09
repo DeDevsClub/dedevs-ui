@@ -1,0 +1,91 @@
+---
+title: Kanban Board
+description: A flexible and animated kanban-style board component for showcasing features, metrics, and interactive content.
+icon: SquareKanban
+full: true
+---
+
+## Preview
+
+<Preview path="site-kanban" />
+
+## Installation
+
+<Installer packageName="site-kanban" />
+
+## Overview
+
+The Kanban Board component provides a polished, drag‑and‑drop task board suitable for docs demos and landing pages. It showcases cards grouped by columns (To Do, In Progress, Review, Done) with avatars, tags, badges, and subtle glassmorphism styling. The demo is fully client-side and self-contained with sample data.
+
+## Features
+
+### Core
+- **Drag & Drop**: Move tasks between columns (native DnD API)
+- **Responsive Layout**: Single-column on mobile, multi-column on desktop
+- **Task Metadata**: Title, description, tags, due date, comments, attachments, assignee
+- **Visual Hierarchy**: Cards, badges, avatars, and subtle separators
+- **Dark Mode**: Tailwind dark styles included
+
+### UI Building Blocks
+- `@/components/ui/card` for task cards
+- `@/components/ui/badge` for counts and tags
+- `@/components/ui/avatar` for assignees
+- `lucide-react` icons for affordances
+
+## Usage
+
+```tsx
+'use client';
+
+import KanbanBoard from '@repo/site/kanban';
+
+export default function Example() {
+  return (
+    <div className="w-full">
+      <KanbanBoard />
+    </div>
+  );
+}
+```
+
+## API
+
+This demo component does not currently accept props; it renders an interactive board from internal sample data to demonstrate layout and interactions.
+
+Data structures used internally:
+
+```ts
+type Task = {
+  id: string;
+  title: string;
+  description?: string;
+  priority?: 'low' | 'medium' | 'high';
+  assignee?: { name: string; avatar: string };
+  tags?: string[];
+  dueDate?: string;
+  attachments?: number;
+  comments?: number;
+};
+
+type Column = {
+  id: string;
+  title: string;
+  tasks: Task[];
+  color?: string;
+};
+```
+
+> Note: A future enhancement could expose `columns` and callbacks (e.g., `onMove`) as props for app integration.
+
+## Accessibility
+
+- **Semantics**: Cards are structured with headings and descriptive text
+- **Keyboard**: Native DnD is mouse-based; consider adding keyboard shortcuts if you adopt this in production
+- **Contrast**: Dark mode and borders ensure sufficient contrast
+- **Avatars**: Provide descriptive `AvatarFallback` initials for screen readers
+
+## Notes
+
+- This component is intended as a visual demo and starting point
+- It relies on shadcn/ui primitives and lucide icons available in the docs app
+- The CLI installer will install any missing shadcn/ui primitives when adding this component

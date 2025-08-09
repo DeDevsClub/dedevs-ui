@@ -4,7 +4,6 @@ import { Components } from './components/components';
 import { Hero } from './components/hero';
 import { Features } from './components/features';
 import { Stats } from './components/stats';
-import { Testimonials } from './components/testimonials';
 import { TechStack } from './components/tech-stack';
 import { UseCases } from './components/use-cases';
 
@@ -17,7 +16,6 @@ const Home = () => (
     <Components />
     <UseCases />
     <Blocks />
-    <Testimonials />
     <CallToAction />
   </div>
 );

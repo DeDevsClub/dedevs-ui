@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "ai-server",
   "type": "registry:ui",
-  "description": "AI server component utilities",
+  "description": "AI server component",
   "files": [
     {
       "path": "packages/ai/server.tsx",

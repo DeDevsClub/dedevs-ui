@@ -16,7 +16,7 @@ const tradingPairs = [
   { symbol: 'MATIC/USD', baseAsset: 'MATIC', quoteAsset: 'USD' },
 ];
 
-const DeFiOrderBookExample = () => {
+const DeFiOrderbookExample = () => {
   const [selectedPair, setSelectedPair] = useState(tradingPairs[0]);
   const [refreshKey, setRefreshKey] = useState(0);
 
@@ -104,7 +104,7 @@ const DeFiOrderBookExample = () => {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg">Exchange A</CardTitle>
-              <Badge variant="secondary">Binance</Badge>
+              <Badge variant="outline">Binance</Badge>
             </div>
           </CardHeader>
           <CardContent>
@@ -116,7 +116,7 @@ const DeFiOrderBookExample = () => {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg">Exchange B</CardTitle>
-              <Badge variant="secondary">Coinbase</Badge>
+              <Badge variant="outline">Coinbase</Badge>
             </div>
           </CardHeader>
           <CardContent>
@@ -167,4 +167,4 @@ const DeFiOrderBookExample = () => {
   );
 };
 
-export default DeFiOrderBookExample;
+export default DeFiOrderbookExample;

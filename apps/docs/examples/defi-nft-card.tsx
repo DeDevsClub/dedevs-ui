@@ -129,10 +129,10 @@ const NftMarketplace: React.FC = () => {
             <div className="relative z-10 w-full max-w-[1600px] mx-auto">
                 {/* Header Section */}
                 <div className="mb-6 sm:mb-8 lg:mb-12 text-center">
-                    <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-4 font-space-grotesk">
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-text mb-2 sm:mb-4 font-space-grotesk">
                         NFT Marketplace
                     </h1>
-                    <p className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-slate-400 max-w-2xl mx-auto px-4">
+                    <p className="text-sm sm:text-base lg:text-lg text-text max-w-2xl mx-auto px-4">
                         Discover, collect, and trade unique digital assets
                     </p>
                 </div>

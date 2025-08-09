@@ -16,7 +16,7 @@ export default function PricingPage() {
     <div className="container mx-auto px-4 py-16 max-w-6xl">
       {/* Header */}
       <div className="text-center space-y-4 mb-16">
-        <Badge variant="secondary" className="mb-4">
+        <Badge variant="outline" className="mb-4">
           <Sparkles className="w-4 h-4 mr-1" />
           Pricing Plans
         </Badge>

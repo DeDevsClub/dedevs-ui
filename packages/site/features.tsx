@@ -13,7 +13,6 @@ export interface Feature {
   iconColor?: string;
   href?: string;
   image?: string;
-  badge?: string;
 }
 
 export interface FeaturesProps {
@@ -55,27 +54,21 @@ const FeatureCard = ({ feature, showImage = false }: { feature: Feature; showIma
   const content = (
     <div
       className={cn(
-        "group relative h-full p-6 rounded-xl border border-neutral-200 dark:border-neutral-800",
-        "bg-gradient-to-b from-white to-neutral-50 dark:from-neutral-900 dark:to-neutral-950",
+        "group relative h-full w-full p-6 rounded-xl border border-neutral-200 dark:border-neutral-800",
+        "bg-background mx-auto justify-center items-center flex flex-col",
         "hover:border-neutral-300 dark:hover:border-neutral-700",
         "hover:shadow-lg hover:shadow-neutral-200/50 dark:hover:shadow-neutral-900/50",
         "transition-all duration-300 ease-out",
         feature.href && "cursor-pointer"
       )}
     >
-      {/* Badge */}
-      {feature.badge && (
-        <div className="absolute -top-2 -right-2 px-2 py-1 bg-emerald-500 text-white text-xs font-medium rounded-full">
-          {feature.badge}
-        </div>
-      )}
 
-      <div className="flex flex-col h-full space-y-4">
+      <div className="flex flex-col h-full w-full justify-start items-start space-y-4">
         {/* Icon or Image */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {showImage && feature.image ? (
-              <div className="w-12 h-12 rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+              <div className="w-12 h-12 rounded-lg overflow-hidden bg-background">
                 <img
                   src={feature.image}
                   alt={feature.title}
@@ -86,29 +79,28 @@ const FeatureCard = ({ feature, showImage = false }: { feature: Feature; showIma
               <div
                 className={cn(
                   "w-12 h-12 rounded-lg flex items-center justify-center",
-                  "bg-gradient-to-br from-neutral-100 to-neutral-200",
-                  "dark:from-neutral-800 dark:to-neutral-900",
-                  feature.iconColor || "text-neutral-700 dark:text-neutral-300"
+                  "bg-background",
+                  feature.iconColor || "text-text"
                 )}
               >
                 <IconComponent className="w-6 h-6" />
               </div>
             ) : (
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600" />
+              <div className="w-12 h-12 rounded-lg bg-background" />
             )}
           </div>
 
           {feature.href && (
-            <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors opacity-0 group-hover:opacity-100" />
+            <ArrowRight className="w-5 h-5 text-text group-hover:text-text transition-colors opacity-0 group-hover:opacity-100" />
           )}
         </div>
 
         {/* Content */}
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors">
+          <h3 className="text-lg font-semibold text-text mb-2 group-hover:text-text transition-colors">
             {feature.title}
           </h3>
-          <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          <p className="text-text leading-relaxed">
             {feature.description}
           </p>
         </div>
@@ -141,7 +133,7 @@ const AlternatingFeature = ({ feature, index, showImage = false }: { feature: Fe
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             {showImage && feature.image ? (
-              <div className="w-12 h-12 rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+              <div className="w-12 h-12 rounded-lg overflow-hidden bg-background">
                 <img
                   src={feature.image}
                   alt={feature.title}
@@ -152,30 +144,29 @@ const AlternatingFeature = ({ feature, index, showImage = false }: { feature: Fe
               <div
                 className={cn(
                   "w-12 h-12 rounded-lg flex items-center justify-center",
-                  "bg-gradient-to-br from-neutral-100 to-neutral-200",
-                  "dark:from-neutral-800 dark:to-neutral-900",
-                  feature.iconColor || "text-neutral-700 dark:text-neutral-300"
+                  "bg-background",
+                  feature.iconColor || "text-text"
                 )}
               >
                 <IconComponent className="w-6 h-6" />
               </div>
             ) : (
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600" />
+              <div className="w-12 h-12 rounded-lg bg-background" />
             )}
           </div>
 
-          <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+          <h3 className="text-2xl font-bold text-text">
             {feature.title}
           </h3>
           
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          <p className="text-lg text-text leading-relaxed">
             {feature.description}
           </p>
 
           {feature.href && (
             <a
               href={feature.href}
-              className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
+              className="inline-flex items-center gap-2 text-text hover:text-text font-medium transition-colors"
             >
               Learn more
               <ArrowRight className="w-4 h-4" />
@@ -189,7 +180,7 @@ const AlternatingFeature = ({ feature, index, showImage = false }: { feature: Fe
         "relative",
         !isEven && "lg:col-start-1 lg:row-start-1"
       )}>
-        <div className="aspect-video rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+        <div className="aspect-video rounded-xl bg-background border border-neutral-200 overflow-hidden">
           {feature.image ? (
             <img
               src={feature.image}
@@ -199,9 +190,9 @@ const AlternatingFeature = ({ feature, index, showImage = false }: { feature: Fe
           ) : (
             <div className="w-full h-full flex items-center justify-center">
               {IconComponent ? (
-                <IconComponent className="w-16 h-16 text-neutral-400 dark:text-neutral-500" />
+                <IconComponent className="w-16 h-16 text-text" />
               ) : (
-                <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600" />
+                <div className="w-16 h-16 rounded-lg bg-background" />
               )}
             </div>
           )}
@@ -234,8 +225,8 @@ export function Features({
   };
 
   return (
-    <section className={cn("py-24 sm:py-32 bg-white dark:bg-neutral-950", className)}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className={cn("py-24 sm:py-32 bg-background w-full justify-center items-center flex flex-col", className)}>
+      <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
         <motion.div
           initial="hidden"
@@ -244,11 +235,11 @@ export function Features({
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-text sm:text-4xl">
             {title}
           </h2>
           {subtitle && (
-            <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+            <p className="mt-4 text-lg text-text">
               {subtitle}
             </p>
           )}
@@ -256,10 +247,11 @@ export function Features({
 
         {/* Features */}
         {layout === "alternating" ? (
-          <div className="space-y-24">
+          <div className="space-y-24 w-full flex flex-col justify-center items-center mx-auto bg-background">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.id}
+                className="w-full flex flex-col justify-center items-center mx-auto bg-background"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
@@ -279,10 +271,10 @@ export function Features({
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className="space-y-6"
+            className="space-y-6 w-full flex flex-col justify-center items-center mx-auto bg-background"
           >
             {features.map((feature) => (
-              <motion.div key={feature.id} variants={fadeInUp}>
+              <motion.div key={feature.id} className="w-full flex flex-col justify-center items-center mx-auto bg-background" variants={fadeInUp}>
                 <FeatureCard feature={feature} showImage={showImages} />
               </motion.div>
             ))}
@@ -293,10 +285,10 @@ export function Features({
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className={cn("grid gap-6", getGridCols())}
+            className={cn("grid gap-6 w-full flex flex-col justify-center items-center mx-auto bg-background", getGridCols())}
           >
             {features.map((feature) => (
-              <motion.div key={feature.id} variants={fadeInUp}>
+              <motion.div key={feature.id} className="w-full flex flex-col justify-center items-center mx-auto bg-background" variants={fadeInUp}>
                 <FeatureCard feature={feature} showImage={showImages} />
               </motion.div>
             ))}
