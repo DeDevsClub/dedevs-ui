@@ -13,13 +13,16 @@ import {
 import { RiSettings4Line, RiArrowDownLine } from "@remixicon/react";
 import { I18nProvider, Input, Label, NumberField } from "react-aria-components";
 import { cn } from "@repo/shadcn-ui/lib/utils";
+import { useState } from "react";
 
 interface ConverterFieldProps {
     className?: string;
     isLast?: boolean;
-    defaultValue: number;
+    amount: number;
+    onAmountChange: (value: number) => void;
     balance: string;
-    defaultCoin: string;
+    selectedCoin: string;
+    onSelectCoin: (value: string) => void;
     coins: {
         id: string;
         name: string;
@@ -30,40 +33,47 @@ interface ConverterFieldProps {
 function ConverterField({
     className,
     isLast,
-    defaultValue,
+    amount,
+    onAmountChange,
     balance,
-    defaultCoin,
+    selectedCoin,
+    onSelectCoin,
     coins,
 }: ConverterFieldProps) {
     return (
         <>
+            {/* Arrow */}
             {isLast && (
                 <div
-                    className="size-10 flex items-center justify-center rounded-full bg-linear-to-b from-primary to-primary-to inset-shadow-[0_1px_rgb(255_255_255/0.15)] absolute top-1/2 -translate-y-1/2"
+                    className="size-6 border z-10 rounded-full border-primary flex flex-col items-center justify-end bg-linear-to-b from-primary to-primary-to inset-shadow-[0_1px_rgb(255_255_255/0.15)] absolute top-1/2 -translate-y-1/2"
                     aria-hidden="true"
                 >
                     <RiArrowDownLine className="text-primary-foreground" size={20} />
                 </div>
             )}
+            {/* Converter */}
             <Card
                 className={cn(
-                    "relative w-full flex-row items-center justify-between gap-2 p-5 dark:bg-card/64",
+                    "relative w-full flex-row items-center justify-between gap-2 p-4 dark:bg-card/64 border-2 border-border",
                     isLast
                         ? "[mask-image:radial-gradient(ellipse_26px_24px_at_50%_0%,transparent_0,_transparent_24px,_black_25px)]"
                         : "[mask-image:radial-gradient(ellipse_26px_24px_at_50%_100%,transparent_0,_transparent_24px,_black_25px)]",
                     className,
                 )}
             >
+                {/* Arrow */}
                 {isLast && (
                     <div
                         className="absolute -top-px left-1/2 -translate-x-1/2 w-[50px] h-[25px] rounded-b-full border-b border-x border-white/15"
                         aria-hidden="true"
                     ></div>
                 )}
+                {/* Amount */}
                 <div className="grow">
                     <I18nProvider locale="en-US">
                         <NumberField
-                            defaultValue={defaultValue}
+                            value={amount}
+                            onChange={(v) => onAmountChange(v ?? 0)}
                             minValue={0}
                             formatOptions={{
                                 minimumFractionDigits: 1,
@@ -80,13 +90,14 @@ function ConverterField({
                         {balance}
                     </div>
                 </div>
-                <div>
-                    <Select defaultValue={defaultCoin}>
+                {/* Coin selector */}
+                <div className="flex items-center gap-2">
+                    <Select value={selectedCoin} onValueChange={onSelectCoin}>
                         <SelectTrigger className="p-1 pr-2 h-8 rounded-full [&>span_svg]:text-muted-foreground/80 [&>span]:flex [&>span]:items-center [&>span]:gap-2 [&>span_svg]:shrink-0 border-0 bg-card/64 hover:bg-card/80 shadow-lg inset-shadow-[0_1px_rgb(255_255_255/0.15)]">
                             <SelectValue placeholder="Select coin" />
                         </SelectTrigger>
                         <SelectContent
-                            className="dark bg-zinc-800 border-none shadow-black/10 inset-shadow-[0_1px_rgb(255_255_255/0.15)] [&_*[role=option]>span>svg]:text-muted-foreground/80 [&_*[role=option]]:ps-2 [&_*[role=option]]:pe-8 [&_*[role=option]>span]:start-auto [&_*[role=option]>span]:end-2 [&_*[role=option]>span]:flex [&_*[role=option]>span]:items-center [&_*[role=option]>span]:gap-2 [&_*[role=option]>span>svg]:shrink-0"
+                            className="dark bg-muted border-none shadow-black/10 inset-shadow-[0_1px_rgb(255_255_255/0.15)] [&_*[role=option]>span>svg]:text-muted-foreground/80 [&_*[role=option]]:ps-2 [&_*[role=option]]:pe-8 [&_*[role=option]>span]:start-auto [&_*[role=option]>span]:end-2 [&_*[role=option]>span]:flex [&_*[role=option]>span]:items-center [&_*[role=option]>span]:gap-2 [&_*[role=option]>span>svg]:shrink-0"
                             align="center"
                         >
                             {coins.map((coin) => (
@@ -128,47 +139,135 @@ export function Converter() {
     ];
 
     function ConverterContent() {
+        const [fromCoinId, setFromCoinId] = useState<string>("2");
+        const [toCoinId, setToCoinId] = useState<string>("1");
+        const balances: Record<string, string> = {
+            "1": "54,579", // Ark
+            "2": "12,234.2", // Tok
+        };
+
+        // Simple pair rate helper. Example baseline: 1 ARK = 25.00 TOK
+        const getRate = (fromId: string, toId: string): number => {
+            if (fromId === toId) return 1;
+            const ARK = "1";
+            const TOK = "2";
+            const arkToTok = 25.00; // 1 ARK -> 25.00 TOK
+            if (fromId === ARK && toId === TOK) return arkToTok;
+            if (fromId === TOK && toId === ARK) return 1 / arkToTok;
+            return 1; // fallback
+        };
+
+        const round2 = (n: number) => Math.max(0, Math.round((n + Number.EPSILON) * 100) / 100);
+
+        // Amounts and last edited side
+        const [fromAmount, setFromAmount] = useState<number>(1);
+        const [toAmount, setToAmount] = useState<number>(() => round2(1 * getRate("2", "1")));
+        const [lastEdited, setLastEdited] = useState<"from" | "to">("from");
+
+        const handleFromChange = (value: string) => {
+            const previousFrom = fromCoinId;
+            setFromCoinId(value);
+            if (value === toCoinId) {
+                const fallback = coins.find((c) => c.id !== value)?.id ?? toCoinId;
+                setToCoinId(previousFrom !== value ? previousFrom : fallback);
+            }
+            // Recalculate the opposite amount based on who was last edited to preserve user intent
+            const rate = getRate(value, toCoinId);
+            if (lastEdited === "from") {
+                setToAmount((prev) => round2(fromAmount * rate));
+            } else {
+                // last edited is "to", keep toAmount and back-calc from
+                setFromAmount((prev) => round2(toAmount / rate));
+            }
+        };
+
+        const handleToChange = (value: string) => {
+            const previousTo = toCoinId;
+            setToCoinId(value);
+            if (value === fromCoinId) {
+                const fallback = coins.find((c) => c.id !== value)?.id ?? fromCoinId;
+                setFromCoinId(previousTo !== value ? previousTo : fallback);
+            }
+            const rate = getRate(fromCoinId, value);
+            if (lastEdited === "from") {
+                setToAmount((prev) => round2(fromAmount * rate));
+            } else {
+                setFromAmount((prev) => round2(toAmount / rate));
+            }
+        };
+
+        // Handlers for amount edits
+        const handleFromAmountChange = (val: number) => {
+            const rate = getRate(fromCoinId, toCoinId);
+            setFromAmount(val);
+            setToAmount(round2(val * rate));
+            setLastEdited("from");
+        };
+
+        const handleToAmountChange = (val: number) => {
+            const rate = getRate(fromCoinId, toCoinId);
+            setToAmount(val);
+            setFromAmount(val === 0 ? 0 : round2(val / rate));
+            setLastEdited("to");
+        };
+
+        // Pricing and summary calculations
+        const usdPrices: Record<string, number> = {
+            "1": 25, // ARK -> $25.00 (demo)
+            "2": 1, // TOK -> $1.00 (demo)
+        };
+        const formatUSD = (n: number) =>
+            new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(n);
+        const networkFeeUSD = 3.20;
+        const txValueUSD = (usdPrices[toCoinId] ?? 0) * toAmount;
+        const orderNetUSD = txValueUSD + networkFeeUSD;
+
         return (
             <>
                 <div className="relative flex flex-col items-center gap-1 mb-4">
                     <ConverterField
-                        defaultValue={15494.9}
-                        balance="24,579"
-                        defaultCoin="2"
+                        amount={fromAmount}
+                        onAmountChange={handleFromAmountChange}
+                        balance={balances[fromCoinId] ?? "0"}
+                        selectedCoin={fromCoinId}
+                        onSelectCoin={handleFromChange}
                         coins={coins}
                     />
                     <ConverterField
                         isLast
-                        defaultValue={12984.2}
-                        balance="1,379.2"
-                        defaultCoin="1"
+                        amount={toAmount}
+                        onAmountChange={handleToAmountChange}
+                        balance={balances[toCoinId] ?? "0"}
+                        selectedCoin={toCoinId}
+                        onSelectCoin={handleToChange}
                         coins={coins}
                     />
                 </div>
-                <div className="mb-2 ps-3 uppercase text-muted-foreground/50 text-xs font-medium">
+                {/* Summary */}
+                <div className="mb-2 ps-3 uppercase text-muted-foreground/50 text-xs font-medium rounded-md">
                     Summary
                 </div>
-                <Card className="p-4 gap-0 rounded-[0.75rem]">
+                <Card className="p-4 gap-0 rounded-md">
                     <ul className="text-sm">
                         <li className="flex items-center justify-between pb-3 mb-3 border-b border-card/50">
                             <span className="text-muted-foreground">Transaction Value</span>
-                            <span className="font-medium">$2,867</span>
+                            <span className="font-medium">{formatUSD(txValueUSD)}</span>
                         </li>
                         <li className="flex items-center justify-between pb-3 mb-3 border-b border-card/50">
                             <span className="text-muted-foreground">Network Fees</span>
-                            <span className="font-medium">$31.2</span>
+                            <span className="font-medium">{formatUSD(networkFeeUSD)}</span>
                         </li>
                         <li className="flex items-center justify-between pb-3 mb-3 border-b border-card/50">
                             <span className="text-muted-foreground">Order Net</span>
-                            <span className="font-medium">$2,898.2</span>
+                            <span className="font-medium">{formatUSD(orderNetUSD)}</span>
                         </li>
                     </ul>
                     <Button size="lg" className="w-full">
                         Confirm
                     </Button>
                     <div className="text-xs text-center uppercase mt-3">
-                        1 <span className="text-muted-foreground">ARK =</span> 1,574.04{" "}
-                        <span className="text-muted-foreground">TOK</span>
+                        {coins.find((c) => c.id === fromCoinId)?.name} <span className="text-muted-foreground">=</span> 1,574.04{" "}
+                        {coins.find((c) => c.id === toCoinId)?.name}
                     </div>
                 </Card>
             </>
@@ -177,27 +276,7 @@ export function Converter() {
 
     return (
         <Tabs defaultValue="tab-1" className="flex-1 gap-5">
-            <div className="flex items-center gap-2">
-                <TabsList className="flex w-full bg-background dark:bg-card/64 p-0 shadow-md *:not-first:ms-px dark:inset-shadow-[0_1px_rgb(255_255_255/0.15)]">
-                    <TabsTrigger
-                        value="tab-1"
-                        className="flex-1 data-[state=active]:shadow-none data-[state=active]:bg-transparent relative before:absolute before:inset-y-2 before:-left-px before:w-px before:bg-border dark:before:bg-card first:before:hidden"
-                    >
-                        Convert
-                    </TabsTrigger>
-                    <TabsTrigger
-                        value="tab-2"
-                        className="flex-1 data-[state=active]:shadow-none data-[state=active]:bg-transparent relative before:absolute before:inset-y-2 before:-left-px before:w-px before:bg-border dark:before:bg-card first:before:hidden"
-                    >
-                        Buy
-                    </TabsTrigger>
-                    <TabsTrigger
-                        value="tab-3"
-                        className="flex-1 data-[state=active]:shadow-none data-[state=active]:bg-transparent relative before:absolute before:inset-y-2 before:-left-px before:w-px before:bg-border dark:before:bg-card first:before:hidden"
-                    >
-                        Send
-                    </TabsTrigger>
-                </TabsList>
+            <div className="flex items-center gap-2 justify-end">
                 <Button
                     size="icon"
                     variant="ghost"
@@ -208,15 +287,7 @@ export function Converter() {
                 </Button>
             </div>
             <div className="dark bg-background dark:bg-secondary/64 rounded-2xl p-2">
-                <TabsContent value="tab-1">
-                    <ConverterContent />
-                </TabsContent>
-                <TabsContent value="tab-2">
-                    <ConverterContent />
-                </TabsContent>
-                <TabsContent value="tab-3">
-                    <ConverterContent />
-                </TabsContent>
+                <ConverterContent />
             </div>
         </Tabs>
     );
