@@ -108,7 +108,7 @@ export const Hero = () => (
       <div className="-mb-24 overflow-hidden rounded-4xl border-background/10 border-x bg-gradient-to-b from-background/15 to-background/40 p-8 backdrop-blur-lg">
         {/* <DemoVideo url="https://youtu.be/FqQ9j6bqtf0" /> */}
         <Image
-          src="https://ui.dedevs.com/hero.png"
+          src="/hero.png"
           alt="Hero"
           width={3072}
           height={2048}
