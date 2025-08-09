@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "packages/site/index.tsx",
-      "content": "// Site Components - Landing page and marketing components\nexport { BentoGrid, BentoCard } from \"./bento\";\nexport type { BentoItem, BentoGridProps } from \"./bento\";\n\nexport { Features } from \"./features\";\nexport type { FeaturesProps, Feature } from \"./features\";\n\n// Kanban Board\nexport { default as KanbanBoard } from \"./kanban\";\n\n\n// GitHub Card\nexport { default as GitHubCard } from \"./github-card\";",
+      "content": "// Site Components - Landing page and marketing components\nexport { BentoGrid, BentoCard } from \"./bento\";\nexport type { BentoItem, BentoGridProps } from \"./bento\";\n\nexport { Features } from \"./features\";\nexport type { FeaturesProps, Feature } from \"./features\";\n\n// Kanban Board\nexport { default as KanbanBoard } from \"./kanban\";\n\n// GitHub Card\nexport { default as GitHubCard } from \"./github-card\";",
       "type": "registry:component"
     }
   ]

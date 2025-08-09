@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "defi-orderbook",
   "type": "registry:ui",
-  "description": "Orderbook component for displaying real-time orderbook data",
+  "description": "Defi orderbook component",
   "files": [
     {
       "path": "packages/defi/orderbook.tsx",

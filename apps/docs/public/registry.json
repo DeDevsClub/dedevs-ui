@@ -235,6 +235,17 @@
       ]
     },
     {
+      "name": "defi-orderbook",
+      "type": "registry:ui",
+      "description": "Defi orderbook component",
+      "files": [
+        {
+          "path": "packages/defi/orderbook.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "defi-swap",
       "type": "registry:ui",
       "description": "Swap component for displaying real-time swap data",
