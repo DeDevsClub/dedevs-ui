@@ -13,7 +13,7 @@ export function OrganizationStructuredData() {
     sameAs: [
       'https://github.com/dedevsclub',
       'https://x.com/dedevsclub',
-      'https://www.twitter.com/dedevsclub',
+      'https://www.x.com/dedevsclub',
       'https://www.linkedin.com/in/buns',
       'https://www.instagram.com/bunsdev',
     ],

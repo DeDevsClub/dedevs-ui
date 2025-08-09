@@ -2,7 +2,7 @@
 
 import { Converter } from '@repo/defi/swap';
 
-const Example = () => {
+const DefiSwapExample = () => {
   return (
     <div className="w-full max-w-md mx-auto p-6">
       <Converter />
@@ -10,4 +10,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default DefiSwapExample;

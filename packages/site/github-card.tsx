@@ -28,7 +28,7 @@ interface ContributionDay {
     count: number;
 }
 
-export default function GitHubProfileCard() {
+export default function GitHubCard() {
     const [username, setUsername] = useState("");
     const [userData, setUserData] = useState<GitHubUser | null>(null);
     const [loading, setLoading] = useState(false);
@@ -346,7 +346,7 @@ export default function GitHubProfileCard() {
                                 <div className="flex space-x-4">
                                     {userData.twitter_username && (
                                         <a
-                                            href={`https://twitter.com/${userData.twitter_username}`}
+                                            href={`https://x.com/${userData.twitter_username}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="p-2 hover:bg-background rounded-lg transition-colors"
@@ -536,7 +536,7 @@ export default function GitHubProfileCard() {
                             Enter a GitHub username to view their profile card
                         </p>
                         <p className="text-sm">
-                            Try searching for popular users like &quot;arihantcodes&quot;,
+                            Try searching for popular users like &quot;bunsdev&quot;,
                             &quot;torvalds&quot;
                         </p>
                     </div>

@@ -2,8 +2,11 @@
 title: Site Features
 description: A flexible features showcase component with multiple layout options for landing pages and marketing sites.
 icon: Zap
-full: true
 ---
+
+<PoweredBy packages={[
+  { name: 'Lucide', url: 'https://lucide.dev/', icon: 'simple-icons:lucide' },
+]} />
 
 <Preview path="site-features" />
 
@@ -14,7 +17,7 @@ full: true
 ## Usage
 
 ```tsx
-import { Features, type Feature } from "@repo/site";
+import { Features, type Feature } from "@repo/site/features";
 import { Zap, Shield, Palette } from "lucide-react";
 
 const features: Feature[] = [

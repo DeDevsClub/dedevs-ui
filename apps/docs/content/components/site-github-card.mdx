@@ -4,6 +4,11 @@ description: A beautiful GitHub profile card component for showcasing your GitHu
 icon: Github
 ---
 
+<PoweredBy packages={[
+  { name: 'Tailwind CSS', url: 'https://tailwindcss.com/', icon: 'simple-icons:tailwindcss' },
+  { name: 'React', url: 'https://reactjs.org/', icon: 'simple-icons:react' },
+]} />
+
 ## Preview
 
 <Preview path="site-github-card" />
@@ -33,7 +38,7 @@ Import the component from `@repo/site` and render it in a client page or compone
 ```tsx
 "use client";
 import React from "react";
-import { GitHubCard } from "@repo/site";
+import { GitHubCard } from "@repo/site/github-card";
 
 export default function Page() {
   return (

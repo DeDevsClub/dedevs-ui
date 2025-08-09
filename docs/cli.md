@@ -88,7 +88,6 @@ Available components:
   defi-ticker     Ticker component for displaying real-time data
   defi-swap       Swap component for displaying real-time swap data
   defi-chart      Chart component for displaying real-time chart data
-  defi-orderbook  Orderbook component for displaying real-time orderbook data
 
 🌐 Site Components:
   site-bento      Bento component for displaying a grid of items

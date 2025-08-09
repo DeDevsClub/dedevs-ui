@@ -10,7 +10,7 @@ import { UseCases } from './components/use-cases';
 const Home = () => (
   <div className="mt-[var(--fd-nav-height)] w-full">
     <Hero />
-    <Stats />
+    {/* <Stats /> */}
     <Features />
     <TechStack />
     <Components />

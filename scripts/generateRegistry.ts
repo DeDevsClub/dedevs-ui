@@ -42,7 +42,6 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
     'code-big-calendar': 'Big calendar component for displaying events',
     // defi
     'defi-ticker': 'Ticker component for displaying real-time data',
-    'defi-orderbook': 'Orderbook component for displaying real-time orderbook data',
     'defi-chart': 'Chart component for displaying real-time data',
     'defi-swap': 'Swap component for displaying real-time swap data',
     // site

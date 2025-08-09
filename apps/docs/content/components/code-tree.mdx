@@ -1,63 +1,31 @@
 ---
-title: Tree
+title: Code Tree
 description: A flexible tree view component with collapsible nodes, selection, and animations.
+icon: FolderTree
 new: true
 ---
 
-import { ComponentPreview } from "../../components/component-preview";
-import { TypeTable } from "fumadocs-ui/components/type-table";
+<PoweredBy packages={[
+  { name: 'Lucide', url: 'https://lucide.dev/', icon: 'simple-icons:lucide' },
+]} />
 
 import { Tabs, Tab } from "fumadocs-ui/components/tabs";
+import { TypeTable } from "fumadocs-ui/components/type-table";
+import { SourcePreview } from "../../components/preview/source-preview";
+import { TreeProvider, Tree, TreeItem } from "@repo/code/tree";
+import { Folder, File, FolderOpen, Image, Video, Music, Settings, Users, Database, FileText } from "lucide-react";
 
-import { 
-  Folder, 
-  FolderOpen, 
-  File, 
-  FileText, 
-  Image, 
-  Video, 
-  Music,
-  Settings,
-  Users,
-  Package,
-  Database
-} from "lucide-react";
-
-// import { TreeProvider, Tree, TreeItem } from "@repo/code/tree";
-
-<Tabs items={["Preview", "Code"]}>
-  <Tab value="Preview">
-    <ComponentPreview name="code-tree" />
-  </Tab>
-  <Tab value="Code">
-    ```tsx
-    <TreeProvider className="w-full max-w-md">
-      <Tree>
-        <TreeItem nodeId="root" label="Project" icon={<Folder />} hasChildren>
-          <TreeItem nodeId="src" label="src" icon={<Folder />} level={1} hasChildren>
-            <TreeItem nodeId="components" label="components" icon={<Folder />} level={2} hasChildren>
-              <TreeItem nodeId="ui" label="ui" icon={<Folder />} level={3} hasChildren>
-                <TreeItem nodeId="button" label="button.tsx" icon={<FileText />} level={4} />
-                <TreeItem nodeId="tree" label="tree.tsx" icon={<FileText />} level={4} />
-              </TreeItem>
-            </TreeItem>
-          </TreeItem>
-        </TreeItem>
-      </Tree>
-    </TreeProvider>
-    ```
-  </Tab>
-</Tabs>
+<Preview path="code-tree" type="component" />
 
 ## Installation
 
 <Tabs items={["Manual", "CLI"]} defaultIndex={1}>
-<Tab value="Manual">
+  <Tab value="Manual">
 
-Install following dependencies:
+Install the required dependencies:
 
 ```bash
-npm install @radix-ui/react-slot class-variance-authority motion lucide-react
+pnpm add @radix-ui/react-slot class-variance-authority framer-motion lucide-react
 ```
 
 Copy and paste the following code into your project.
@@ -69,7 +37,7 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ChevronRight, Folder, File, FolderOpen } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 // Tree Context
@@ -356,19 +324,19 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
           className={cn(
             treeItemVariants({ variant, selected: isSelected, className })
           )}
-          style={{ paddingLeft: level * indent + 8 }}
+          style={{ paddingInlineStart: level * indent + 8 }}
           onClick={handleClick}
           whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
         >
           {/* Tree Lines */}
           {showLines && level > 0 && (
-            <div className="absolute left-0 top-0 bottom-0 pointer-events-none">
+            <div className="absolute start-0 top-0 bottom-0 pointer-events-none">
               {currentPath.map((isLastInPath, pathIndex) => (
                 <div
                   key={pathIndex}
-                  className="absolute top-0 bottom-0 border-l border-border/40"
+                  className="absolute top-0 bottom-0 border-s border-border/40"
                   style={{
-                    left: pathIndex * indent + 12,
+                    insetInlineStart: pathIndex * indent + 12,
                     display:
                       pathIndex === currentPath.length - 1 && isLastInPath
                         ? "none"
@@ -379,16 +347,16 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
               <div
                 className="absolute top-1/2 border-t border-border/40"
                 style={{
-                  left: (level - 1) * indent + 12,
+                  insetInlineStart: (level - 1) * indent + 12,
                   width: indent - 4,
                   transform: "translateY(-1px)",
                 }}
               />
               {isLast && (
                 <div
-                  className="absolute top-0 border-l border-border/40"
+                  className="absolute top-0 border-s border-border/40"
                   style={{
-                    left: (level - 1) * indent + 12,
+                    insetInlineStart: (level - 1) * indent + 12,
                     height: "50%",
                   }}
                 />
@@ -398,19 +366,19 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
 
           {/* Expand Icon */}
           <motion.div
-            className="flex items-center justify-center w-4 h-4 mr-1"
+            className="flex items-center justify-center w-4 h-4 me-1"
             animate={{ rotate: hasChildren && isExpanded ? 90 : 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
           >
             {hasChildren && (
-              <ChevronRight className="h-3 w-3 text-muted-foreground" />
+              <ChevronRight className="h-3 w-3 text-muted-foreground rtl:-scale-x-100" />
             )}
           </motion.div>
 
           {/* Node Icon */}
           {showIcons && (
             <motion.div
-              className="flex items-center justify-center w-4 h-4 mr-2 text-muted-foreground"
+              className="flex items-center justify-center w-4 h-4 me-2 text-muted-foreground"
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.15 }}
             >
@@ -419,7 +387,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
           )}
 
           {/* Label */}
-          <span className="text-sm  truncate flex-1 text-foreground">
+          <span className="text-sm truncate flex-1 text-foreground">
             {label}
           </span>
         </motion.div>
@@ -461,20 +429,20 @@ TreeItem.displayName = "TreeItem";
 export { TreeProvider, Tree, TreeItem, treeVariants, treeItemVariants };
 ```
 
-</Tab>
-<Tab value="CLI">
+  </Tab>
+  <Tab value="CLI">
 
 ```bash
-npx hextaui@latest add tree
+npx dedevs-ui@latest add code-tree
 ```
 
-</Tab>
+  </Tab>
 </Tabs>
 
 ## Usage
 
 ```tsx
-import { TreeProvider, Tree, TreeItem } from "@/components/ui/tree";
+import { TreeProvider, Tree, TreeItem } from "@repo/code/tree";
 ```
 
 ```tsx
@@ -488,72 +456,6 @@ import { TreeProvider, Tree, TreeItem } from "@/components/ui/tree";
 ```
 
 ## Examples
-
-### Basic Tree
-
-<Tabs items={["Preview", "Code"]}>
-  <Tab value="Preview">
-    <ComponentPreview name="code-tree" />
-  </Tab>
-  <Tab value="Code">
-    ```tsx
-    <TreeProvider className="w-full max-w-sm">
-      <Tree>
-        <TreeItem nodeId="documents" label="Documents" icon={<Folder />} hasChildren>
-          <TreeItem nodeId="projects" label="Projects" icon={<Folder />} level={1} hasChildren>
-            <TreeItem nodeId="project1" label="Project 1" icon={<Folder />} level={2} hasChildren>
-              <TreeItem nodeId="readme" label="README.md" icon={<FileText />} level={3} />
-              <TreeItem nodeId="index" label="index.tsx" icon={<FileText />} level={3} />
-            </TreeItem>
-          </TreeItem>
-          <TreeItem nodeId="images" label="Images" icon={<Folder />} level={1} hasChildren>
-            <TreeItem nodeId="logo" label="logo.png" icon={<Image />} level={2} />
-            <TreeItem nodeId="banner" label="banner.jpg" icon={<Image />} level={2} />
-          </TreeItem>
-        </TreeItem>
-      </Tree>
-    </TreeProvider>
-    ```
-  </Tab>
-</Tabs>
-
-### Tree Variants
-
-<Tabs items={["Preview", "Code"]}>
-  <Tab value="Preview">
-    <ComponentPreview name="code-tree" />
-  </Tab>
-  <Tab value="Code">
-    ```tsx
-    {/* Default */}
-    <TreeProvider variant="default">
-      <Tree>
-        <TreeItem nodeId="1" label="Folder" icon={<Folder />} hasChildren>
-          <TreeItem nodeId="2" label="File.txt" icon={<File />} level={1} />
-        </TreeItem>
-      </Tree>
-    </TreeProvider>
-
-    {/* Outline */}
-    <TreeProvider variant="outline">
-      <Tree>
-        <TreeItem nodeId="3" label="Folder" icon={<Folder />} hasChildren>
-          <TreeItem nodeId="4" label="File.txt" icon={<File />} level={1} />
-        </TreeItem>
-      </Tree>
-    </TreeProvider>
-
-    {/* Ghost */}
-    <TreeProvider variant="ghost">
-      <Tree>
-        <TreeItem nodeId="5" label="Folder" icon={<Folder />} hasChildren>
-          <TreeItem nodeId="6" label="File.txt" icon={<File />} level={1} />
-        </TreeItem>
-      </Tree>
-    </TreeProvider>
-    ```
-  </Tab>
-</Tabs>
 
 ### Custom Icons
 
@@ -580,40 +482,16 @@ import { TreeProvider, Tree, TreeItem } from "@/components/ui/tree";
   </Tab>
 </Tabs>
 
-### Without Lines
-
-<Tabs items={["Preview", "Code"]}>
-  <Tab value="Preview">
-    <ComponentPreview name="code-tree" />
-  </Tab>
-  <Tab value="Code">
-    ```tsx
-    <TreeProvider showLines={false}>
-      <Tree>
-        <TreeItem nodeId="root" label="Root" icon={<Folder />} hasChildren>
-          <TreeItem nodeId="child1" label="Child 1" icon={<Folder />} level={1} hasChildren>
-            <TreeItem nodeId="grandchild1" label="Grandchild 1" icon={<File />} level={2} />
-            <TreeItem nodeId="grandchild2" label="Grandchild 2" icon={<File />} level={2} />
-          </TreeItem>
-          <TreeItem nodeId="child2" label="Child 2" icon={<File />} level={1} />
-        </TreeItem>
-      </Tree>
-    </TreeProvider>
-    ```
-  </Tab>
-</Tabs>
-
 ### Data-driven Tree
 
-You can build tree structures from data using a simple recursive approach.
-
 <Tabs items={["Preview", "Code"]}>
   <Tab value="Preview">
     <ComponentPreview name="code-tree" />
   </Tab>
   <Tab value="Code">
     ```tsx
-    // Example data structure
+    import { Video, Music, Folder } from "lucide-react";
+
     const treeData = [
       {
         id: "media",
@@ -622,7 +500,7 @@ You can build tree structures from data using a simple recursive approach.
         children: [
           {
             id: "videos",
-            label: "Videos", 
+            label: "Videos",
             icon: <Video />,
             children: [
               { id: "video1", label: "intro.mp4", icon: <Video /> },
@@ -633,15 +511,12 @@ You can build tree structures from data using a simple recursive approach.
             id: "audio",
             label: "Audio",
             icon: <Music />,
-            children: [
-              { id: "audio1", label: "song.mp3", icon: <Music /> },
-            ],
+            children: [{ id: "audio1", label: "song.mp3", icon: <Music /> }],
           },
         ],
       },
     ];
 
-    // Recursive function to build tree items
     function buildTreeItems(nodes: any[], level = 0, parentPath: boolean[] = []) {
       return nodes.map((node, index) => {
         const isLast = index === nodes.length - 1;
@@ -658,22 +533,14 @@ You can build tree structures from data using a simple recursive approach.
             parentPath={parentPath}
             hasChildren={hasChildren}
           >
-            {hasChildren &&
-              buildTreeItems(
-                node.children,
-                level + 1,
-                [...parentPath, isLast]
-              )}
+            {hasChildren && buildTreeItems(node.children, level + 1, [...parentPath, isLast])}
           </TreeItem>
         );
       });
     }
 
-    // Usage
     <TreeProvider>
-      <Tree>
-        {buildTreeItems(treeData)}
-      </Tree>
+      <Tree>{buildTreeItems(treeData)}</Tree>
     </TreeProvider>
     ```
   </Tab>
@@ -796,6 +663,16 @@ You can build tree structures from data using a simple recursive approach.
       description: "When true, the component will render as a child element",
       type: "boolean",
       default: "false",
+    },
+    isLast: {
+      description: "Whether this item is the last among its siblings (used for line rendering)",
+      type: "boolean",
+      default: "false",
+    },
+    parentPath: {
+      description: "Boolean array describing whether each ancestor was last among its siblings (used for drawing connector lines)",
+      type: "boolean[]",
+      default: "[]",
     },
   }}
 />

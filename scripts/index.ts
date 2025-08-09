@@ -423,7 +423,6 @@ async function listComponents() {
           { name: 'code-snippet', description: 'Code snippet component' },
           // defi
           { name: 'defi-ticker', description: 'Ticker component for displaying real-time data' },
-          { name: 'defi-orderbook', description: 'Orderbook component for displaying real-time orderbook data' },
           { name: 'defi-chart', description: 'Chart component for displaying real-time data' },
           { name: 'defi-swap', description: 'Swap component for displaying real-time swap data' },
           // site

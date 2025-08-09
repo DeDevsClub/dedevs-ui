@@ -285,3 +285,12 @@ In this case, set:
 1. In /(docs)/[[...slug]]/page.tsx: sidebar={{ hidden: true, collapsible: false }}
 2. In /globals.css: .landing-page #nd-subnav button[data-search] + button { @apply hidden; }
 */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

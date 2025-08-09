@@ -23,6 +23,7 @@ interface ConverterFieldProps {
     balance: string;
     selectedCoin: string;
     onSelectCoin: (value: string) => void;
+    onMax?: () => void;
     coins: {
         id: string;
         name: string;
@@ -38,6 +39,7 @@ function ConverterField({
     balance,
     selectedCoin,
     onSelectCoin,
+    onMax,
     coins,
 }: ConverterFieldProps) {
     return (
@@ -45,7 +47,7 @@ function ConverterField({
             {/* Arrow */}
             {isLast && (
                 <div
-                    className="size-6 border z-10 rounded-full border-primary flex flex-col items-center justify-end bg-linear-to-b from-primary to-primary-to inset-shadow-[0_1px_rgb(255_255_255/0.15)] absolute top-1/2 -translate-y-1/2"
+                    className="size-6 border z-10 rounded-full border-primary flex flex-col items-center justify-center bg-linear-to-b from-primary to-primary-to inset-shadow-[0_1px_rgb(255_255_255/0.15)] absolute top-1/2 -translate-y-1/2"
                     aria-hidden="true"
                 >
                     <RiArrowDownLine className="text-primary-foreground" size={20} />
@@ -85,9 +87,25 @@ function ConverterField({
                             <Input className="w-full max-w-40 text-2xl font-semibold bg-transparent focus-visible:outline-none py-0.5 px-1 -ml-1 mb-0.5 focus:bg-card/64 rounded-lg appearance-none" />
                         </NumberField>
                     </I18nProvider>
-                    <div className="text-xs text-muted-foreground">
-                        <span className="text-muted-foreground/70">Balance: </span>
-                        {balance}
+                    <div className="text-xs text-muted-foreground flex items-center justify-between gap-3">
+                        <div
+                            className="flex items-center gap-2 cursor-pointer"
+                            onClick={onMax}
+                        >
+                            <span className="text-muted-foreground/70">Balance: </span>
+                            {balance}
+                        </div>
+                        {/* {onMax && (
+                            <Button
+                                type="button"
+                                variant="ghost"
+                                size="sm"
+                                className="h-6 px-2 py-0 text-[10px] uppercase tracking-wide"
+                                onClick={onMax}
+                            >
+                                MAX
+                            </Button>
+                        )} */}
                     </div>
                 </div>
                 {/* Coin selector */}
@@ -211,6 +229,18 @@ export function Converter() {
             setLastEdited("to");
         };
 
+        // MAX handler for the input (from) field
+        const parseBalance = (s: string) => {
+            // Remove commas and non-numeric except dot
+            const cleaned = (s ?? "0").replace(/[^0-9.]/g, "");
+            const n = parseFloat(cleaned);
+            return Number.isFinite(n) ? n : 0;
+        };
+        const handleMax = () => {
+            const full = parseBalance(balances[fromCoinId] ?? "0");
+            handleFromAmountChange(full);
+        };
+
         // Pricing and summary calculations
         const usdPrices: Record<string, number> = {
             "1": 25, // ARK -> $25.00 (demo)
@@ -231,6 +261,7 @@ export function Converter() {
                         balance={balances[fromCoinId] ?? "0"}
                         selectedCoin={fromCoinId}
                         onSelectCoin={handleFromChange}
+                        onMax={handleMax}
                         coins={coins}
                     />
                     <ConverterField

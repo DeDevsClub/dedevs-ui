@@ -22,26 +22,22 @@ const items: {
   locale?: DeFiTickerProps['locale'];
 }[] = [
     {
-      symbol: 'DUOL',
-      src: 'https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/DUOL.png',
-      price: 478.03,
-      change: 5.2,
+      symbol: 'BTC',
+      src: 'https://ui.dedevs.com/assets/tokens/btc.png',
+      price: 125250.00,
+      change: 1.25,
     },
     {
-      symbol: 'DBD',
-      src: 'https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/DBD.png',
-      price: 102.33,
-      change: 1.05,
-      currency: 'EUR',
-      locale: 'de-DE',
+      symbol: 'ETH',
+      src: 'https://ui.dedevs.com/assets/tokens/eth.png',
+      price: 4220.20,
+      change: 4.20,
     },
     {
-      symbol: '7203.T',
-      src: 'https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/TM.png',
-      price: 2460,
-      change: -120,
-      currency: 'JPY',
-      locale: 'ja-JP',
+      symbol: 'USDC',
+      src: 'https://ui.dedevs.com/assets/tokens/usdc.png',
+      price: 1.00,
+      change: 0.01,
     },
   ];
 

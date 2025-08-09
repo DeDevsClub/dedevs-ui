@@ -6,7 +6,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '@repo/shadcn-ui/components/ui/tabs';
+} from 'fumadocs-ui/components/tabs';
 import { cn } from '@repo/shadcn-ui/lib/utils';
 import { BoxIcon, CodeIcon, EyeIcon } from 'lucide-react';
 import { PreviewCode } from './code';
@@ -84,14 +84,14 @@ export const Preview = async ({
   return (
     <div
       className={cn(
-        'size-full overflow-auto rounded-lg border bg-background',
+        'flex flex-col h-full w-full overflow-hidden rounded-lg',
         type === 'block' && 'h-[48rem] prose-code:border-none prose-code:p-0',
         type === 'component' && 'not-prose h-[32rem]',
         className
       )}
     >
       <Tabs className="size-full gap-0" defaultValue="preview">
-        <TabsList className="w-full rounded-none border-b">
+        <TabsList className="border-b">
           <TabsTrigger value="source">
             <BoxIcon className="text-muted-foreground" size={16} />
             Source
@@ -106,20 +106,20 @@ export const Preview = async ({
           </TabsTrigger>
         </TabsList>
         <TabsContent
-          className="not-prose size-full overflow-y-auto bg-background"
+          className="not-prose size-full overflow-y-auto"
           value="source"
         >
           <PreviewSource source={sourceComponents} />
         </TabsContent>
         <TabsContent
-          className="size-full overflow-y-auto bg-background"
+          className="size-full overflow-y-auto"
           value="code"
         >
           <PreviewCode code={parsedCode} filename="index.tsx" language="tsx" />
         </TabsContent>
         <TabsContent
           className={cn(
-            'not-fumadocs-codeblock size-full',
+            'not-fumadocs-codeblock size-full overflow-hidden',
             type === 'component' ? 'overflow-hidden' : 'overflow-auto'
             // "overflow-y-auto bg-background"
           )}

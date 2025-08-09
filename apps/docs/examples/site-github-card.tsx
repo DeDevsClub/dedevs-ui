@@ -1,7 +1,5 @@
-"use client";
-
 import React from "react";
-import { GitHubCard } from "@repo/site";
+import GitHubCard from "@repo/site/github-card";
 
 export default function ExampleSiteGitHubCard() {
   return (

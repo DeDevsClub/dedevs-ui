@@ -75,17 +75,16 @@ export const Features = () => (
         </p>
       </div>
       
-      <div className="mx-auto mt-16 max-w-7xl">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {features.map((feature, index) => (
+      <div className="mx-auto mt-12 max-w-7xl">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((feature) => (
             <Card 
               key={feature.title}
               className={cn(
-                "group relative overflow-hidden border-0 bg-gradient-to-br from-background/50 to-background/30 backdrop-blur-sm transition-all hover:shadow-lg hover:shadow-primary/5",
-                "hover:from-background/80 hover:to-background/60"
+                "group relative overflow-hidden transition-all hover:shadow-lg hover:shadow-primary/5 p-2",
               )}
             >
-              <CardContent className="p-6">
+              <CardContent className="p-4">
                 <div className="flex items-start justify-between">
                   <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <feature.icon className="h-6 w-6" />

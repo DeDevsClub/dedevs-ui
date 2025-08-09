@@ -73,9 +73,9 @@ const stats = [
 ];
 
 export const UseCases = () => (
-  <section className="relative py-16 sm:py-20 lg:py-24">
+  <section className="relative py-16 w-full flex flex-col items-center">
     <div className="container">
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto max-w-full text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Built for modern applications
         </h2>
@@ -85,8 +85,8 @@ export const UseCases = () => (
       </div>
 
       {/* Stats Row */}
-      <div className="mx-auto mt-12 max-w-4xl">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="mx-auto py-16 w-full max-w-full flex flex-col items-center">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 w-full">
           {stats.map((stat) => (
             <div
               key={stat.label}
@@ -100,22 +100,22 @@ export const UseCases = () => (
         </div>
       </div>
       
-      <div className="mx-auto mt-16 max-w-7xl">
+      <div className="mx-auto mt-16 w-full max-w-full flex flex-col items-center">
         <div className="grid gap-8 lg:grid-cols-3">
-          {useCases.map((useCase, index) => (
+          {useCases.map((useCase) => (
             <Card 
               key={useCase.title}
               className={cn(
                 "group relative overflow-hidden border-0 transition-all hover:shadow-xl hover:shadow-primary/10",
-                `bg-gradient-to-br ${useCase.gradient} backdrop-blur-sm`
+                `bg-muted backdrop-blur-sm`
               )}
             >
-              <CardHeader className="pb-4">
+              <CardHeader className="p-4 rounded-sm">
                 <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-background/80 text-primary backdrop-blur-sm">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-md bg-background/80 text-primary">
                     <useCase.icon className="h-6 w-6" />
                   </div>
-                  <Badge variant="outline" className="bg-background/80 backdrop-blur-sm">
+                  <Badge variant="outline" className="bg-background text-xs">
                     {useCase.badge}
                   </Badge>
                 </div>
@@ -125,12 +125,12 @@ export const UseCases = () => (
                 </p>
               </CardHeader>
               
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-4 p-4 rounded-sm border-2 border-background">
                 <div>
-                  <h4 className="mb-3 text-sm font-semibold">Key Features</h4>
+                  <h4 className="mb-2 text-sm font-semibold">Key Features</h4>
                   <ul className="space-y-2">
-                    {useCase.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-muted-foreground">
+                    {useCase.features.map((feature) => (
+                      <li key={feature} className="flex items-center text-sm text-muted-foreground">
                         <div className="mr-2 h-1.5 w-1.5 rounded-full bg-primary" />
                         {feature}
                       </li>
@@ -141,20 +141,20 @@ export const UseCases = () => (
                 <div>
                   <h4 className="mb-3 text-sm font-semibold">Use Cases</h4>
                   <div className="flex flex-wrap gap-2">
-                    {useCase.examples.map((example, idx) => (
-                      <Badge key={idx} variant="outline" className="bg-background/50 text-xs">
+                    {useCase.examples.map((example) => (
+                      <Badge key={example} variant="outline" className="bg-background text-xs">
                         {example}
                       </Badge>
                     ))}
                   </div>
                 </div>
                 
-                <Button asChild className="w-full group-hover:bg-primary group-hover:text-primary-foreground">
+                {/* <Button asChild className="w-full group-hover:bg-primary group-hover:text-primary-foreground">
                   <Link href={useCase.link} className="flex items-center justify-center gap-2">
                     Explore Components
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
-                </Button>
+                </Button> */}
               </CardContent>
             </Card>
           ))}

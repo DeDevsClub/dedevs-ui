@@ -10,10 +10,10 @@ import {
 
 const Example = () => (
   <DeFiTicker>
-    <DeFiTickerIcon src="invalid-icon-url" symbol="AAPL" />
-    <DeFiTickerSymbol symbol="AAPL" />
-    <DeFiTickerPrice price={196.58} />
-    <DeFiTickerPriceChange change={-1.25} />
+    <DeFiTickerIcon src="invalid-icon-url" symbol="BTC" />
+    <DeFiTickerSymbol symbol="BTC" />
+    <DeFiTickerPrice price={125250} />
+    <DeFiTickerPriceChange change={1.25} isPercent />
   </DeFiTicker>
 );
 

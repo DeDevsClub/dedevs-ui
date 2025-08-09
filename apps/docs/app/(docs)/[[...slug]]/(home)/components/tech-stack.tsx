@@ -84,9 +84,9 @@ const techStack = [
 ];
 
 export const TechStack = () => (
-  <section className="relative py-16 sm:py-20 lg:py-24 bg-muted/30">
+  <section className="relative py-16 bg-muted/30">
     <div className="container">
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto max-w-full text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Built with modern technologies
         </h2>
@@ -95,7 +95,7 @@ export const TechStack = () => (
         </p>
       </div>
       
-      <div className="mx-auto mt-16 max-w-6xl">
+      <div className="mx-auto mt-16 max-w-full">
         <div className="grid gap-8 lg:grid-cols-3">
           {techStack.map((stack) => (
             <Card key={stack.category} className="border-0 bg-background/50 backdrop-blur-sm">
@@ -111,10 +111,10 @@ export const TechStack = () => (
                       <TooltipTrigger asChild>
                         <div className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-muted/50">
                           <div
-                            className="flex h-10 w-10 items-center justify-center rounded-lg text-white"
+                            className="flex h-8 w-8 items-center justify-center rounded-full text-text"
                             style={{ backgroundColor: tech.color }}
                           >
-                            <tech.icon className="h-5 w-5" />
+                            <tech.icon className="h-8 w-8" />
                           </div>
                           <div className="flex-1">
                             <div className="font-medium">{tech.name}</div>

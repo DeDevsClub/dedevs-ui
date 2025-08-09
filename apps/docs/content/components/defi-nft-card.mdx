@@ -4,17 +4,14 @@ description: A beautiful, responsive NFT card component designed for displaying 
 icon: Image
 ---
 
-A beautiful, responsive NFT card component designed for displaying digital collectibles in DeFi marketplaces and NFT platforms.
 
-## Features
+<PoweredBy packages={[
+  { name: 'Tailwind CSS', url: 'https://tailwindcss.com/', icon: 'simple-icons:tailwindcss' },
+  { name: 'React', url: 'https://reactjs.org/', icon: 'simple-icons:react' },
+  { name: 'Remix', url: 'https://remix.run/', icon: 'simple-icons:remix' },
+]} />
 
-- **Responsive Design**: Optimized for all screen sizes with mobile-first approach
-- **Interactive Elements**: Favorite button with state management and hover effects
-- **Time-based Auctions**: Optional countdown timer for auction-based NFTs
-- **Ethereum Integration**: Built-in ETH icon and price display formatting
-- **Modern Styling**: Glass morphism effects, smooth animations, and dark mode support
-- **Accessibility**: Proper ARIA labels, keyboard navigation, and screen reader support
-- **Customizable**: Flexible props for different use cases and styling needs
+<Preview path="defi-nft-card" />
 
 ## Installation
 
@@ -26,15 +23,15 @@ npx dedevs-ui add defi-nft-card
 
 ### Basic Usage
 
-<ComponentPreview name="defi-nft-card-basic" />
+<Preview path="defi-nft-card-basic" />
 
 ### Marketplace Grid
 
-<ComponentPreview name="defi-nft-card-marketplace" />
+<Preview path="defi-nft-card-marketplace" />
 
 ### Full Example
 
-<ComponentPreview name="defi-nft-card" />
+<Preview path="defi-nft-card" />
 
 ## Component Structure
 
@@ -136,6 +133,16 @@ const handleFavorite = (id: string) => {
     className="max-w-sm mx-auto shadow-2xl"
 />
 ```
+
+## Features
+
+- **Responsive Design**: Optimized for all screen sizes with mobile-first approach
+- **Interactive Elements**: Favorite button with state management and hover effects
+- **Time-based Auctions**: Optional countdown timer for auction-based NFTs
+- **Ethereum Integration**: Built-in ETH icon and price display formatting
+- **Modern Styling**: Glass morphism effects, smooth animations, and dark mode support
+- **Accessibility**: Proper ARIA labels, keyboard navigation, and screen reader support
+- **Customizable**: Flexible props for different use cases and styling needs
 
 ## Accessibility
 

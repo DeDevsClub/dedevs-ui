@@ -118,27 +118,14 @@ function ChartTooltipContent({
   color,
   nameKey,
   labelKey,
-}: {
-  active?: boolean
-  payload?: Array<{
-    dataKey: string
-    name?: string
-    value: any
-    payload: any
-    color?: string
-  }>
-  label?: string
-  className?: string
-  indicator?: "line" | "dot" | "dashed"
-  hideLabel?: boolean
-  hideIndicator?: boolean
-  labelFormatter?: (value: any, payload: any[]) => React.ReactNode
-  labelClassName?: string
-  formatter?: (value: any, name: string, item: any, index: number) => React.ReactNode
-  color?: string
-  nameKey?: string
-  labelKey?: string
-}) {
+}: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
+  React.ComponentProps<"div"> & {
+    hideLabel?: boolean
+    hideIndicator?: boolean
+    indicator?: "line" | "dot" | "dashed"
+    nameKey?: string
+    labelKey?: string
+  }) {
   const { config } = useChart()
 
   const tooltipLabel = React.useMemo(() => {
@@ -206,7 +193,7 @@ function ChartTooltipContent({
               )}
             >
               {formatter && item?.value !== undefined && item.name ? (
-                formatter(item.value, item.name, item, index)
+                formatter(item.value, item.name, item, index, item.payload)
               ) : (
                 <>
                   {itemConfig?.icon ? (
@@ -269,19 +256,11 @@ function ChartLegendContent({
   payload,
   verticalAlign = "bottom",
   nameKey,
-}: React.ComponentProps<"div"> & {
-  payload?: Array<{
-    value: string
-    type?: string
-    id?: string
-    color?: string
-    dataKey?: string
-    payload?: any
-  }>
-  verticalAlign?: "top" | "middle" | "bottom"
-  hideIcon?: boolean
-  nameKey?: string
-}) {
+}: React.ComponentProps<"div"> &
+  Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+    hideIcon?: boolean
+    nameKey?: string
+  }) {
   const { config } = useChart()
 
   if (!payload?.length) {
@@ -296,7 +275,7 @@ function ChartLegendContent({
         className
       )}
     >
-      {payload.map((item: any) => {
+      {payload.map((item) => {
         const key = `${nameKey || item.dataKey || "value"}`
         const itemConfig = getPayloadConfigFromPayload(config, item, key)
 

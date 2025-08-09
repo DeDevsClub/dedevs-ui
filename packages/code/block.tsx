@@ -254,10 +254,16 @@ const codeBlockClassName = cn(
   '[&_.shiki]:!bg-[var(--shiki-bg)]',
   '[&_code]:w-full',
   '[&_code]:grid',
-  '[&_code]:overflow-x-auto',
+  // Prevent horizontal scroll and allow wrapping
+  '[&_pre]:overflow-x-hidden',
+  '[&_code]:overflow-x-hidden',
+  '[&_code]:whitespace-pre-wrap',
   '[&_code]:bg-transparent',
   '[&_.line]:px-4',
   '[&_.line]:w-full',
+  // Wrap long lines to avoid x-axis scroll
+  '[&_.line]:whitespace-pre-wrap',
+  '[&_.line]:break-words',
   '[&_.line]:relative'
 );
 
@@ -531,13 +537,13 @@ type CodeBlockFallbackProps = HTMLAttributes<HTMLDivElement>;
 
 const CodeBlockFallback = ({ children, ...props }: CodeBlockFallbackProps) => (
   <div {...props}>
-    <pre className="w-full">
-      <code>
+    <pre className="w-full overflow-x-hidden">
+      <code className="whitespace-pre-wrap break-words">
         {children
           ?.toString()
           .split('\n')
           .map((line, i) => (
-            <span className="line" key={i}>
+            <span className="line whitespace-pre-wrap break-words" key={i}>
               {line}
             </span>
           ))}
@@ -562,11 +568,13 @@ export const CodeBlockBody = ({ children, ...props }: CodeBlockBodyProps) => {
 export type CodeBlockItemProps = HTMLAttributes<HTMLDivElement> & {
   value: string;
   lineNumbers?: boolean;
+  showCopy?: boolean;
 };
 
 export const CodeBlockItem = ({
   children,
   lineNumbers = true,
+  showCopy = true,
   className,
   value,
   ...props
@@ -587,10 +595,16 @@ export const CodeBlockItem = ({
         wordHighlightClassNames,
         darkModeClassNames,
         lineNumbers && lineNumberClassNames,
+        'relative overflow-hidden',
         className
       )}
       {...props}
     >
+      {showCopy && (
+        <div className="absolute right-2 top-2 z-10">
+          <CodeBlockCopyButton aria-label="Copy code" />
+        </div>
+      )}
       {children}
     </div>
   );
