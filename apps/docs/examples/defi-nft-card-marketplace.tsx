@@ -51,9 +51,9 @@ const nftData: (NftCardProps & { isFavorited?: boolean })[] = [
         isFavorited: false,
     },
     {
-        id: 'neon-pulse-006',
-        imageUrl: 'https://i.pinimg.com/1200x/8a/2c/14/8a2c14c5f8e7b3d9a1e4f6c8b2d5e9f7.jpg',
-        title: 'Neon Pulse',
+        id: 'auric-flow-006',
+        imageUrl: 'https://i.pinimg.com/1200x/2a/59/11/2a591199f4558350175dd0b2e120558a.jpg',
+        title: 'Auric Flow',
         highestBid: '1/1',
         price: '0.056 ETH',
         timeLeft: '06:20:00',

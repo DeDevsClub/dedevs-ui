@@ -13,7 +13,9 @@ export type AISourcesProps = ComponentProps<'div'>;
 
 export const AISources = ({ className, ...props }: AISourcesProps) => (
   <Collapsible
-    className={cn('not-prose mb-4 text-primary text-xs', className)}
+    className={cn('flex flex-col not-prose mb-4 text-primary justify-center items-center text-center text-sm w-full', 
+      'bg-muted text-muted-foreground hover:bg-muted/80 transition-colors rounded-md p-1',
+      className)}
     {...props}
   />
 );
@@ -30,7 +32,7 @@ export const AISourcesTrigger = ({
   children,
   ...props
 }: AISourcesTriggerProps) => (
-  <CollapsibleTrigger className="flex items-center gap-2" {...props}>
+  <CollapsibleTrigger className="flex items-center gap-2 w-full justify-center" {...props}>
     {children ?? (
       <>
         <p className="font-medium">Used {count} sources</p>
@@ -61,7 +63,7 @@ export const AISource = ({
   ...props
 }: AISourceProps) => (
   <a
-    className="flex items-center gap-2"
+    className="flex items-center gap-2 hover:bg-muted hover:text-primary rounded-md p-2 transition-colors"
     href={href}
     rel="noreferrer"
     target="_blank"

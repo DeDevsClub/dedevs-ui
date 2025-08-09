@@ -17,7 +17,8 @@ export const PreviewContent = ({ children, type }: PreviewContentProps) => {
       <ResizablePanel
         className={cn(
           'peer not-fumadocs-codeblock size-full',
-          type === 'component' ? 'overflow-hidden!' : 'overflow-auto!'
+          // For components, allow scrolling so top content is not clipped
+          type === 'component' ? 'overflow-auto' : 'overflow-auto'
         )}
         defaultSize={100}
         maxSize={100}

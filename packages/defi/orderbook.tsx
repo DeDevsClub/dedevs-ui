@@ -3,120 +3,216 @@
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { TrendingUp } from 'lucide-react'
+import { TrendingUp, TrendingDown, Activity } from 'lucide-react'
 
 interface OrderBookEntry {
     price: number
     amount: number
     total: number
+    change?: number
 }
 
-export function OrderBook() {
+interface OrderBookProps {
+    pair?: string
+    exchange?: string
+    className?: string
+}
+
+export function OrderBook({ 
+    pair = "ETH/USD", 
+    exchange = "Coinbase",
+    className = "" 
+}: OrderBookProps) {
     const [asks, setAsks] = useState<OrderBookEntry[]>([])
     const [bids, setBids] = useState<OrderBookEntry[]>([])
     const [spread, setSpread] = useState(0)
+    const [spreadPercent, setSpreadPercent] = useState(0)
+    const [lastPrice, setLastPrice] = useState(0)
+    const [priceChange, setPriceChange] = useState(0)
 
     // Simulate real-time order book data
     useEffect(() => {
         const generateOrderBook = () => {
-            const basePrice = 2345.67
+            const basePrice = 2345.67 + (Math.random() - 0.5) * 10
             const newAsks: OrderBookEntry[] = []
             const newBids: OrderBookEntry[] = []
 
-            // Generate asks (sell orders)
-            for (let i = 0; i < 8; i++) {
-                const price = basePrice + (i + 1) * (Math.random() * 2 + 0.5)
-                const amount = Math.random() * 10 + 0.1
+            // Generate asks (sell orders) - sorted ascending
+            for (let i = 0; i < 10; i++) {
+                const price = basePrice + (i + 1) * (Math.random() * 1.5 + 0.3)
+                const amount = Math.random() * 15 + 0.1
+                const change = (Math.random() - 0.5) * 0.1
                 newAsks.push({
                     price: parseFloat(price.toFixed(2)),
                     amount: parseFloat(amount.toFixed(4)),
-                    total: parseFloat((price * amount).toFixed(2))
+                    total: parseFloat((price * amount).toFixed(2)),
+                    change: parseFloat(change.toFixed(3))
                 })
             }
 
-            // Generate bids (buy orders)
-            for (let i = 0; i < 8; i++) {
-                const price = basePrice - (i + 1) * (Math.random() * 2 + 0.5)
-                const amount = Math.random() * 10 + 0.1
+            // Generate bids (buy orders) - sorted descending
+            for (let i = 0; i < 10; i++) {
+                const price = basePrice - (i + 1) * (Math.random() * 1.5 + 0.3)
+                const amount = Math.random() * 15 + 0.1
+                const change = (Math.random() - 0.5) * 0.1
                 newBids.push({
                     price: parseFloat(price.toFixed(2)),
                     amount: parseFloat(amount.toFixed(4)),
-                    total: parseFloat((price * amount).toFixed(2))
+                    total: parseFloat((price * amount).toFixed(2)),
+                    change: parseFloat(change.toFixed(3))
                 })
             }
 
+            const currentSpread = newAsks[0]?.price - newBids[0]?.price || 0
+            const midPrice = ((newAsks[0]?.price || 0) + (newBids[0]?.price || 0)) / 2
+            const spreadPct = midPrice > 0 ? (currentSpread / midPrice) * 100 : 0
+            
             setAsks(newAsks)
             setBids(newBids)
-            setSpread(newAsks[0]?.price - newBids[0]?.price || 0)
+            setSpread(currentSpread)
+            setSpreadPercent(spreadPct)
+            
+            // Update last price and change
+            if (lastPrice > 0) {
+                setPriceChange(midPrice - lastPrice)
+            }
+            setLastPrice(midPrice)
         }
 
         generateOrderBook()
-        const interval = setInterval(generateOrderBook, 2000)
+        const interval = setInterval(generateOrderBook, 1500)
         return () => clearInterval(interval)
-    }, [])
+    }, [lastPrice])
+
+    const formatPrice = (price: number) => price.toLocaleString('en-US', { 
+        minimumFractionDigits: 2, 
+        maximumFractionDigits: 2 
+    })
+
+    const formatAmount = (amount: number) => amount.toLocaleString('en-US', { 
+        minimumFractionDigits: 4, 
+        maximumFractionDigits: 4 
+    })
+
+    const getMaxAmount = () => {
+        const allAmounts = [...asks, ...bids].map(entry => entry.amount)
+        return Math.max(...allAmounts)
+    }
+
+    const maxAmount = getMaxAmount()
 
     return (
-        <Card className="h-full border-gray-200/60">
-            <CardHeader className="pb-3">
+        <Card className={`h-full border-slate-200/60 bg-background shadow-sm ${className}`}>
+            <CardHeader className="pb-4 border-b border-slate-100">
                 <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm font-semibold text-gray-900">Order Book</CardTitle>
-                    <Badge className="h-5 px-2 text-xs bg-blue-50 text-blue-700">
-                        ETH/USD
-                    </Badge>
+                    <div className="flex items-center gap-3">
+                        <CardTitle className="font-semibold text-text">Order Book</CardTitle>
+                        <Activity className="w-4 h-4 text-slate-400" />
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Badge variant="secondary" className="h-6 px-2.5 text-xs font-medium bg-blue-50 text-blue-700 border-blue-200">
+                            {pair}
+                        </Badge>
+                        <Badge variant="outline" className="h-6 px-2.5 text-xs text-slate-600">
+                            {exchange}
+                        </Badge>
+                    </div>
                 </div>
             </CardHeader>
+            
             <CardContent className="p-0">
-                <div className="space-y-1">
-                    {/* Header */}
-                    <div className="grid grid-cols-3 gap-4 px-4 py-2 text-xs font-medium text-gray-500 border-b border-gray-100">
+                <div className="space-y-0">
+                    {/* Column Headers */}
+                    <div className="grid grid-cols-3 gap-4 px-4 py-3 text-xs font-semibold text-slate-600 bg-slate-50/50 border-b border-slate-100">
                         <span>Price (USD)</span>
-                        <span className="text-right">Amount (ETH)</span>
-                        <span className="text-right">Total</span>
+                        <span className="text-right">Size ({pair.split('/')[0]})</span>
+                        <span className="text-right">Total (USD)</span>
                     </div>
 
                     {/* Asks (Sell Orders) */}
-                    <div className="space-y-0.5">
-                        {asks.slice().reverse().map((ask, index) => (
+                    <div className="max-h-48 overflow-y-auto">
+                        {asks.slice().reverse().slice(0, 8).map((ask, index) => (
                             <div
-                                key={`ask-${index}`}
-                                className="grid grid-cols-3 gap-4 px-4 py-1 text-xs hover:bg-red-50/50 transition-colors relative"
+                                key={`ask-${ask.price}-${index}`}
+                                className="group grid grid-cols-3 gap-4 px-4 py-1.5 text-xs hover:bg-red-50/60 transition-all duration-150 relative cursor-pointer"
                             >
+                                {/* Depth Bar */}
                                 <div
-                                    className="absolute right-0 top-0 bottom-0 bg-red-50/30"
-                                    style={{ width: `${Math.min((ask.amount / 10) * 100, 100)}%` }}
+                                    className="absolute right-0 top-0 bottom-0 bg-gradient-to-l from-red-50/40 to-red-50/20 transition-all duration-300"
+                                    style={{ width: `${Math.min((ask.amount / maxAmount) * 100, 100)}%` }}
                                 />
-                                <span className="text-red-600 font-mono relative z-10">${ask.price}</span>
-                                <span className="text-right text-gray-900 font-mono relative z-10">{ask.amount}</span>
-                                <span className="text-right text-gray-600 font-mono relative z-10">${ask.total}</span>
+                                
+                                <div className="flex items-center gap-1 relative z-10">
+                                    <span className="text-red-600 font-mono font-medium">${formatPrice(ask.price)}</span>
+                                    {ask.change && ask.change !== 0 && (
+                                        <span className={`text-xs ${ask.change > 0 ? 'text-red-500' : 'text-green-500'}`}>
+                                            {ask.change > 0 ? '↑' : '↓'}
+                                        </span>
+                                    )}
+                                </div>
+                                <span className="text-right text-slate-700 font-mono relative z-10 group-hover:text-text">
+                                    {formatAmount(ask.amount)}
+                                </span>
+                                <span className="text-right text-slate-500 font-mono relative z-10 group-hover:text-slate-700">
+                                    ${ask.total.toLocaleString()}
+                                </span>
                             </div>
                         ))}
                     </div>
 
-                    {/* Spread */}
-                    <div className="px-4 py-3 bg-gray-50/50 border-y border-gray-100">
-                        <div className="flex items-center justify-between text-sm">
-                            <span className="text-gray-600">Spread</span>
+                    {/* Spread Section */}
+                    <div className="px-4 py-4 bg-gradient-to-r from-slate-50/50 to-slate-50/30 border-y border-slate-100">
+                        <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                                <span className="font-mono text-gray-900">${spread.toFixed(2)}</span>
-                                <TrendingUp className="w-3 h-3 text-emerald-500" />
+                                <span className="text-sm font-medium text-slate-700">Spread</span>
+                                <div className="flex items-center gap-1">
+                                    {priceChange > 0 ? (
+                                        <TrendingUp className="w-3.5 h-3.5 text-green-500" />
+                                    ) : priceChange < 0 ? (
+                                        <TrendingDown className="w-3.5 h-3.5 text-red-500" />
+                                    ) : (
+                                        <div className="w-3.5 h-3.5 rounded-full bg-slate-300" />
+                                    )}
+                                </div>
+                            </div>
+                            <div className="text-right">
+                                <div className="font-mono text-sm font-semibold text-text">
+                                    ${spread.toFixed(2)}
+                                </div>
+                                <div className="text-xs text-slate-500">
+                                    {spreadPercent.toFixed(3)}%
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Bids (Buy Orders) */}
-                    <div className="space-y-0.5">
-                        {bids.map((bid, index) => (
+                    <div className="max-h-48 overflow-y-auto">
+                        {bids.slice(0, 8).map((bid, index) => (
                             <div
-                                key={`bid-${index}`}
-                                className="grid grid-cols-3 gap-4 px-4 py-1 text-xs hover:bg-emerald-50/50 transition-colors relative"
+                                key={`bid-${bid.price}-${index}`}
+                                className="group grid grid-cols-3 gap-4 px-4 py-1.5 text-xs hover:bg-green-50/60 transition-all duration-150 relative cursor-pointer"
                             >
+                                {/* Depth Bar */}
                                 <div
-                                    className="absolute right-0 top-0 bottom-0 bg-emerald-50/30"
-                                    style={{ width: `${Math.min((bid.amount / 10) * 100, 100)}%` }}
+                                    className="absolute right-0 top-0 bottom-0 bg-gradient-to-l from-green-50/40 to-green-50/20 transition-all duration-300"
+                                    style={{ width: `${Math.min((bid.amount / maxAmount) * 100, 100)}%` }}
                                 />
-                                <span className="text-emerald-600 font-mono relative z-10">${bid.price}</span>
-                                <span className="text-right text-gray-900 font-mono relative z-10">{bid.amount}</span>
-                                <span className="text-right text-gray-600 font-mono relative z-10">${bid.total}</span>
+                                
+                                <div className="flex items-center gap-1 relative z-10">
+                                    <span className="text-green-600 font-mono font-medium">${formatPrice(bid.price)}</span>
+                                    {bid.change && bid.change !== 0 && (
+                                        <span className={`text-xs ${bid.change > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                                            {bid.change > 0 ? '↑' : '↓'}
+                                        </span>
+                                    )}
+                                </div>
+                                <span className="text-right text-slate-700 font-mono relative z-10 group-hover:text-text">
+                                    {formatAmount(bid.amount)}
+                                </span>
+                                <span className="text-right text-slate-500 font-mono relative z-10 group-hover:text-slate-700">
+                                    ${bid.total.toLocaleString()}
+                                </span>
                             </div>
                         ))}
                     </div>

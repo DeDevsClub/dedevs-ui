@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useState } from 'react';
-import { TrendingUp, TrendingDown, BarChart3, Calendar, RefreshCw } from 'lucide-react';
+import { TrendingUp, TrendingDown, BarChart3, RefreshCw } from 'lucide-react';
 
 const tradingPairs = [
   { symbol: 'ETH/USD', price: 2345.67, change: 2.34, changePercent: 0.1 },
@@ -49,9 +49,9 @@ const Example = () => {
           <div className="flex items-center justify-between">
             <CardTitle className="text-2xl font-bold">DeFi Trading Charts</CardTitle>
             <div className="flex items-center gap-2">
-              <Badge variant="secondary" className="flex items-center gap-1">
+              <Badge variant="outline" className="flex items-center gap-1">
                 <BarChart3 className="w-3 h-3" />
-                Live Data
+                <span className="bg-background text-text">Live Data</span>
               </Badge>
               <Button
                 variant="outline"
@@ -60,7 +60,7 @@ const Example = () => {
                 className="flex items-center gap-2"
               >
                 <RefreshCw className="w-4 h-4" />
-                Refresh
+                <span className="bg-background text-text">Refresh</span>
               </Button>
             </div>
           </div>
@@ -90,14 +90,14 @@ const Example = () => {
       {/* Main Chart Interface */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Chart Controls */}
-        <div className="space-y-6">
+        <div className="space-y-6 bg-background">
           <Card>
             <CardHeader>
               <CardTitle className="text-lg">Chart Controls</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-2 block">Trading Pair</label>
+                <label className="text-sm font-medium text-text mb-2 block">Trading Pair</label>
                 <Select
                   value={selectedPair.symbol}
                   onValueChange={(value) => {
@@ -126,7 +126,7 @@ const Example = () => {
               </div>
               
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-2 block">Timeframe</label>
+                <label className="text-sm font-medium text-text mb-2 block">Timeframe</label>
                 <div className="grid grid-cols-3 gap-2">
                   {timeframes.map((tf) => (
                     <Button
@@ -165,20 +165,20 @@ const Example = () => {
               </div>
               
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">24h High</span>
+                <div className="flex justify-between text-text">
+                  <span className="text-text">24h High</span>
                   <span className="font-mono">${(selectedPair.price * 1.05).toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">24h Low</span>
+                <div className="flex justify-between text-text">
+                  <span className="text-text">24h Low</span>
                   <span className="font-mono">${(selectedPair.price * 0.95).toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">24h Volume</span>
+                <div className="flex justify-between text-text">
+                  <span className="text-text">24h Volume</span>
                   <span className="font-mono">$12.4M</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Market Cap</span>
+                <div className="flex justify-between text-text">
+                  <span className="text-text">Market Cap</span>
                   <span className="font-mono">$284.5B</span>
                 </div>
               </div>
@@ -201,7 +201,7 @@ const Example = () => {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="h-96">
+              <div className="h-full">
                 <CandlestickChart key={`${selectedPair.symbol}-${selectedTimeframe}-${refreshKey}`} />
               </div>
             </CardContent>
@@ -326,23 +326,23 @@ const Example = () => {
               <h3 className="font-semibold mb-3">Market Sentiment</h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Trend</span>
+                  <span className="text-sm text-text">Trend</span>
                   <Badge variant="default">Bullish</Badge>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Volatility</span>
+                  <span className="text-sm text-text">Volatility</span>
                   <Badge variant="secondary">Medium</Badge>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Volume</span>
+                  <span className="text-sm text-text">Volume</span>
                   <Badge variant="outline">High</Badge>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Momentum</span>
+                  <span className="text-sm text-text">Momentum</span>
                   <Badge variant="default">Strong</Badge>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Signal</span>
+                  <span className="text-sm text-text">Signal</span>
                   <Badge variant="default">Buy</Badge>
                 </div>
               </div>

@@ -59,15 +59,6 @@ const nftData: (NftCardProps & { isFavorited?: boolean })[] = [
         timeLeft: '01:15:00',
     },
     {
-        id: 'neon-pulse-006',
-        imageUrl: 'https://i.pinimg.com/1200x/8a/2c/14/8a2c14c5f8e7b3d9a1e4f6c8b2d5e9f7.jpg',
-        title: 'Neon Pulse',
-        highestBid: '1/1',
-        price: '0.056 ETH',
-        timeLeft: '06:20:00',
-        isFavorited: true,
-    },
-    {
         id: 'future-vision-007',
         imageUrl: 'https://i.pinimg.com/1200x/af/5f/3d/af5f3d7fc5d2cd647fc5559c86b61096.jpg',
         title: 'Future Vision',
@@ -129,7 +120,7 @@ const NftMarketplace: React.FC = () => {
     };
 
     return (
-        <div className="relative p-4 sm:p-6 lg:p-8 overflow-hidden min-h-[1000px]">
+        <div className="relative p-4 sm:p-6 lg:p-8 min-h-[1000px]">
             {/* Google Font Import */}
             <style>
                 {`@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');`}

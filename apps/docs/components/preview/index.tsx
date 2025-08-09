@@ -84,7 +84,7 @@ export const Preview = async ({
   return (
     <div
       className={cn(
-        'size-full overflow-hidden rounded-lg border bg-background',
+        'size-full overflow-auto rounded-lg border bg-background',
         type === 'block' && 'h-[48rem] prose-code:border-none prose-code:p-0',
         type === 'component' && 'not-prose h-[32rem]',
         className
@@ -121,6 +121,7 @@ export const Preview = async ({
           className={cn(
             'not-fumadocs-codeblock size-full',
             type === 'component' ? 'overflow-hidden' : 'overflow-auto'
+            // "overflow-y-auto bg-background"
           )}
           value="preview"
         >

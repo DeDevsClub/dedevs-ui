@@ -5,8 +5,8 @@ import { NftCard } from '@repo/defi/nft-card';
 
 export default function DefiNftCardBasic() {
     return (
-        <div className="flex items-center justify-center min-h-[600px] p-6">
-            <div className="max-w-sm w-full">
+        <div className="flex items-center justify-center min-h-[720px] p-2">
+            <div className="max-w-sm w-full p-2">
                 <NftCard
                     id="ethereal-dreams-001"
                     imageUrl="https://i.pinimg.com/1200x/93/b6/9f/93b69fd5d973b3f2fbc325982eb8e658.jpg"

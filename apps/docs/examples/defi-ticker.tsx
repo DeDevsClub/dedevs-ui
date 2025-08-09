@@ -9,7 +9,7 @@ import {
 } from '@repo/defi/ticker';
 
 const Example = () => (
-  <div className="flex items-center justify-center min-h-[200px] p-6">
+  <div className="flex flex-col items-center justify-center p-6">
     <DeFiTicker>
       <DeFiTickerIcon
         src="https://raw.githubusercontent.com/nvstly/icons/refs/heads/main/ticker_icons/GOOG.png"

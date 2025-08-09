@@ -1,10 +1,10 @@
 ---
 title: DeFi Swap
-description: A comprehensive token swap interface with multi-tab support for Convert, Buy, and Send operations.
+description: A simple, modern token swap converter with clean UI and great UX.
 icon: ArrowRightLeft
 ---
 
-<Preview path="defi-swap" />
+<Preview path="defi-swap-basic" />
 
 ## Installation
 
@@ -12,13 +12,12 @@ icon: ArrowRightLeft
 
 ## Features
 
-- **Multi-Tab Interface**: Convert, Buy, and Send operations in a single component
-- **Token Selection**: Dropdown with coin icons and names
-- **Real-time Conversion**: Live amount calculations with formatted numbers
-- **Balance Display**: Shows available token balances
-- **Transaction Summary**: Detailed breakdown of fees and totals
-- **Modern Design**: Clean, professional UI with dark mode support
-- **Accessibility**: Full keyboard navigation and screen reader support
+- **Simple Converter**: Minimal, focused swap experience
+- **Token Selection**: Professional dropdown with token icons and symbols
+- **Live Conversion**: Instant rate calculation with formatted values
+- **Balance Context**: Optional balance hints for clarity
+- **Sleek Design**: Modern card, subtle gradients, dark mode ready
+- **Accessible**: Keyboard navigation and screen reader labels
 
 ## Examples
 
@@ -26,24 +25,15 @@ icon: ArrowRightLeft
 
 <Preview path="defi-swap-basic" />
 
-### Advanced Integration
-
-The main example demonstrates a comprehensive swap interface with:
-
-- Pool information and statistics
-- Multiple swap modes (Standard, Pro, Limit Orders)
-- Recent transaction history
-- Pool comparison and selection
-- Market analytics integration
+This basic example showcases a clean, focused converter ideal for most swap flows.
 
 ## Component Structure
 
-The Converter component includes:
+The `Converter` component includes:
 
-- **Tab Navigation**: Convert, Buy, Send modes
-- **Converter Fields**: Input/output token selection and amounts
-- **Transaction Summary**: Fees, totals, and exchange rates
-- **Settings Button**: Additional configuration options
+- **From/To Fields**: Token selectors and amount inputs
+- **Rate Preview**: Inline exchange rate and minimal fee hint
+- **Primary Action**: Clear call-to-action button
 
 ## Usage Examples
 
@@ -56,49 +46,6 @@ export function SwapWidget() {
   return (
     <div className="w-full max-w-md">
       <Converter />
-    </div>
-  );
-}
-```
-
-### With Pool Information
-
-```tsx
-import { Converter } from '@repo/defi/swap';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
-export function SwapWithInfo() {
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <div className="lg:col-span-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Swap Tokens</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Converter />
-          </CardContent>
-        </Card>
-      </div>
-      <div>
-        <Card>
-          <CardHeader>
-            <CardTitle>Pool Information</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span>TVL</span>
-                <span>$2.4B</span>
-              </div>
-              <div className="flex justify-between">
-                <span>APY</span>
-                <span>12.5%</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
     </div>
   );
 }
@@ -125,11 +72,11 @@ const coins = [
 
 ## Styling Features
 
-- **Gradient Backgrounds**: Modern card designs with subtle gradients
-- **Masked Borders**: Unique visual effects with CSS mask properties
-- **Icon Integration**: Coin icons with proper fallbacks
-- **Responsive Design**: Adapts to different screen sizes
-- **Dark Mode**: Full dark theme support
+- **Subtle Gradients**: Refined, professional look
+- **Masked Borders**: Elegant depth with CSS masks
+- **Iconography**: Crisp token icons with fallbacks
+- **Responsive**: Mobile-first, adapts seamlessly
+- **Dark Mode**: First-class dark theme support
 
 ## Accessibility
 
@@ -143,18 +90,16 @@ const coins = [
 
 Perfect for:
 
-- **DeFi Applications**: Core swapping functionality
-- **Trading Platforms**: Token exchange interfaces
-- **Wallet Applications**: Built-in swap features
-- **Portfolio Managers**: Asset conversion tools
-- **DEX Aggregators**: Multi-protocol swap routing
+- **DeFi Apps**: Core swap flow
+- **Wallets**: Embedded, lightweight swap
+- **Trading UIs**: Quick convert widget
+- **Dashboards**: Inline asset conversion
 
 ## Customization
 
 The component can be customized by:
 
 - Modifying the coins array for different tokens
-- Adjusting default values and balances
-- Customizing the transaction summary fields
-- Adding additional tabs or functionality
+- Setting default amounts and balances
+- Tuning rate/fee display text
 - Styling with custom CSS classes

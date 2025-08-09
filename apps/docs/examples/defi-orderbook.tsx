@@ -16,7 +16,7 @@ const tradingPairs = [
   { symbol: 'MATIC/USD', baseAsset: 'MATIC', quoteAsset: 'USD' },
 ];
 
-const Example = () => {
+const DeFiOrderBookExample = () => {
   const [selectedPair, setSelectedPair] = useState(tradingPairs[0]);
   const [refreshKey, setRefreshKey] = useState(0);
 
@@ -25,7 +25,7 @@ const Example = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto space-y-6 p-6 min-h-[900px]">
+    <div className="w-full max-w-7xl mx-auto space-y-2 p-6 min-h-[1800px]">
       {/* Header Controls */}
       <Card>
         <CardHeader>
@@ -167,4 +167,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default DeFiOrderBookExample;
