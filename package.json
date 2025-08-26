@@ -27,6 +27,7 @@
     "url": "https://github.com/DeDevsClub/dedevs-ui.git"
   },
   "scripts": {
+    "shell": "source ./workflows.sh",
     "build": "turbo build",
     "build:cli": "tsup",
     "build:registry": "npx shadcn@latest build && cp -r public/r apps/docs/public/ && cp registry.json apps/docs/public/",

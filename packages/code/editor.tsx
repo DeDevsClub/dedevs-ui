@@ -7,10 +7,8 @@ import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import Placeholder from '@tiptap/extension-placeholder';
 import Subscript from '@tiptap/extension-subscript';
 import Superscript from '@tiptap/extension-superscript';
-import { Table } from '@tiptap/extension-table';
-import { TableCell } from '@tiptap/extension-table-cell';
-import { TableHeader } from '@tiptap/extension-table-header';
-import { TableRow } from '@tiptap/extension-table-row';
+import Underline from '@tiptap/extension-underline';
+import Link from '@tiptap/extension-link';
 import { TaskItem } from '@tiptap/extension-task-item';
 import { TaskList } from '@tiptap/extension-task-list';
 import { TextStyle } from '@tiptap/extension-text-style';
@@ -48,7 +46,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { cn } from '@repo/shadcn-ui/lib/utils';
+import { cn } from '@/lib/utils';
 
 export type { Editor, JSONContent } from '@tiptap/react';
 
@@ -95,6 +93,12 @@ import {
 import type { FormEventHandler, HTMLAttributes, ReactNode } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import tippy, { type Instance as TippyInstance } from 'tippy.js';
+
+import { Table } from '@tiptap/extension-table'
+import { TableRow } from '@tiptap/extension-table-row'
+import { TableHeader } from '@tiptap/extension-table-header'
+import { TableCell } from '@tiptap/extension-table-cell'
+
 
 interface SlashNodeAttrs {
     id: string | null;
@@ -587,6 +591,21 @@ export const EditorProvider = ({
         }),
         Superscript,
         Subscript,
+        Underline,
+        Link.configure({
+            autolink: true,
+            openOnClick: false,
+            linkOnPaste: true,
+            HTMLAttributes: { rel: 'noreferrer noopener', target: '_blank' },
+            validate: (href: string) => {
+                try {
+                    new URL(href);
+                    return true;
+                } catch {
+                    return false;
+                }
+            },
+        }),
         Slash.configure({
             suggestion: {
                 items: async ({ editor, query }) => {
@@ -715,7 +734,9 @@ export const EditorProvider = ({
                             handleCommandNavigation(event);
                         },
                     }}
-                    extensions={[...defaultExtensions, ...(extensions ?? [])]}
+                    extensions={[
+                        ...defaultExtensions,
+                        ...(extensions ?? [])]}
                     {...props}
                 />
             </div>

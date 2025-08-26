@@ -262,25 +262,32 @@ function findComponentFiles(dir: string): string[] {
 }
 
 function transformImports(content: string): string {
-  // Transform @repo/shadcn-ui imports to standard shadcn/ui imports
-  let transformed = content.replace(
-    /import\s+({[^}]*})\s+from\s+['"]@repo\/shadcn-ui\/components\/ui\/([^'"]+)['"]/g,
-    "import $1 from '@/components/ui/$2'"
-  );
+// Transform @repo/shadcn-ui imports to standard shadcn/ui imports
+let transformed = content.replace(
+  /import\s+({[^}]*})\s+from\s+['"]@repo\/shadcn-ui\/components\/ui\/([^'"]+)['"]/g,
+  "import $1 from '@/components/ui/$2'"
+);
 
-  // Transform @repo/shadcn-ui/lib/utils imports
-  transformed = transformed.replace(
-    /import\s+({[^}]*})\s+from\s+['"]@repo\/shadcn-ui\/lib\/utils['"]/g,
-    "import $1 from '@/lib/utils'"
-  );
+// Transform @repo/shadcn-ui/lib/utils imports
+transformed = transformed.replace(
+  /import\s+({[^}]*})\s+from\s+['"]@repo\/shadcn-ui\/lib\/utils['"]/g,
+  "import $1 from '@/lib/utils'"
+);
 
-  // Transform other @repo/ imports by removing the @repo/ prefix
-  transformed = transformed.replace(
-    /import\s+([^\s]+)\s+from\s+['"]@repo\/([^'"]+)['"]/g,
-    "import $1 from '$2'"
-  );
+// Transform @repo/code imports to local code-block component
+// Example: import { CodeBlock, ... } from '@repo/code' -> import { CodeBlock, ... } from '@/components/code-block'
+transformed = transformed.replace(
+  /import\s+([\s\S]*?)\s+from\s+['"]@repo\/code['"];?/g,
+  "import $1 from '@/components/code-block'"
+);
 
-  return transformed;
+// Transform other @repo/ imports by removing the @repo/ prefix
+transformed = transformed.replace(
+  /import\s+([^\s]+)\s+from\s+['"]@repo\/([^'"]+)['"]/g,
+  "import $1 from '$2'"
+);
+
+return transformed;
 }
 
 async function installMissingShadcnComponents(componentData: any) {
@@ -351,7 +358,12 @@ async function installMissingShadcnComponents(componentData: any) {
 }
 
 function detectPackageManager(): string {
+  // Prefer pnpm if available anywhere (monorepo root or globally installed)
   if (existsSync('pnpm-lock.yaml')) return 'pnpm';
+  try {
+    execSync('pnpm -v', { stdio: 'ignore' });
+    return 'pnpm';
+  } catch {}
   if (existsSync('yarn.lock')) return 'yarn';
   if (existsSync('package-lock.json')) return 'npm';
   return 'npm'; // default fallback
@@ -538,7 +550,9 @@ async function renameInstalledComponent(packageName: string, componentData: any)
     return;
   }
 
-  const componentsDir = join(process.cwd(), 'components', 'ui');
+  // Prefer components/ root, then fallback to components/ui
+  const primaryComponentsDir = join(process.cwd(), 'components');
+  const uiComponentsDir = join(process.cwd(), 'components', 'ui');
 
   for (const file of componentData.files) {
     if (file.path) {
@@ -547,8 +561,15 @@ async function renameInstalledComponent(packageName: string, componentData: any)
       const expectedFileName = `${packageName}.tsx`;
 
       if (originalFileName && originalFileName !== expectedFileName) {
-        const originalFilePath = join(componentsDir, originalFileName);
-        const newFilePath = join(componentsDir, expectedFileName);
+        // Try in components/ first
+        let originalFilePath = join(primaryComponentsDir, originalFileName);
+        let newFilePath = join(primaryComponentsDir, expectedFileName);
+
+        // If not found, try components/ui
+        if (!existsSync(originalFilePath)) {
+          originalFilePath = join(uiComponentsDir, originalFileName);
+          newFilePath = join(uiComponentsDir, expectedFileName);
+        }
 
         // Check if the original file exists and rename it
         if (existsSync(originalFilePath)) {
@@ -569,10 +590,10 @@ async function renameInstalledComponent(packageName: string, componentData: any)
           }
         } else {
           // If the original file doesn't exist, check if the expected file already exists
-          if (existsSync(newFilePath)) {
+          if (existsSync(join(primaryComponentsDir, expectedFileName)) || existsSync(join(uiComponentsDir, expectedFileName))) {
             console.log(`  ✅ ${expectedFileName} already exists with correct name`);
           } else {
-            console.warn(`⚠️  Neither ${originalFileName} nor ${expectedFileName} found in ${componentsDir}`);
+            console.warn(`⚠️  Neither ${originalFileName} nor ${expectedFileName} found in ${primaryComponentsDir} or ${uiComponentsDir}`);
           }
         }
       } else if (originalFileName === expectedFileName) {
@@ -621,6 +642,12 @@ function extractComponentDependencies(componentData: any): string[] {
           componentDependencies.add(componentPath);
           console.log(`🔍 Found component dependency: ${componentPath}`);
         }
+      }
+
+      // Detect usage of @repo/code and require code-block component
+      if (/from\s+['"]@repo\/code['"]/g.test(normalizedContent)) {
+        componentDependencies.add('code-block');
+        console.log('🔍 Detected @repo/code usage -> adding dependency: code-block');
       }
     }
   }
