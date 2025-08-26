@@ -125,6 +125,17 @@
       ]
     },
     {
+      "name": "ai-web-preview",
+      "type": "registry:ui",
+      "description": "AI web-preview component",
+      "files": [
+        {
+          "path": "packages/ai/web-preview.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "code-big-calendar",
       "type": "registry:ui",
       "description": "Big calendar component for displaying events",

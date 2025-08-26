@@ -8,7 +8,9 @@ import {
   TabsTrigger,
 } from 'fumadocs-ui/components/tabs';
 import { cn } from '@repo/shadcn-ui/lib/utils';
-import { BoxIcon, CodeIcon, EyeIcon } from 'lucide-react';
+import { BoxIcon, CodeIcon, EyeIcon, Maximize2 } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 import { PreviewCode } from './code';
 import { PreviewContent } from './content';
 import { PreviewRender } from './render';
@@ -91,7 +93,7 @@ export const Preview = async ({
       )}
     >
       <Tabs className="size-full gap-0" defaultValue="preview">
-        <TabsList className="border-b">
+        <TabsList className="border-b flex items-center gap-2">
           <TabsTrigger value="source">
             <BoxIcon className="text-muted-foreground" size={16} />
             Source
@@ -104,6 +106,13 @@ export const Preview = async ({
             <EyeIcon className="text-muted-foreground" size={16} />
             Preview
           </TabsTrigger>
+          <div className="ml-auto pr-1">
+            <Button asChild size="icon" variant="ghost" title="Open fullscreen">
+              <Link href={`/example/${path}`} target="_blank" rel="noreferrer">
+                <Maximize2 className="h-4 w-4 text-muted-foreground" />
+              </Link>
+            </Button>
+          </div>
         </TabsList>
         <TabsContent
           className="not-prose size-full overflow-y-auto"
